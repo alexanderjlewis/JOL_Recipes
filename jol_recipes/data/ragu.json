@@ -1,0 +1,22 @@
+{
+    "name": "Ragu",
+    "safe_name": "ragu",
+    "description": "",
+    "serving_tag": "serves",
+    "serving_qty": "4",
+    "serving_unit": "adults",
+    "ingredients": [{
+        "category": "Meat and Vegetable",
+        "name": "",
+        "quantity": ""
+    }, {
+        "category": "Meat and Vegetable",
+        "name": "",
+        "quantity": ""
+    }],
+    "equipment": [
+        "Food Processor (Optional)",
+        "Large Baking Tray"
+    ],
+    "steps": []
+}

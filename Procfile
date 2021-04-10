@@ -1,0 +1,1 @@
+web: gunicorn --chdir jol_recipes app:app

@@ -1,0 +1,140 @@
+{
+    "name": "Basil Pesto",
+    "safe_name": "basil_pesto",
+    "description": "Say no more. Watch out for Richard.",
+    "serving_tag": "makes sauce for",
+    "serving_qty": "500",
+    "serving_unit": "g of Dry Pasta",
+    "ingredients_pantry": [{
+        "name": "Extra-Virgin Olive Oil",
+        "quantity": 120,
+        "unit": "mL"
+    }, {
+        "name": "Pine Nuts",
+        "quantity": 2,
+        "unit": "Tbsp"
+    }, {
+        "name": "Salt",
+        "quantity": "",
+        "unit": "To Taste"
+    }, {
+        "name": "Dried Pasta",
+        "quantity": 500,
+        "unit": "g"
+    }],
+    "ingredients_meat_veg": [{
+        "name": "Garlic",
+        "quantity": 2,
+        "unit": "Cloves"
+    }],
+    "ingredients_fridge_freezer": [{
+        "name": "Parmesan",
+        "quantity": 60,
+        "unit": "g"
+    }],
+    "ingredients_herbs_spices": [{
+        "name": "Basil Leaves",
+        "quantity": 60,
+        "unit": "g"
+    }],
+    "equipment_standard": [
+        "Large Pot"
+    ],
+    "equipment_special": [
+        "Blender"
+    ],
+    "step_layout": ["Start", 0, 1, 2, 3, 4, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0":{
+            "time": "5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 40,
+            "ingredients": [{
+                    "name": "Basil Leaves",
+                    "quantity": 60,
+                    "unit": "g"
+                },
+                {
+                    "name": "Extra-Virgin Olive Oil",
+                    "quantity": 120,
+                    "unit": "mL"
+                },
+                {
+                    "name": "Pine Nuts",
+                    "quantity": 2,
+                    "unit": "Tbsp"
+                },
+                {
+                    "name": "Garlic",
+                    "quantity": 2,
+                    "unit": "Cloves"
+                }
+            ],
+            "instruction": "Blend until smooth.",
+            "extra_info": ""
+        },
+        "1":{
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 60,
+            "ingredients": [],
+            "instruction": "Bring a large pot of water to the boil.",
+            "extra_info": ""
+        },
+        "2":{
+            "time": "~7 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 70,
+            "ingredients": [{
+                "name": "Dried Pasta",
+                "quantity": 500,
+                "unit": "g"
+            }],
+            "instruction": "Boil till al dente",
+            "extra_info": ""
+        },
+        "3":{
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [],
+            "instruction": "Drain pasta and coat with a small amount of oil.",
+            "extra_info": ""
+        },
+        "4":{
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Salt",
+                "quantity": "",
+                "unit": "To Taste"
+            }],
+            "instruction": "Add sauce. Season to taste.",
+            "extra_info": ""
+        },
+        "Finish":{
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}

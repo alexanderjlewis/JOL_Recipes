@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}JOL Recipe List{% endblock title %}
+{% block content %}
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="/index.html">JOL Recipe Book</a>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/list">List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/conversion">Unit Conversion</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active">List</li>
+    </ol>
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>Recipes</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for recipe in recipes %}
+          <div class="col" id="{{ recipe['safe_name'] }}">
+            <div class="card border-primary mb-3">
+              <div class="card-header">{{ recipe['name'] }}</div>
+              <div class="card-body">
+                <p>
+                  {% for tag in recipe['tags_info'] %}
+                    <span class="badge badge-pill badge-info">{{ tag }}</span>
+                  {% endfor %}
+                  {% for tag in recipe['tags_green'] %}
+                    <span class="badge badge-pill badge-success">{{ tag }}</span>
+                  {% endfor %}
+                </p>
+                <p class="card-text">{{ recipe['tag_line'] }}</p>
+                <a href="/recipe/{{ recipe['safe_name'] }}" class="btn btn-primary stretched-link">See Details</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <br class="mb-4">
+{% endblock content %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function() {
+      $.get( "/api/getList", function( data ) {
+        console.log( typeof data ); // string
+        console.log( data ); // HTML content of the jQuery.ajax page
+      });
+    });
+  </script>
+{% endblock scripts %}

@@ -1,0 +1,59 @@
+{
+    "recipes": [{
+            "name": "Bagels",
+            "safe_name": "bagels",
+            "tag_line": "12 hrs to Complete, 30min effort",
+            "tags_info": ["Stand Mixer"],
+            "tags_green": ["Vege"]
+        },
+        {
+            "name": "Ragu",
+            "safe_name": "ragu",
+            "tag_line": "2hrs, 30min effort",
+            "tags_info": ["Food Processor"],
+            "tags_green": ["Vege"]
+        },
+        {
+            "name": "Pizza Dough",
+            "safe_name": "pizza_dough",
+            "tag_line": "2hrs, 30min effort",
+            "tags_info": ["Stand Mixer"],
+            "tags_green": ["Vege"]
+        },
+        {
+            "name": "Basil Pesto",
+            "safe_name": "basil_pesto",
+            "tag_line": "30min effort",
+            "tags_info": [],
+            "tags_green": ["Vege"]
+        },
+        {
+            "name": "Giant Couscous and Pumpkin",
+            "safe_name": "couscous_pumpkin",
+            "tag_line": "30min effort",
+            "tags_info": ["Blender"],
+            "tags_green": ["Vege"]
+        },
+        {
+            "name": "Orange Chicken",
+            "safe_name": "orange_chicken",
+            "tag_line": "Prep one day in advance, 1 hr effort",
+            "tags_info": ["Deep Frying"],
+            "tags_green": [""]
+        },
+        {
+            "name": "Ramen Noodles",
+            "safe_name": "ramen_noodles",
+            "tag_line": "Prep a day in advance, ~1 hr effort",
+            "tags_info": ["Stand Mixer"],
+            "tags_green": ["Vege"]
+        },
+        {
+            "name": "Dan Dan Noodles",
+            "safe_name": "dan_dan_noodles",
+            "tag_line": "~1 hr effort",
+            "tags_info": ["Food Processor"],
+            "tags_green": ["Vege"]
+        }
+    ]
+}

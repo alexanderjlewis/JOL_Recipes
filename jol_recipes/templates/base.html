@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" {% block html_attrs  %}{% endblock html_attrs %}>
+{% block html %}
+  <head>
+    {% block head %}
+    <title>{% block title %}{{title|default}}{% endblock title %}</title>
+
+    {% block metas %}
+    <meta name="description" content="Flask-PWA" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}"/>
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/152.png') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    {% endblock metas %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+
+    {% block css %}
+    {% endblock css %}
+    
+    {% endblock head %}
+  </head>
+  <body{% block body_attrs %}{% endblock body_attrs %}>
+    {% block body %}
+    
+    <div id="app">  
+      {% block content %}
+      {% endblock content %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    
+    {% block scripts %}
+    {% endblock scripts %}
+
+    {% block serviceworker %}
+    <script type="text/javascript">
+      if ("serviceWorker" in navigator) {
+          window.addEventListener("load", () => {
+          navigator.serviceWorker
+              .register("/sw.js")
+              .then((registration) => {
+                console.log(`Yay! ServiceWorker is loaded 🎉`)
+              })
+              .catch((err) => {
+                console.log(`Boo! ServiceWorker didn't load 😬: ${err}`);
+              });
+          });
+      }
+    </script>
+    {% endblock serviceworker %}
+
+    {% endblock body %}
+  </body>
+{% endblock html %}
+</html>

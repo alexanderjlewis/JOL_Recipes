@@ -1,0 +1,212 @@
+{
+    "name": "Bagels",
+    "safe_name": "bagels",
+    "description": "Perfect breakfast treat, on their own or with eggs and smoked salmon. Try them topped with poppy seed, sesame seeds or an 'everything' mix of both with onion and garlic granules too.",
+    "serving_tag": "makes",
+    "serving_qty": "8",
+    "serving_unit": "bagles",
+    "ingredients_pantry": [{
+        "name": "Dry Yeast",
+        "quantity": 1,
+        "unit": "Tbsp"
+    }, {
+        "name": "Bread Flour",
+        "quantity": 4,
+        "unit": "Cups"
+    }, {
+        "name": "Salt",
+        "quantity": 2,
+        "unit": "Tsp"
+    }, {
+        "name": "Brown Sugar",
+        "quantity": 3,
+        "unit": "Tbsp"
+    }, {
+        "name": "Caster Sugar",
+        "quantity": 1,
+        "unit": "Tbsp"
+    }],
+    "ingredients_meat_veg": [{
+        "name": "Eggs",
+        "quantity": 1,
+        "unit": ""
+    }],
+    "ingredients_herbs_spices": [{
+        "name": "Toppings",
+        "quantity": "",
+        "unit": "Various"
+    }],
+    "equipment_standard": [
+        "Stove",
+        "Oven",
+        "Large Pan"
+    ],
+    "equipment_special": [
+        "Stand Mixer"
+    ],
+    "step_layout": ["Start", 0, 1, 2, "SS", 3, 4, 5, 6, "SE", 7, 8, 9, 10, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "10 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 15,
+            "ingredients": [{
+                    "name": "Dry Yeast",
+                    "quantity": 1,
+                    "unit": "Tbsp"
+                },
+                {
+                    "name": "Warm Water",
+                    "quantity": 1.5,
+                    "unit": "Cups"
+                },
+                {
+                    "name": "Bread Flour",
+                    "quantity": 4,
+                    "unit": "Cups"
+                },
+                {
+                    "name": "Salt",
+                    "quantity": 2,
+                    "unit": "Tsp"
+                },
+                {
+                    "name": "Brown Sugar",
+                    "quantity": 1,
+                    "unit": "Tbsp"
+                }
+            ],
+            "instruction": "Kneed, medium-low speed in a stand mixer",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "12 hrs",
+            "secondary": false,
+            "long_step": 8,
+            "completion": 60,
+            "ingredients": [],
+            "instruction": "Put dough in an oiled bowl and cover. Leave in fridge to rise",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 60,
+            "ingredients": [],
+            "instruction": "Transfer onto floured board and divide into 8 even balls. Kneed and roll each ball until smooth",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "30 min",
+            "secondary": false,
+            "long_step": 1,
+            "completion": 70,
+            "ingredients": [],
+            "instruction": "Cover and let rest",
+            "extra_info": ""
+        },
+        "4": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 70,
+            "ingredients": [],
+            "instruction": "Preheat oven to 220C",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 70,
+            "ingredients": [],
+            "instruction": "Bring a large pan of water to boil",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 75,
+            "ingredients": [{
+                    "name": "Brown Sugar",
+                    "quantity": 2,
+                    "unit": "Tbsp"
+                },
+                {
+                    "name": "Caster Sugar",
+                    "quantity": 1,
+                    "unit": "Tbsp"
+                }
+            ],
+            "instruction": "Dissolve sugar into boiling water",
+            "extra_info": ""
+        },
+        "7": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [],
+            "instruction": "Poke a hole through the centre of each ball to form a ring.",
+            "extra_info": ""
+        },
+        "8": {
+            "time": "3 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [],
+            "instruction": "Boil bagels in batches, flipping after 2 min",
+            "extra_info": ""
+        },
+        "9": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [{
+                    "name": "Eggs",
+                    "quantity": 1,
+                    "unit": ""
+                },
+                {
+                    "name": "Toppings",
+                    "quantity": "",
+                    "unit": "Various"
+                }
+            ],
+            "instruction": "Brush on beaten egg then coat with topping of choice.",
+            "extra_info": ""
+        },
+        "10": {
+            "time": "20-25 min",
+            "secondary": false,
+            "long_step": 1,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Bake",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}

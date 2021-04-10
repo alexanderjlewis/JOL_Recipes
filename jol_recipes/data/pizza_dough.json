@@ -1,0 +1,182 @@
+{
+    "name": "Pizza Dough",
+    "safe_name": "pizza_dough",
+    "description": "This easy pizza dough recipe is great for beginners and produces a soft homemade pizza crust",
+    "serving_tag": "makes dough for",
+    "serving_qty": "2",
+    "serving_unit": "pizzas",
+    "ingredients_pantry": [{
+        "name": "Dry Yeast",
+        "quantity": 2.25,
+        "unit": "Tsp"
+    }, {
+        "name": "Bread Flour",
+        "quantity": 450,
+        "unit": "g"
+    }, {
+        "name": "Salt",
+        "quantity": 0.75,
+        "unit": "Tsp"
+    }, {
+        "name": "Caster Sugar",
+        "quantity": 1,
+        "unit": "Tbsp"
+    }, {
+        "name": "Olive Oil",
+        "quantity": 2,
+        "unit": "Tbsp"
+    }],
+    "ingredients_meat_veg": [{
+        "name": "Toppings",
+        "quantity": "",
+        "unit": "Various"
+    }],
+    "ingredients_herbs_spices": [{
+        "name": "Toppings",
+        "quantity": "",
+        "unit": "Various"
+    }],
+    "equipment_standard": [
+        "Oven",
+        "Pizza Pan (or large tray)"
+    ],
+    "equipment_special": [
+        "Stand Mixer"
+    ],
+    "step_layout": ["Start", 0, 1, "SS", 2, 3, 4, "SE", 5, 6, 7, 8, "Finish"],
+    "steps": {
+        "Start":{
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 5,
+            "ingredients": [{
+                    "name": "Dry Yeast",
+                    "quantity": 2.25,
+                    "unit": "Tsp"
+                },
+                {
+                    "name": "Warm Water (~40C)",
+                    "quantity": 320,
+                    "unit": "mL"
+                },
+                {
+                    "name": "Caster Sugar",
+                    "quantity": 1,
+                    "unit": "Tbsp"
+                }
+            ],
+            "instruction": "Whisk together. Cover and rest.",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "~5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 15,
+            "ingredients": [{
+                    "name": "Olive Oil",
+                    "quantity": 2,
+                    "unit": "Tbsp"
+                },
+                {
+                    "name": "Salt",
+                    "quantity": 0.75,
+                    "unit": "Tbsp"
+                },
+                {
+                    "name": "Bread Flour",
+                    "quantity": 450,
+                    "unit": "g"
+                }
+            ],
+            "instruction": "Add ingredients to stand mixer. Knead with a dough hook for 5min or until it bounces back slowly from a finger press.",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 40,
+            "ingredients": [],
+            "instruction": "Lightly oil a large bowl. Place dough in a bowl and cover",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "60 - 90 min",
+            "secondary": false,
+            "long_step": 2,
+            "completion": 45,
+            "ingredients": [],
+            "instruction": "Allow to rise in a warm place.",
+            "extra_info": ""
+        },
+        "4": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 45,
+            "ingredients": [],
+            "instruction": "Preheat oven to 250C",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 70,
+            "ingredients": [],
+            "instruction": "Turn out dough onto a floured surface. Punch down to release trapped air and divide in half.",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 75,
+            "ingredients": [],
+            "instruction": "Roll each half into a 12\" circle",
+            "extra_info": ""
+        },
+        "7": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 75,
+            "ingredients": [{
+                "name": "Toppings",
+                "quantity": "",
+                "unit": "Various"
+            }],
+            "instruction": "Add toppings of your choice",
+            "extra_info": ""
+        },
+        "8": {
+            "time": "8 - 12 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 85,
+            "ingredients": [],
+            "instruction": "Bake",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}

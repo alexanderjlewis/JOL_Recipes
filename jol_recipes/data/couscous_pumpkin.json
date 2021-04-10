@@ -1,0 +1,75 @@
+{
+    "name": "Giant Couscous and Pumpkin",
+    "safe_name": "couscous_pumpkin",
+    "description": "Ottolenghi Flavour - pg 137",
+    "serving_tag": "serves",
+    "serving_qty": "4",
+    "serving_unit": "adults",
+    "ingredients_pantry": [{
+        "name": "Olive Oil",
+        "quantity": 105,
+        "unit": "mL"
+    }, {
+        "name": "Caster Sugar",
+        "quantity": 2.5,
+        "unit": "Tsp"
+    }, {
+        "name": "Giant Couscous",
+        "quantity": 250,
+        "unit": "g"
+    }],
+    "ingredients_meat_veg": [{
+        "name": "Crown Prince Pumpkin",
+        "quantity": 750,
+        "unit": "g"
+    }, {
+        "name": "Garlic",
+        "quantity": 8,
+        "unit": "Cloves"
+    }, {
+        "name": "Onion",
+        "quantity": 2,
+        "unit": "Large"
+    }, {
+        "name": "Plum Tomatos",
+        "quantity": 750,
+        "unit": "g"
+    }, {
+        "name": "Onion",
+        "quantity": 2,
+        "unit": "Large"
+    }, {
+        "name": "Baby Spinach",
+        "quantity": 250,
+        "unit": "g"
+    }, {
+        "name": "Fresh Coriander",
+        "quantity": 15,
+        "unit": "g"
+    }],
+    "ingredients_fridge_freezer": [{
+        "name": "Parmesan",
+        "quantity": 60,
+        "unit": "g"
+    }],
+    "ingredients_herbs_spices": [{
+        "name": "Star Anise",
+        "quantity": 4,
+        "unit": "Whole"
+    }, {
+        "name": "Ground Cinnamon",
+        "quantity": 3,
+        "unit": "Tsp"
+    }, {
+        "name": "Chilli Flakes",
+        "quantity": 0.3,
+        "unit": "Tsp"
+    }],
+    "equipment_standard": [
+        "Large Oven Tray",
+        "Saute Pan"
+    ],
+    "equipment_special": [],
+    "step_layout": [],
+    "steps": []
+}

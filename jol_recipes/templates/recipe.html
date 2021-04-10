@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% block title %}JOL Recipe - {{ recipe['name'] }}{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="/">JOL Recipe Book</a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/list">List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/conversion">Unit Conversion</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/list">List</a></li>
+      <li class="breadcrumb-item active">{{ recipe['name'] }}</li>
+    </ol>
+    <div class="jumbotron py-4">
+      <h2>{{ recipe['name'] }}</h2>
+      <p class="lead">{{ recipe['description'] }}</p>
+      <p class="mb-0">
+        <button type="button" class="mr-2 btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#scalingModal">
+          Adjust Qty
+        </button><span></span>
+        <em id="heading_quantity" data_qty={{ recipe['serving_qty'] }}>Quantity shown {{ recipe['serving_tag'] }} {{ recipe['serving_qty'] }} {{ recipe['serving_unit'] }}.</em>
+      </p>
+    </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item mr-1">
+        <a class="nav-link active" data-toggle="tab" href="#ingredients">Ingredients</a>
+      </li>
+      <li class="nav-item mr-1">
+        <a class="nav-link" data-toggle="tab" href="#equipment">Equipment</a>
+      </li>
+      <li class="nav-item mr-1">
+        <a class="nav-link" data-toggle="tab" href="#method">Method</a>
+      </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active show" id="ingredients">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 mt-2">
+            <ul class="list-group">
+              <h5 class="mt-2">Meat & Vegetables</h5>
+              {% if recipe['ingredients_meat_veg'] %}
+                {% for ingredient in recipe['ingredients_meat_veg'] %}  
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+                    <span class="flex-grow-1">{{ingredient['name']}}</span>
+                    <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+                  </li>
+                {% endfor %}
+              {% else %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="flex-grow-1"><i>None</i></span>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="col-lg-5 col-md-6 mt-2">
+            <ul class="list-group">
+              <h5 class="mt-2">Herbs and Spices</h5>
+              {% if recipe['ingredients_herbs_spices'] %}
+                {% for ingredient in recipe['ingredients_herbs_spices'] %}  
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+                    <span class="flex-grow-1">{{ingredient['name']}}</span>
+                    <em text-muted data_role='list_ingredient_qty' id="list_hs_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+                  </li>
+                {% endfor %}
+              {% else %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="flex-grow-1"><i>None</i></span>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="col-lg-5 col-md-6 mt-2">
+            <ul class="list-group">
+              <h5 class="mt-2">Pantry</h5>
+              {% if recipe['ingredients_pantry'] %}
+                {% for ingredient in recipe['ingredients_pantry'] %}  
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+                    <span class="flex-grow-1">{{ingredient['name']}}</span>
+                    <em text-muted data_role='list_ingredient_qty' id="list_p_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+                  </li>
+                {% endfor %}
+              {% else %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="flex-grow-1"><i>None</i></span>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="col-lg-5 col-md-6 mt-2">
+            <ul class="list-group">
+              <h5 class="mt-2">Fridge and Freezer</h5>
+              {% if recipe['ingredients_fridge_freezer'] %}
+                {% for ingredient in recipe['ingredients_fridge_freezer'] %}  
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+                    <span class="flex-grow-1">{{ingredient['name']}}</span>
+                    <em text-muted data_role='list_ingredient_qty' id="list_ff_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+                  </li>
+                {% endfor %}
+              {% else %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="flex-grow-1"><i>None</i></span>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="equipment">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mt-2">
+            <h5 class="mt-2">Standard</h5>
+            <ul class="list-group">
+                {% if recipe['equipment_standard'] %}
+                  {% for item in recipe['equipment_standard'] %}  
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <span class="flex-grow-1">{{item}}</span>
+                    </li>
+                  {% endfor %}
+                {% else %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="flex-grow-1"><i>None</i></span>
+                  </li>
+                {% endif %}
+              </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-2">
+            <h5 class="mt-2">Specialised</h5>
+            <ul class="list-group">
+                {% if recipe['equipment_special'] %}
+                  {% for item in recipe['equipment_special'] %}  
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <span class="flex-grow-1">{{item}}</span>
+                    </li>
+                  {% endfor %}
+                {% else %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="flex-grow-1"><i>None</i></span>
+                  </li>
+                {% endif %}
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="method">
+        <div class="col-lg-12">
+          <div style="width:100%;max-width:690px;margin-left:auto;margin-right:auto;">
+            {% block chart_svg %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br class="mb-4">
+
+  <!-- Scaling Modal -->
+  <div class="modal fade" id="scalingModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Adjust Recipe Quantity</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Update to:</label>
+            <div class="input-group">
+              <input data_qty="{{ recipe['serving_qty'] }}" id="updatedScaleFactor" type="numeric" class="form-control" value="{{ recipe['serving_qty'] }}">
+              <div class="input-group-append">
+                <span class="input-group-text">{{ recipe['serving_unit'] }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" onclick="updatescaling()" class="btn btn-primary">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block scripts %}
+  <script>
+    function changecolor(elt) {
+      svg_elt = document.getElementById(elt.id);
+
+      if (svg_elt.getAttribute('fill') == '#c5e1a5') {
+        svg_elt.setAttribute('fill','#3D4242');
+      }
+      else {
+        svg_elt.setAttribute('fill','#c5e1a5');
+      }
+    
+    }
+
+    function updatescaling() {
+      var serving_tag = '{{ recipe['serving_tag'] }}';
+      var serving_qty = '{{ recipe['serving_qty'] }}';
+      var serving_unit = '{{ recipe['serving_unit'] }}';
+      //Quantity shown  {{ recipe['serving_qty'] }} {{ recipe['serving_unit'] }}.
+      
+      elt = document.getElementById('updatedScaleFactor');
+      new_qty = elt.value;
+      base_qty = elt.getAttribute('data_qty');
+      var factor = new_qty/base_qty;
+
+      elts = document.querySelectorAll("[data_role='chart_ingredient_qty']");
+      var arrayLength = elts.length;
+      for (var i = 0; i < arrayLength; i++) {
+          var base_qty = (elts[i].getAttribute('data_qty'));
+          if (base_qty) {
+            var updated_qty = base_qty * factor;
+          } else {
+            var updated_qty = '';
+          };
+          var current_unit = elts[i].getAttribute('data_unit');
+          document.getElementById(elts[i].id).innerHTML = updated_qty + current_unit;
+      }
+
+      element = document.getElementById('heading_quantity')
+      element_qty = element.getAttribute('data_qty')
+      element.innerHTML = 'Quantity shown {{ recipe['serving_tag'] }} ' + element_qty * factor + ' {{ recipe['serving_unit'] }}.';
+
+      elts = document.querySelectorAll("[data_role='list_ingredient_qty']");
+      var arrayLength = elts.length;
+      for (var i = 0; i < arrayLength; i++) {
+          var base_qty = (elts[i].getAttribute('data_qty'));
+          if (base_qty) {
+            var updated_qty = base_qty * factor;
+          } else {
+            var updated_qty = '';
+          };
+          var current_unit = elts[i].getAttribute('data_unit');
+          document.getElementById(elts[i].id).innerHTML = updated_qty + ' ' + current_unit;
+      }
+
+    }
+
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    })
+
+  </script>
+
+{% endblock scripts %}
+   
