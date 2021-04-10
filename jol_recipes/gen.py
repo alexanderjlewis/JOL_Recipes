@@ -319,14 +319,42 @@ class element_renderer():
         fo.append(p1)
 
         # draw the connecting line if required
-        if self.in_split and self.main_path:
+        #if self.in_split and self.main_path:
+        #    path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,text_x_pos - 5)
+        #    path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+        #    self.svg.insert(0,path)
+        
+        # draw the connecting line if required
+        if self.in_split:
+            if self.main_path:
+                path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,text_x_pos - 5)
+                path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                self.svg.insert(0,path)
+                if self.time:
+                    path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,self.main_path_x - self.text_offset_x + 5)
+                    path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                    self.svg.insert(0,path)
+            else:
+                path = 'M{0} {1} H{2}'.format(self.secondary_path_x,text_y_pos + 11,text_x_pos - 5)
+                path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                self.svg.insert(0,path)
+                if self.time:
+                    path = 'M{0} {1} H{2}'.format(self.secondary_path_x,text_y_pos + 11,self.main_path_x - self.text_offset_x + 5)
+                    path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                    self.svg.insert(0,path)
+        else:
             path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,text_x_pos - 5)
             path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
             self.svg.insert(0,path)
+            if self.time:
+                path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,self.main_path_x - self.text_offset_x + 5)
+                path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                self.svg.insert(0,path)
+
         
         #add the 'time' text
         if self.time:
-            time_text = ET.Element('text', attrib={'x':str(text_x_pos - 75), 'y':str(text_y_pos), 'class':'chart_text', 'alignment-baseline':'hanging'})
+            time_text = ET.Element('text', attrib={'x':str(self.main_path_x - self.text_offset_x), 'y':str(text_y_pos + 15), 'class':'chart_text', 'fill':'#545454', 'text-anchor':'end'})
             time_text.text = self.data['time']
             g.append(time_text)
 
