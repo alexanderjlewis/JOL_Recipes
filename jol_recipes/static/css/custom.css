@@ -3,13 +3,6 @@
     font-size: small;
 }
 
-tspan a {
-    fill: #93c54b;
-    /* Even for text, SVG uses fill over color */
-    text-decoration: underline;
-    font-style: italic;
-}
-
 .chart_textarea {
     border: none;
     overflow: hidden;
@@ -23,12 +16,13 @@ tspan a {
 .chart_text {
     font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
     font-size: small;
+    color: rgb(84, 84, 84);
 }
 
 .chart_p {
     margin-bottom: 0;
 }
 
-.chart_a{
+.chart_a {
     padding-left: 2px;
 }

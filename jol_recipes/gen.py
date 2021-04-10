@@ -127,6 +127,7 @@ class element_renderer():
         self.ingredients = 0
         self.lines_text = []
         self.extra_info = False
+        self.time = False
         self.data = {}
         self.height = 0
         self.first_node = False
@@ -154,6 +155,9 @@ class element_renderer():
 
             if self.data['long_step']:
                 self.long_node = True
+
+            if self.data['time']:
+                self.time = True
 
     def draw_node(self,svg_y_pos):
 
@@ -205,10 +209,10 @@ class element_renderer():
         group = ET.Element('g',attrib={})
         square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8),'y':str(self.y_pos),'width':str(self.ingredient_square_side),'height':str(self.ingredient_square_side),'fill':'#3D4242','stroke':'#3D4242'})
         group.append(square)
-        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'end','font-size':'smaller','alignment-baseline':'middle', 'class':'chart_text'})
+        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
         text.text = ingredient['name']
         group.append(text)
-        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'start','font-size':'smaller','font-style':'italic','alignment-baseline':'middle'})
+        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'start','font-style':'italic','alignment-baseline':'middle', 'class':'chart_text'})
         text.text = str(ingredient['quantity']) + ' ' + str(ingredient['unit'])
         group.append(text)
         
@@ -294,7 +298,12 @@ class element_renderer():
         else:
             text_x_pos = self.main_path_x + self.text_offset_x
 
-        fo = ET.Element('foreignObject', attrib={'x':str(text_x_pos), 'y':str(text_y_pos), 'height':str(len(self.lines_text) * self.node_text_line_spacing_y + 50), 'width':'100%'})
+        if self.extra_info:
+            fo_height = (len(self.lines_text) * self.node_text_line_spacing_y) + 30
+        else:
+            fo_height = len(self.lines_text) * self.node_text_line_spacing_y
+
+        fo = ET.Element('foreignObject', attrib={'x':str(text_x_pos), 'y':str(text_y_pos), 'height':str(fo_height), 'width':'100%'})
         fo.append(ET.Element('body', attrib={'xmlns':'http://www.w3.org/1999/xhtml'}))
 
         text_area = ET.Element('textarea', attrib={'rows':str(len(self.lines_text)),'cols':str(self.node_text_char_width),'disabled':'','wrap':'soft','class':'chart_textarea chart_text'})
@@ -309,18 +318,21 @@ class element_renderer():
         p1.append(text_area)
         fo.append(p1)
 
-        
-
         # draw the connecting line if required
         if self.in_split and self.main_path:
             path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,text_x_pos - 5)
             path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
             self.svg.insert(0,path)
+        
+        #add the 'time' text
+        if self.time:
+            time_text = ET.Element('text', attrib={'x':str(text_x_pos - 75), 'y':str(text_y_pos), 'class':'chart_text', 'alignment-baseline':'hanging'})
+            time_text.text = self.data['time']
+            g.append(time_text)
 
         #add the 'extra info' section if required
         if self.extra_info:
             p2 = ET.Element('p', attrib={'class':'chart_p'})
-
             #tspan =  ET.Element('tspan', attrib={'x':str(text_x_pos),'y':str(text_y_pos + (len(self.lines_text) * 19)),'alignment-baseline':'middle'})
             a = ET.Element('a', attrib={'alignment-baseline':'middle','tabindex':"0", 'class':"chart_a chart_text", "role":"button", 'data-toggle':"popover", "data-trigger":"focus", 'data-placement':"bottom", 'data-content':self.data['extra_info']})
             a.text = "Click for More Details..."
@@ -356,8 +368,7 @@ class element_renderer():
 ############## END OF CLASS ######################
 
 def generate(render_recipe): 
-    if render_recipe and render_recipe.get('step_layout'):
-        
+    if render_recipe and render_recipe.get('step_layout'): 
         obj_graph_renderer = graph_renderer(render_recipe = render_recipe)
         obj_graph_renderer.render()
         return obj_graph_renderer.get_graph()
