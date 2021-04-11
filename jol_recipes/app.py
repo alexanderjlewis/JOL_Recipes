@@ -1,7 +1,7 @@
 #app.py
 import json
 from gen import generate
-from flask import Flask, render_template, url_for, send_file
+from flask import Flask, render_template, url_for, send_file, request
 import config
 from helper_funcs import get_recipe_data
 
@@ -17,6 +17,12 @@ def index_page():
 def list_page():
     return render_template('list.html', recipes=recipes)
 
+@app.route('/test')
+def test():
+    submitted_name = request.args.get('safe_name')
+    quantity = request.args.get('quantity')
+    return 'test data from flask' + submitted_name + quantity
+
 @app.route('/api/getRecipe/<name>/chart')
 def getRecipe(name=None):
     recipe_data = get_recipe_data(name, recipes)
@@ -24,12 +30,10 @@ def getRecipe(name=None):
 
 @app.route('/recipe/<name>')
 def render_recipe_page(name=None):
-    recipe_data = None
-    for recipe in recipes:
-        if recipe['safe_name'] == name:
-            with open('data/recipes/' + name + '.json') as f1:
-                recipe_data = json.load(f1)
-    chart = generate(recipe_data, ingredients)
+    quantity_required = 15
+    recipe_data = get_recipe_data(name, recipes)
+    #chart = generate(recipe_data, quantity_required)
+    chart = generate(recipe_data)
     return render_template('chart.html', recipe=recipe_data, chart=chart)
 
 @app.route('/sw.js')

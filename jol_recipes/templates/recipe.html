@@ -259,7 +259,19 @@
     $('.popover-dismiss').popover({
       trigger: 'focus'
     })
-
+    
+    
+      $.ajax({
+      type : "GET",
+      url : '/test',
+      dataType: "json",
+      data: {recipe:'{{ recipe['safe_name'] }}', quantity:recipe_quantity},
+      contentType: 'application/json;charset=UTF-8',
+      success: function (data) {
+          console.log(data);
+          }
+      });
+      
   </script>
 
 {% endblock scripts %}
