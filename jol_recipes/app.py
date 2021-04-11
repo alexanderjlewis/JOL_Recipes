@@ -2,12 +2,12 @@
 import json
 from gen import generate
 from flask import Flask, render_template, url_for, send_file
+import config
+from helper_funcs import get_recipe_data
 
 app = Flask(__name__)
-with open('data/recipe_list.json') as f:
-    recipes = json.load(f)
-with open('data/ingredient_list.json') as f:
-    ingredients = json.load(f)
+recipes = config.load_recipes()
+ingredients = config.load_ingredients()
 
 @app.route('/')
 def index_page():
@@ -17,14 +17,14 @@ def index_page():
 def list_page():
     return render_template('list.html', recipes=recipes)
 
-
-@app.route('/api/getList')
-def getList():
-    return "<p>Got it!</p>"
+@app.route('/api/getRecipe/<name>/chart')
+def getRecipe(name=None):
+    recipe_data = get_recipe_data(name, recipes)
+    return recipe_data
 
 @app.route('/recipe/<name>')
 def render_recipe_page(name=None):
-    render_recipe = None
+    recipe_data = None
     for recipe in recipes:
         if recipe['safe_name'] == name:
             with open('data/recipes/' + name + '.json') as f1:
