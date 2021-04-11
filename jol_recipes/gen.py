@@ -8,7 +8,7 @@ class graph_renderer():
     def __init__(self, render_recipe):
         # dynamic vars
         self.svg = ET.Element('svg', attrib={'width':'100%', 'version':"1.1", 'xmlns':"http://www.w3.org/2000/svg"})
-        self.current_y = 50 #some padding for top of chart
+        self.current_y = 0
         self.element_objs = []
         self.render_recipe = render_recipe
 
@@ -209,10 +209,10 @@ class element_renderer():
         group = ET.Element('g',attrib={})
         square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8),'y':str(self.y_pos),'width':str(self.ingredient_square_side),'height':str(self.ingredient_square_side),'fill':'#3D4242','stroke':'#3D4242'})
         group.append(square)
-        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
+        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text', 'fill':'#545454'})
         text.text = ingredient['name']
         group.append(text)
-        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'start','font-style':'italic','alignment-baseline':'middle', 'class':'chart_text'})
+        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'start','font-style':'italic','alignment-baseline':'middle', 'class':'chart_text', 'fill':'#545454'})
         text.text = str(ingredient['quantity']) + ' ' + str(ingredient['unit'])
         group.append(text)
         
@@ -395,7 +395,8 @@ class element_renderer():
 
 ############## END OF CLASS ######################
 
-def generate(render_recipe): 
+def generate(render_recipe, ingredient_list):
+    
     if render_recipe and render_recipe.get('step_layout'): 
         obj_graph_renderer = graph_renderer(render_recipe = render_recipe)
         obj_graph_renderer.render()

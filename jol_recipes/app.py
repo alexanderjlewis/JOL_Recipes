@@ -4,8 +4,10 @@ from gen import generate
 from flask import Flask, render_template, url_for, send_file
 
 app = Flask(__name__)
-with open('data/recipes.json') as f:
-    data = json.load(f)
+with open('data/recipe_list.json') as f:
+    recipes = json.load(f)
+with open('data/ingredient_list.json') as f:
+    ingredients = json.load(f)
 
 @app.route('/')
 def index_page():
@@ -13,7 +15,7 @@ def index_page():
 
 @app.route('/list')
 def list_page():
-    return render_template('list.html', recipes=data['recipes'])
+    return render_template('list.html', recipes=recipes)
 
 
 @app.route('/api/getList')
@@ -23,12 +25,12 @@ def getList():
 @app.route('/recipe/<name>')
 def render_recipe_page(name=None):
     render_recipe = None
-    for recipe in data['recipes']:
+    for recipe in recipes:
         if recipe['safe_name'] == name:
-            with open('data/' + name + '.json') as f1:
-                json_data = json.load(f1)
-    chart = generate(json_data)
-    return render_template('chart.html', recipe=json_data, chart=chart)
+            with open('data/recipes/' + name + '.json') as f1:
+                recipe_data = json.load(f1)
+    chart = generate(recipe_data, ingredients)
+    return render_template('chart.html', recipe=recipe_data, chart=chart)
 
 @app.route('/sw.js')
 def sw():

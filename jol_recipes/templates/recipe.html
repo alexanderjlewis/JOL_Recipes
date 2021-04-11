@@ -195,6 +195,8 @@
 
 {% block scripts %}
   <script>
+    var recipe_quantity = {{recipe['serving_qty']}}
+
     function changecolor(elt) {
       svg_elt = document.getElementById(elt.id);
 
