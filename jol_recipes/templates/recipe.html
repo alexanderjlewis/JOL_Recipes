@@ -157,7 +157,7 @@
       </div>
       <div class="tab-pane fade" id="method_tab">
         <div class="col-lg-12">
-          <div style="width:100%;max-width:690px;margin-left:auto;margin-right:auto;">
+          <div style="width:100%;max-width:690px;margin-left:auto;margin-right:auto;" id="chart_area">
             {% block chart_svg %}{% endblock %}
           </div>
         </div>
@@ -214,41 +214,23 @@
       var serving_qty = '{{ recipe['serving_qty'] }}';
       var serving_unit = '{{ recipe['serving_unit'] }}';
       //Quantity shown  {{ recipe['serving_qty'] }} {{ recipe['serving_unit'] }}.
+
+      var qty = $('#updatedScaleFactor').val()
+
       
-      elt = document.getElementById('updatedScaleFactor');
-      new_qty = elt.value;
-      base_qty = elt.getAttribute('data_qty');
-      var factor = new_qty/base_qty;
 
-      elts = document.querySelectorAll("[data_role='chart_ingredient_qty']");
-      var arrayLength = elts.length;
-      for (var i = 0; i < arrayLength; i++) {
-          var base_qty = (elts[i].getAttribute('data_qty'));
-          if (base_qty) {
-            var updated_qty = base_qty * factor;
-          } else {
-            var updated_qty = '';
-          };
-          var current_unit = elts[i].getAttribute('data_unit');
-          document.getElementById(elts[i].id).innerHTML = updated_qty + current_unit;
-      }
+      $.ajax({
+        type : "GET",
+        url : '/test',
+        dataType: "json",
+        data: {recipe:'{{ recipe['safe_name'] }}', quantity:qty},
+        contentType: 'application/json;charset=UTF-8',
+        success: function (data) {
+          $( '#chart_area' ).html( data );
+          $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + qty + ' ' + serving_unit);
+        }
+      });
 
-      element = document.getElementById('heading_quantity')
-      element_qty = element.getAttribute('data_qty')
-      element.innerHTML = 'Quantity shown {{ recipe['serving_tag'] }} ' + element_qty * factor + ' {{ recipe['serving_unit'] }}.';
-
-      elts = document.querySelectorAll("[data_role='list_ingredient_qty']");
-      var arrayLength = elts.length;
-      for (var i = 0; i < arrayLength; i++) {
-          var base_qty = (elts[i].getAttribute('data_qty'));
-          if (base_qty) {
-            var updated_qty = base_qty * factor;
-          } else {
-            var updated_qty = '';
-          };
-          var current_unit = elts[i].getAttribute('data_unit');
-          document.getElementById(elts[i].id).innerHTML = updated_qty + ' ' + current_unit;
-      }
 
     }
 
@@ -259,18 +241,6 @@
     $('.popover-dismiss').popover({
       trigger: 'focus'
     })
-    
-    
-      $.ajax({
-      type : "GET",
-      url : '/test',
-      dataType: "json",
-      data: {recipe:'{{ recipe['safe_name'] }}', quantity:recipe_quantity},
-      contentType: 'application/json;charset=UTF-8',
-      success: function (data) {
-          console.log(data);
-          }
-      });
       
   </script>
 
