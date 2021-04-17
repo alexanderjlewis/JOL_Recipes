@@ -20,24 +20,28 @@ def adjust_recipe_qty(recipe, quantity_required):
             try:
                 ingredient['quantity'] *= multiplier
             except:
-                ingredient['quantity'] = ''
+                pass
 
     for ingredient in recipe['ingredients_pantry']:
         try:
             ingredient['quantity'] *= multiplier
+            ingredient['quantity'] = round(ingredient['quantity'], 2).rstrip('0').rstrip('.')
+            print(ingredient['quantity'])
         except:
-            ingredient['quantity'] = ''
+            pass
 
     for ingredient in recipe['ingredients_meat_veg']:
         try:
             ingredient['quantity'] *= multiplier
+            ingredient['quantity'] = round(ingredient['quantity'], 2).rstrip('0').rstrip('.')
         except:
-            ingredient['quantity'] = ''
+            pass
 
     for ingredient in recipe['ingredients_herbs_spices']:
         try:
             ingredient['quantity'] *= multiplier
+            ingredient['quantity'] = round(ingredient['quantity'], 2).rstrip('0').rstrip('.')
         except:
-            ingredient['quantity'] = ''
+            pass
     
     return recipe

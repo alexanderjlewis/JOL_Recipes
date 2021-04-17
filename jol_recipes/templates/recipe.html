@@ -150,7 +150,7 @@
         $.ajax({
           type : "GET",
           url : '/api/getChart',
-          dataType: "json",
+          dataType: "html",
           data: {recipe:'{{ recipe['safe_name'] }}', quantity:serving_qty},
           contentType: 'application/json;charset=UTF-8',
           success: function (data) {
@@ -163,22 +163,15 @@
         $.ajax({
           type : "GET",
           url : '/api/getIngredientList',
-          dataType: "json",
+          dataType: "html",
           data: {recipe:'{{ recipe['safe_name'] }}', quantity:serving_qty},
           contentType: 'application/json;charset=UTF-8',
           success: function (data) {
-            console.log('success');
             $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end
-          },
-          failure: function (data) {
-            console.log('failed');
           }
         });
 
       }   
-
-
-
 
     }
 
