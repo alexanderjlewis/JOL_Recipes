@@ -3,7 +3,7 @@
     "safe_name": "bagels",
     "description": "Perfect breakfast treat, on their own or with eggs and smoked salmon. Try them topped with poppy seed, sesame seeds or an 'everything' mix of both with onion and garlic granules too.",
     "serving_tag": "makes",
-    "serving_qty": "8",
+    "serving_qty": 8,
     "serving_unit": "bagles",
     "ingredients_pantry": [{
         "name": "Dry Yeast",

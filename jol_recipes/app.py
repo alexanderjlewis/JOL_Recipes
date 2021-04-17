@@ -3,7 +3,7 @@ import json
 from gen import generate
 from flask import Flask, render_template, url_for, send_file, request, jsonify
 import config
-from helper_funcs import get_recipe_data
+from helper_funcs import get_recipe_data, adjust_recipe_qty
 
 app = Flask(__name__)
 recipes = config.load_recipes()
@@ -20,16 +20,18 @@ def list_page():
 @app.route('/api/getChart')
 def api_getChart():
     submitted_name = request.args.get('recipe')
-    quantity = int(request.args.get('quantity'))
+    required_quantity = int(request.args.get('quantity'))
     recipe_data = get_recipe_data(submitted_name, recipes)
-    chart = generate(recipe_data, quantity)
+    recipe_data = adjust_recipe_qty(recipe_data, required_quantity)
+    chart = generate(recipe_data)
     return jsonify(chart)
 
 @app.route('/api/getIngredientList')
 def api_getIngredientList():
     submitted_name = request.args.get('recipe')
-    quantity = int(request.args.get('quantity'))
+    required_quantity = int(request.args.get('quantity'))
     recipe_data = get_recipe_data(submitted_name, recipes)
+    recipe_data = adjust_recipe_qty(recipe_data, required_quantity)
     return render_template('ingredient_list.html', recipe=recipe_data)
 
 @app.route('/recipe/<name>')

@@ -11,14 +11,9 @@ class graph_renderer():
         self.current_y = 0
         self.element_objs = []
         self.render_recipe = render_recipe
-        self.multiplier = 1
 
         # create hatched section
         self.add_defs()
-
-        #calculate multiplier to get required quantity
-        if quantity_required:
-            self.multiplier = int(quantity_required) / int(self.render_recipe['serving_qty'])
 
         #create objects for each element
         in_split = False
@@ -36,7 +31,7 @@ class graph_renderer():
                 element.process_data()
 
             else:
-                element = element_renderer(id = step_id, multiplier = self.multiplier)        
+                element = element_renderer(id = step_id)        
 
                 if step_id == 'Start': #first node in drawing
                     element.first_node = True
@@ -121,7 +116,7 @@ class element_renderer():
     #split line
     split_height = 60 #20 for each radius, + 10 at start.
 
-    def __init__(self,id,is_node = True,multiplier = 1):
+    def __init__(self,id,is_node = True):
         self.id = id
         self.is_node = is_node
         self.start_split = False
@@ -138,7 +133,6 @@ class element_renderer():
         self.long_node = False
         self.y_pos = 0
         self.x_pos = 0
-        self.multiplier = multiplier
 
         self.svg = ET.Element('svg', attrib={'width':'100%'})
 
@@ -219,7 +213,7 @@ class element_renderer():
 
         # work out the quantity to be displayed based on the recipe and multiplicaiton factor. Use a try/execpt as sometimes this may be a blank string as an input from the recipe json.
         try: 
-            ingredient_qty = float(ingredient['quantity']) * self.multiplier
+            ingredient_qty = ingredient['quantity']
             ingredient_qty = str(round(ingredient_qty, 2)).rstrip('0').rstrip('.')
         except:
             ingredient_qty = ''
@@ -407,10 +401,10 @@ class element_renderer():
 
 ############## END OF CLASS ######################
 
-def generate(recipe, quantity_required = ''):
+def generate(recipe):
     
     if recipe and recipe.get('step_layout'): 
-        obj_graph_renderer = graph_renderer(recipe, quantity_required)
+        obj_graph_renderer = graph_renderer(recipe)
         obj_graph_renderer.render()
         return obj_graph_renderer.get_graph()
 

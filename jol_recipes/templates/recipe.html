@@ -113,7 +113,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" onclick="updatescaling()" class="btn btn-primary" data-dismiss="modal">Apply</button>
+          <button type="button" onclick="updateScaling()" class="btn btn-primary" data-dismiss="modal">Apply</button>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
     
     }
 
-    function updatescaling() {
+    function updateScaling() {
       var serving_tag = '{{ recipe['serving_tag'] }}';
       var serving_qty = '{{ recipe['serving_qty'] }}';
       var serving_unit = '{{ recipe['serving_unit'] }}';
@@ -167,8 +167,11 @@
           data: {recipe:'{{ recipe['safe_name'] }}', quantity:serving_qty},
           contentType: 'application/json;charset=UTF-8',
           success: function (data) {
-            $('#chart_area').html(data); //replace the chart with the new one returned from the back end
-            $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
+            console.log('success');
+            $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end
+          },
+          failure: function (data) {
+            console.log('failed');
           }
         });
 

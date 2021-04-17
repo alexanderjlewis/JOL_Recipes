@@ -9,4 +9,35 @@ def get_recipe_data(submitted_name,recipes):
                 return recipe_data
     
     return False
+
+
+def adjust_recipe_qty(recipe, quantity_required):
     
+    multiplier = int(quantity_required) / int(recipe['serving_qty'])
+
+    for step_id in recipe['steps']:
+        for ingredient in recipe['steps'][str(step_id)]['ingredients']:
+            try:
+                ingredient['quantity'] *= multiplier
+            except:
+                ingredient['quantity'] = ''
+
+    for ingredient in recipe['ingredients_pantry']:
+        try:
+            ingredient['quantity'] *= multiplier
+        except:
+            ingredient['quantity'] = ''
+
+    for ingredient in recipe['ingredients_meat_veg']:
+        try:
+            ingredient['quantity'] *= multiplier
+        except:
+            ingredient['quantity'] = ''
+
+    for ingredient in recipe['ingredients_herbs_spices']:
+        try:
+            ingredient['quantity'] *= multiplier
+        except:
+            ingredient['quantity'] = ''
+    
+    return recipe
