@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-lg-5 col-md-6 mt-2">
+      <ul class="list-group">
+        <h5 class="mt-2">Meat & Vegetables</h5>
+        {% if recipe['ingredients_meat_veg'] %}
+          {% for ingredient in recipe['ingredients_meat_veg'] %}  
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+              <span class="flex-grow-1">{{ingredient['name']}}</span>
+              <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="flex-grow-1"><i>None</i></span>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="col-lg-5 col-md-6 mt-2">
+      <ul class="list-group">
+        <h5 class="mt-2">Herbs and Spices</h5>
+        {% if recipe['ingredients_herbs_spices'] %}
+          {% for ingredient in recipe['ingredients_herbs_spices'] %}  
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+              <span class="flex-grow-1">{{ingredient['name']}}</span>
+              <em text-muted data_role='list_ingredient_qty' id="list_hs_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="flex-grow-1"><i>None</i></span>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="col-lg-5 col-md-6 mt-2">
+      <ul class="list-group">
+        <h5 class="mt-2">Pantry</h5>
+        {% if recipe['ingredients_pantry'] %}
+          {% for ingredient in recipe['ingredients_pantry'] %}  
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+              <span class="flex-grow-1">{{ingredient['name']}}</span>
+              <em text-muted data_role='list_ingredient_qty' id="list_p_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="flex-grow-1"><i>None</i></span>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="col-lg-5 col-md-6 mt-2">
+      <ul class="list-group">
+        <h5 class="mt-2">Fridge and Freezer</h5>
+        {% if recipe['ingredients_fridge_freezer'] %}
+          {% for ingredient in recipe['ingredients_fridge_freezer'] %}  
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+              <span class="flex-grow-1">{{ingredient['name']}}</span>
+              <em text-muted data_role='list_ingredient_qty' id="list_ff_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="flex-grow-1"><i>None</i></span>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>

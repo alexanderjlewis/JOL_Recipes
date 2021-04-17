@@ -17,13 +17,20 @@ def index_page():
 def list_page():
     return render_template('list.html', recipes=recipes)
 
-@app.route('/test')
-def test():
+@app.route('/api/getChart')
+def api_getChart():
     submitted_name = request.args.get('recipe')
     quantity = int(request.args.get('quantity'))
     recipe_data = get_recipe_data(submitted_name, recipes)
     chart = generate(recipe_data, quantity)
     return jsonify(chart)
+
+@app.route('/api/getIngredientList')
+def api_getIngredientList():
+    submitted_name = request.args.get('recipe')
+    quantity = int(request.args.get('quantity'))
+    recipe_data = get_recipe_data(submitted_name, recipes)
+    return render_template('ingredient_list.html', recipe=recipe_data)
 
 @app.route('/recipe/<name>')
 def render_recipe_page(name=None):
