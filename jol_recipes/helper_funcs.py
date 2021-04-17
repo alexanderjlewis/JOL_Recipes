@@ -13,34 +13,34 @@ def get_recipe_data(submitted_name,recipes):
 
 def adjust_recipe_qty(recipe, quantity_required):
     
-    multiplier = int(quantity_required) / int(recipe['serving_qty'])
+    multiplier = float(quantity_required) / float(recipe['serving_qty'])
 
     for step_id in recipe['steps']:
         for ingredient in recipe['steps'][str(step_id)]['ingredients']:
             try:
-                ingredient['quantity'] *= multiplier
+                ingredient['quantity'] = float(ingredient['quantity']) * multiplier
+                ingredient['quantity'] = str(round(ingredient['quantity'], 2)).rstrip('0').rstrip('.')
             except:
                 pass
 
     for ingredient in recipe['ingredients_pantry']:
         try:
-            ingredient['quantity'] *= multiplier
-            ingredient['quantity'] = round(ingredient['quantity'], 2).rstrip('0').rstrip('.')
-            print(ingredient['quantity'])
+            ingredient['quantity'] = float(ingredient['quantity']) * multiplier
+            ingredient['quantity'] = str(round(ingredient['quantity'], 2)).rstrip('0').rstrip('.')
         except:
             pass
 
     for ingredient in recipe['ingredients_meat_veg']:
         try:
-            ingredient['quantity'] *= multiplier
-            ingredient['quantity'] = round(ingredient['quantity'], 2).rstrip('0').rstrip('.')
+            ingredient['quantity'] = float(ingredient['quantity']) * multiplier
+            ingredient['quantity'] = str(round(ingredient['quantity'], 2)).rstrip('0').rstrip('.')
         except:
             pass
 
     for ingredient in recipe['ingredients_herbs_spices']:
         try:
-            ingredient['quantity'] *= multiplier
-            ingredient['quantity'] = round(ingredient['quantity'], 2).rstrip('0').rstrip('.')
+            ingredient['quantity'] = float(ingredient['quantity']) * multiplier
+            ingredient['quantity'] = str(round(ingredient['quantity'], 2)).rstrip('0').rstrip('.')
         except:
             pass
     

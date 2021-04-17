@@ -16,8 +16,9 @@ var filesToCache = [
     '/static/images/icons/512.png',
     '/static/js/bootstrap.bundle.min.js',
     '/static/js/jquery-3.6.0.min.js',
+    '/static/js/app.js',
     '/static/css/bootstrap.min.css',
-    '/static/css/custom.min.css'
+    '/static/css/custom.css'
 ];
 
 // Cache on install

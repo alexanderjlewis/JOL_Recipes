@@ -1,9 +1,9 @@
 {
     "name": "Ramen Noodles",
-    "safe_name": "ramen_noodels",
+    "safe_name": "ramen_noodles",
     "description": "Making good ramen noodles at home is a simple process, so long as you have a few key ingredients.",
     "serving_tag": "makes noodles for",
-    "serving_qty": "4",
+    "serving_qty": 4,
     "serving_unit": "adults",
     "ingredients_pantry": [{
         "name": "Baked Baking Soda",

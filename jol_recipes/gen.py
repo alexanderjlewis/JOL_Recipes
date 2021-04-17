@@ -108,7 +108,7 @@ class element_renderer():
     #path horizontal poisiotns
     main_path_x = 240
     ingredient_path_x = 150
-    secondary_path_x = 300
+    secondary_path_x = 320
 
     #secondary path       
     secondary_text_offset_x = 86
@@ -211,15 +211,8 @@ class element_renderer():
         text.text = ingredient['name']
         group.append(text)
 
-        # work out the quantity to be displayed based on the recipe and multiplicaiton factor. Use a try/execpt as sometimes this may be a blank string as an input from the recipe json.
-        try: 
-            ingredient_qty = ingredient['quantity']
-            ingredient_qty = str(round(ingredient_qty, 2)).rstrip('0').rstrip('.')
-        except:
-            ingredient_qty = ''
-
         text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'start','font-style':'italic','alignment-baseline':'middle', 'class':'chart_text', 'fill':'#545454'})
-        text.text = ingredient_qty + ' ' + str(ingredient['unit'])
+        text.text = str(ingredient['quantity']) + ' ' + str(ingredient['unit'])
         group.append(text)
         
         # increment y_pos for height of ingredient node
@@ -323,12 +316,6 @@ class element_renderer():
         p1 = ET.Element('p', attrib={'class':'chart_p'})
         p1.append(text_area)
         fo.append(p1)
-
-        # draw the connecting line if required
-        #if self.in_split and self.main_path:
-        #    path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,text_x_pos - 5)
-        #    path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
-        #    self.svg.insert(0,path)
         
         # draw the connecting line if required
         if self.in_split:
@@ -366,13 +353,11 @@ class element_renderer():
 
         #add the 'extra info' section if required
         if self.extra_info:
-            p2 = ET.Element('p', attrib={'class':'chart_p'})
-            #tspan =  ET.Element('tspan', attrib={'x':str(text_x_pos),'y':str(text_y_pos + (len(self.lines_text) * 19)),'alignment-baseline':'middle'})
+            p = ET.Element('p', attrib={'class':'chart_p'})
             a = ET.Element('a', attrib={'alignment-baseline':'middle','tabindex':"0", 'class':"chart_a chart_text", "role":"button", 'data-toggle':"popover", "data-trigger":"focus", 'data-placement':"bottom", 'data-content':self.data['extra_info']})
             a.text = "Click for More Details..."
-            #tspan.append(a)
-            p2.append(a)
-            fo.append(p2)
+            p.append(a)
+            fo.append(p)
         
         g.append(fo)
 

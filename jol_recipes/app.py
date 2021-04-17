@@ -32,7 +32,6 @@ def api_getIngredientList():
     required_quantity = int(request.args.get('quantity'))
     recipe_data = get_recipe_data(submitted_name, recipes)
     recipe_data = adjust_recipe_qty(recipe_data, required_quantity)
-    print(recipe_data)
     return render_template('ingredient_list.html', recipe=recipe_data)
 
 @app.route('/recipe/<name>')

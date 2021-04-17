@@ -106,7 +106,7 @@
             <div class="input-group">
               <input data_qty="{{ recipe['serving_qty'] }}" id="updatedScaleFactor" type="numeric" class="form-control" value="{{ recipe['serving_qty'] }}">
               <div class="input-group-append">
-                <span class="input-group-text">{{ recipe['serving_unit'] }}</span>
+                <span class="input-group-text" min="0" step="1">{{ recipe['serving_unit'] }}</span>
               </div>
             </div>
           </div>
@@ -156,6 +156,7 @@
           success: function (data) {
             $('#chart_area').html(data); //replace the chart with the new one returned from the back end
             $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
+            $('[data-toggle="popover"]').popover() //re-enable the popovers
           }
         });
 
@@ -175,13 +176,12 @@
 
     }
 
+
+
     $(function () {
       $('[data-toggle="popover"]').popover()
-    })
+    });
 
-    $('.popover-dismiss').popover({
-      trigger: 'focus'
-    })
       
   </script>
 
