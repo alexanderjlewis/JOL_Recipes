@@ -1,2 +1,4 @@
 *.pyc
 *.pyo
+jol_recipes/__pycache__/app.cpython-37.pyc
+jol_recipes/__pycache__/gen.cpython-37.pyc
