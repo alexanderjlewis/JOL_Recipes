@@ -3,7 +3,6 @@ var staticCacheName = "JOL-recipe-v1"
 var filesToCache = [
     '/',
     '/list',
-    '/recipe/bagels',
     '/offline',
     '/static/images/favicon.ico',
     '/static/images/icons/72.png',
@@ -61,6 +60,7 @@ self.addEventListener('activate', (e) => {
         );
     }
 }); */
+
 self.addEventListener('fetch', (e) => {
     e.respondWith(
         caches.match(e.request).then((r) => {
