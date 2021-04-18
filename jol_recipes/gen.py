@@ -302,7 +302,7 @@ class element_renderer():
         else:
             fo_height = len(self.lines_text) * self.node_text_line_spacing_y
 
-        fo = ET.Element('foreignObject', attrib={'x':str(text_x_pos), 'y':str(text_y_pos), 'height':str(fo_height), 'width':'100%'})
+        fo = ET.Element('foreignObject', attrib={'x':str(text_x_pos), 'y':str(text_y_pos), 'height':str(fo_height), 'width':'100%', 'overflow':'visible'})
 
         text_area = ET.Element('textarea', attrib={'rows':str(len(self.lines_text)),'cols':str(self.node_text_char_width),'disabled':'','wrap':'soft','class':'chart_textarea chart_text'})
         
@@ -312,11 +312,11 @@ class element_renderer():
             text_block += '\r\n'
         text_area.text = text_block
         
-        div = ET.Element('div', attrib={'position':'fixed'})
+        body = ET.Element('div', attrib={'position':'fixed'})
         p1 = ET.Element('p', attrib={'class':'chart_p'})
         p1.append(text_area)
-        div.append(p1)
-        fo.append(div)
+        body.append(p1)
+        fo.append(body)
         
         # draw the connecting line if required
         if self.in_split:
