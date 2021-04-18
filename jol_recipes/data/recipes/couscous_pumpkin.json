@@ -3,7 +3,7 @@
     "safe_name": "couscous_pumpkin",
     "description": "Ottolenghi Flavour - pg 137",
     "serving_tag": "serves",
-    "serving_qty": "4",
+    "serving_qty": 4,
     "serving_unit": "adults",
     "ingredients_pantry": [{
         "name": "Olive Oil",

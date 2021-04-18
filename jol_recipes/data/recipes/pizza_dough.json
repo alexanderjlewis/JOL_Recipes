@@ -3,7 +3,7 @@
     "safe_name": "pizza_dough",
     "description": "This easy pizza dough recipe is great for beginners and produces a soft homemade pizza crust",
     "serving_tag": "makes dough for",
-    "serving_qty": "2",
+    "serving_qty": 2,
     "serving_unit": "pizzas",
     "ingredients_pantry": [{
         "name": "Dry Yeast",
@@ -45,7 +45,7 @@
     ],
     "step_layout": ["Start", 0, 1, "SS", 2, 3, 4, "SE", 5, 6, 7, 8, "Finish"],
     "steps": {
-        "Start":{
+        "Start": {
             "time": "",
             "secondary": false,
             "long_step": false,
