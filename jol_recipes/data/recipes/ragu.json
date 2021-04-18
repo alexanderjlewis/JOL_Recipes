@@ -5,18 +5,268 @@
     "serving_tag": "serves",
     "serving_qty": 4,
     "serving_unit": "adults",
-    "ingredients": [{
-        "category": "Meat and Vegetable",
-        "name": "",
-        "quantity": ""
+    "ingredients_pantry": [{
+        "name": "Olive Oil",
+        "quantity": 120,
+        "unit": "mL"
     }, {
-        "category": "Meat and Vegetable",
-        "name": "",
-        "quantity": ""
+        "name": "Tomato Paste",
+        "quantity": 4,
+        "unit": "Tbsp"
+    }, {
+        "name": "Soy Sauce",
+        "quantity": 90,
+        "unit": "mL"
+    },{
+        "name": "Dried Lentils",
+        "quantity": 180,
+        "unit": "g"
+    },{
+        "name": "Pearl Barley",
+        "quantity": 100,
+        "unit": "g"
+    },{
+        "name": "Vege Stock",
+        "quantity": 1,
+        "unit": "L"
+    },{
+        "name": "Coconut Cream",
+        "quantity": 160,
+        "unit": "g"
+    },{
+        "name": "Red Wine",
+        "quantity": 100,
+        "unit": "mL"
     }],
-    "equipment": [
-        "Food Processor (Optional)",
+    "ingredients_meat_veg": [{
+        "name": "Carrots",
+        "quantity": 3,
+        "unit": ""
+    },{
+        "name": "Onions",
+        "quantity": 2,
+        "unit": ""
+    },{
+        "name": "Oyster Mushrooms",
+        "quantity": 300,
+        "unit": "g"
+    },{
+        "name": "Dried Porcini",
+        "quantity": 60,
+        "unit": "g"
+    },{
+        "name": "Plum Tomatoes",
+        "quantity": 350,
+        "unit": "g"
+    }],
+    "ingredients_herbs_spices": [{
+        "name": "Garlic",
+        "quantity": "4",
+        "unit": "Cloves"
+    },{
+        "name": "Rose Harissa",
+        "quantity": 40,
+        "unit": "g"
+    },{
+        "name": "Cumin Seeds",
+        "quantity": 2,
+        "unit": "Tsp"
+    },{
+        "name": "White Miso Paste",
+        "quantity": 70,
+        "unit": "g"
+    }],
+    "equipment_standard": [
+        "Stove",
+        "Oven",
         "Large Baking Tray"
     ],
-    "steps": []
+    "equipment_special": [
+        "Food Processor"
+    ],
+    "step_layout": ["Start", "SS", 0, 1, 2, "SE", 3, 4, 5, 6, 7, 8, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 5,
+            "ingredients": [],
+            "instruction": "Preheat oven to 190C.",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 15,
+            "ingredients": [{
+                    "name": "Carrots",
+                    "quantity": 3,
+                    "unit": ""
+                },{
+                    "name": "Onions",
+                    "quantity": 2,
+                    "unit": ""
+                },{
+                    "name": "Oyster Mushrooms",
+                    "quantity": 300,
+                    "unit": "g"
+                },{
+                    "name": "Dried Porcini",
+                    "quantity": 60,
+                    "unit": "g"
+                },{
+                    "name": "Garlic",
+                    "quantity": "4",
+                    "unit": "Cloves"
+                },{
+                    "name": "Plum Tomatoes",
+                    "quantity": 350,
+                    "unit": "g"
+                }
+            ],
+            "instruction": "Peel and roughly chop vegetables, then use food processor to very finely chop.",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 20,
+            "ingredients": [{
+                    "name": "Olive Oil",
+                    "quantity": 120,
+                    "unit": "mL"
+                }, {
+                    "name": "Tomato Paste",
+                    "quantity": 4,
+                    "unit": "Tbsp"
+                }, {
+                    "name": "Soy Sauce",
+                    "quantity": 90,
+                    "unit": "mL"
+                },{
+                    "name": "Rose Harissa",
+                    "quantity": 40,
+                    "unit": "g"
+                },{
+                    "name": "Cumin Seeds",
+                    "quantity": 2,
+                    "unit": "Tsp"
+                },{
+                    "name": "White Miso Paste",
+                    "quantity": 70,
+                    "unit": "g"
+                }
+            ],
+            "instruction": "Put chopped vegetables and extra ingredients into a large baking tray and mix well.",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "40 min",
+            "secondary": false,
+            "long_step": 4,
+            "completion": 40,
+            "ingredients": [],
+            "instruction": "Bake, stirring well halfway through",
+            "extra_info": ""
+        },
+        "4": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 50,
+            "ingredients": [],
+            "instruction": "Reduce oven to 180C",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 60,
+            "ingredients": [{
+                    "name": "Dried Lentils",
+                    "quantity": 180,
+                    "unit": "g"
+                },{
+                    "name": "Pearl Barley",
+                    "quantity": 100,
+                    "unit": "g"
+                },{
+                    "name": "Vege Stock",
+                    "quantity": 1,
+                    "unit": "L"
+                },{
+                    "name": "Coconut Cream",
+                    "quantity": 160,
+                    "unit": "g"
+                },{
+                    "name": "Red Wine",
+                    "quantity": 100,
+                    "unit": "mL"
+                },{
+                    "name": "Water",
+                    "quantity": 150,
+                    "unit": "mL"
+                },{
+                    "name": "Salt",
+                    "quantity": 0.3,
+                    "unit": "Tsp"
+                },{
+                    "name": "Pepper",
+                    "quantity": "",
+                    "unit": "Generous Grind"
+                }
+            ],
+            "instruction": "Add all remaining ingredients. Stir very well, scraping sides and bottom. Cover tightly with foil",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "35 min",
+            "secondary": false,
+            "long_step": 4,
+            "completion": 70,
+            "ingredients": [],
+            "instruction": "Bake",
+            "extra_info": ""
+        },
+        "7": {
+            "time": "5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 85,
+            "ingredients": [],
+            "instruction": "Remove foil and bake.",
+            "extra_info": ""
+        },
+        "8": {
+            "time": "15 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [],
+            "instruction": "Rest and serve on pasta or polenta.",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
 }

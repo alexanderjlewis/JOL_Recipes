@@ -312,7 +312,7 @@ class element_renderer():
             text_block += '\r\n'
         text_area.text = text_block
         
-        div = ET.Element('div')
+        div = ET.Element('div', attrib={'position':'fixed'})
         p1 = ET.Element('p', attrib={'class':'chart_p'})
         p1.append(text_area)
         div.append(p1)
