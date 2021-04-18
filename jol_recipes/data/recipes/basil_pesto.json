@@ -3,7 +3,7 @@
     "safe_name": "basil_pesto",
     "description": "Say no more. Watch out for Richard.",
     "serving_tag": "makes sauce for",
-    "serving_qty": "500",
+    "serving_qty": 500,
     "serving_unit": "g of Dry Pasta",
     "ingredients_pantry": [{
         "name": "Extra-Virgin Olive Oil",
@@ -54,7 +54,7 @@
             "instruction": "Start",
             "extra_info": ""
         },
-        "0":{
+        "0": {
             "time": "5 min",
             "secondary": false,
             "long_step": false,
@@ -83,7 +83,7 @@
             "instruction": "Blend until smooth.",
             "extra_info": ""
         },
-        "1":{
+        "1": {
             "time": "",
             "secondary": false,
             "long_step": false,
@@ -92,7 +92,7 @@
             "instruction": "Bring a large pot of water to the boil.",
             "extra_info": ""
         },
-        "2":{
+        "2": {
             "time": "~7 min",
             "secondary": false,
             "long_step": false,
@@ -105,7 +105,7 @@
             "instruction": "Boil till al dente",
             "extra_info": ""
         },
-        "3":{
+        "3": {
             "time": "",
             "secondary": false,
             "long_step": false,
@@ -114,7 +114,7 @@
             "instruction": "Drain pasta and coat with a small amount of oil.",
             "extra_info": ""
         },
-        "4":{
+        "4": {
             "time": "",
             "secondary": false,
             "long_step": false,
@@ -127,7 +127,7 @@
             "instruction": "Add sauce. Season to taste.",
             "extra_info": ""
         },
-        "Finish":{
+        "Finish": {
             "time": "",
             "secondary": false,
             "long_step": false,

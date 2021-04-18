@@ -104,9 +104,9 @@
           <div class="form-group">
             <label for="exampleInputPassword1">Update to:</label>
             <div class="input-group">
-              <input data_qty="{{ recipe['serving_qty'] }}" id="updatedScaleFactor" type="numeric" class="form-control" value="{{ recipe['serving_qty'] }}">
+              <input data_qty="{{ recipe['serving_qty'] }}" id="updatedScaleFactor" min="0" step="1" type="number" class="form-control" value="{{ recipe['serving_qty'] }}">
               <div class="input-group-append">
-                <span class="input-group-text" min="0" step="1">{{ recipe['serving_unit'] }}</span>
+                <span class="input-group-text">{{ recipe['serving_unit'] }}</span>
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@
     "safe_name": "orange_chicken",
     "description": "Binging with Babish - Rick and Morty Inspired",
     "serving_tag": "serves",
-    "serving_qty": "4",
+    "serving_qty": 4,
     "serving_unit": "adults",
     "ingredients_pantry": [{
         "name": "Brown Sugar",
@@ -102,7 +102,7 @@
     ],
     "step_layout": ["Start", 0, 1, 2, 3, 4, 5, "Finish"],
     "steps": {
-        "Start":{
+        "Start": {
             "time": "",
             "secondary": false,
             "long_step": false,
@@ -111,7 +111,7 @@
             "instruction": "Start",
             "extra_info": ""
         },
-        "0":{
+        "0": {
             "time": "10 min",
             "secondary": false,
             "long_step": false,
@@ -124,7 +124,7 @@
             "instruction": "Using a paring knife, cut off the rind of the orange into large strips. Try to avoid cutting off the white pith of the fruit, you only want the zest. Juice the remaining fruit and set 1/4 Cup aside for later.",
             "extra_info": ""
         },
-        "1":{
+        "1": {
             "time": "",
             "secondary": false,
             "long_step": false,
@@ -137,7 +137,7 @@
             "instruction": "Combine with the orange peels in a bowl. Crush or mash the peels with a muddler or potato masher.",
             "extra_info": ""
         },
-        "2":{
+        "2": {
             "time": "12-24 hrs",
             "secondary": false,
             "long_step": 5,
@@ -146,7 +146,7 @@
             "instruction": "Cover the bowl or transfer the mixture to a sealable container, and let sit at room temperature overnight or up to 24 hours.",
             "extra_info": ""
         },
-        "3":{
+        "3": {
             "time": "",
             "secondary": false,
             "long_step": false,
@@ -155,7 +155,7 @@
             "instruction": "Strain the mixture. Reserve the liquid (Oleo Saccharum) and 1 Tbsp of peel for later.",
             "extra_info": ""
         },
-        "4":{
+        "4": {
             "time": "~1min",
             "secondary": false,
             "long_step": false,
@@ -172,7 +172,7 @@
             "instruction": "Add a dash of oil to a large skillet. Cook until fragrant",
             "extra_info": ""
         },
-        "5":{
+        "5": {
             "time": "~1min",
             "secondary": false,
             "long_step": false,
