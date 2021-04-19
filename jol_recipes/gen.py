@@ -312,11 +312,11 @@ class element_renderer():
             text_block += '\r\n'
         text_area.text = text_block
         
-        body = ET.Element('div', attrib={'position':'fixed'})
+        #body = ET.Element('div', attrib={'position':'fixed', 'xmlns':'http://www.w3.org/1999/xhtml'})
         p1 = ET.Element('p', attrib={'class':'chart_p'})
         p1.append(text_area)
-        body.append(p1)
-        fo.append(body)
+        #body.append(p1)
+        fo.append(p1)
         
         # draw the connecting line if required
         if self.in_split:
