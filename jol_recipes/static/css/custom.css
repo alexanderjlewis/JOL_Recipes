@@ -3,27 +3,14 @@
     font-size: small;
 }
 
-.chart_textarea {
-    border: none;
-    overflow: hidden;
-    resize: none;
-    background-color: transparent;
-    line-height: 19px;
-    white-space: pre-line;
-    padding-left: 2px;
-}
-
 .chart_text {
     font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
     font-size: small;
-    color: rgb(84, 84, 84);
-}
-
-.chart_p {
-    margin-bottom: 0;
+    fill: rgb(84, 84, 84);
+    padding-left: 2px;
 }
 
 .chart_a {
     padding-left: 2px;
-    color: #18bc9c;
+    fill: #18bc9c;
 }

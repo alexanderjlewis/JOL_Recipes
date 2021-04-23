@@ -175,8 +175,6 @@ class element_renderer():
             #draw the line that sits behind the ingredient nodes
             self.svg.insert(0,self.draw_ingredients_line(ingredients_start_y_pos)) #need to insert this at the start so that the line is alawys behind the nodes
 
-        #self.y_pos += self.main_node_radius #node is drawn for centre of radius so need to offset
-
         self.svg.append(self.draw_node_shape())
 
         self.svg.insert(0,self.draw_main_line()) #need to insert this at the start so that the main line is alawys behind the nodes
@@ -247,6 +245,7 @@ class element_renderer():
 
         group = ET.Element('g')
 
+        #1) work out how tall the node shape will be
         if self.long_node:  
             oval_middle_length = self.data['long_step'] * self.long_step_inc
 
@@ -273,15 +272,15 @@ class element_renderer():
 
             calc_node_height += (2 * self.main_node_radius)
         
-        #work out how tall the text will be
+        #2) work out how tall the text will be
         if self.lines_text:
             calc_text_height += len(self.lines_text) * self.node_text_line_spacing_y
-        
-        if self.extra_info == True:
+        if self.extra_info:
             calc_text_height += self.node_extra_info_text_line_spacing_y
 
         group.append(self.draw_node_text(calc_text_height))
 
+        #3) take the max of 1) and 2)
         self.y_pos += max(calc_text_height, calc_node_height)
 
         return group
@@ -297,27 +296,24 @@ class element_renderer():
         else:
             text_x_pos = self.main_path_x + self.text_offset_x
 
-        if self.extra_info:
-            fo_height = (len(self.lines_text) * self.node_text_line_spacing_y) + 30
-        else:
-            fo_height = len(self.lines_text) * self.node_text_line_spacing_y
+        # add the main node text
+        text_area = ET.Element('text', attrib={'x':str(text_x_pos), 'y':str(text_y_pos - 4), 'class':'chart_text'})
 
-        fo = ET.Element('foreignObject', attrib={'x':str(text_x_pos), 'y':str(text_y_pos), 'height':str(fo_height), 'width':'100%', 'overflow':'visible'})
-
-        text_area = ET.Element('textarea', attrib={'rows':str(len(self.lines_text)),'cols':str(self.node_text_char_width),'disabled':'','wrap':'soft','class':'chart_textarea chart_text'})
-        
-        text_block = ''
         for line in self.lines_text:
-            text_block += str(line)
-            text_block += '\r\n'
-        text_area.text = text_block
-        
-        #body = ET.Element('div', attrib={'position':'fixed', 'xmlns':'http://www.w3.org/1999/xhtml'})
-        p1 = ET.Element('p', attrib={'class':'chart_p'})
-        p1.append(text_area)
-        #body.append(p1)
-        fo.append(p1)
-        
+            text_line = ET.Element('tspan', attrib={'x':str(text_x_pos) ,'dy':str(self.node_text_line_spacing_y)})
+            text_line.text = line
+            text_area.append(text_line)
+
+        #add the 'extra info' section if required
+        if self.extra_info:
+            text_line = ET.Element('tspan', attrib={'x':str(text_x_pos) ,'dy':str(self.node_text_line_spacing_y)})
+            a = ET.Element('a', attrib={'color':'#18bc9c','alignment-baseline':'middle','tabindex':"0", 'class':"chart_a", "role":"button", 'data-toggle':"popover", "data-trigger":"focus", 'data-placement':"bottom", 'data-content':self.data['extra_info']})
+            a.text = "Click for More Details..."
+            text_line.append(a)
+            text_area.append(text_line)
+
+        g.append(text_area)
+
         # draw the connecting line if required
         if self.in_split:
             if self.main_path:
@@ -351,16 +347,6 @@ class element_renderer():
             time_text = ET.Element('text', attrib={'x':str(self.main_path_x - self.text_offset_x), 'y':str(text_y_pos + 15), 'class':'chart_text', 'fill':'#545454', 'text-anchor':'end'})
             time_text.text = self.data['time']
             g.append(time_text)
-
-        #add the 'extra info' section if required
-        if self.extra_info:
-            p = ET.Element('p', attrib={'class':'chart_p'})
-            a = ET.Element('a', attrib={'alignment-baseline':'middle','tabindex':"0", 'class':"chart_a chart_text", "role":"button", 'data-toggle':"popover", "data-trigger":"focus", 'data-placement':"bottom", 'data-content':self.data['extra_info']})
-            a.text = "Click for More Details..."
-            p.append(a)
-            fo.append(p)
-        
-        g.append(fo)
 
         return g 
 
