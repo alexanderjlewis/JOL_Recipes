@@ -50,11 +50,9 @@
         "unit": "Tsp"
     }],
     "equipment_standard": [
-        "Large Pot"
+        "Large Pot", "Sauce Pan", "Strainer"
     ],
-    "equipment_special": [
-        ""
-    ],
+    "equipment_special": [],
     "step_layout": ["Start", 0, "SS", 1, 2, 3, 4, 5, "SE", 6, 7, 8, "Finish"],
     "steps": {
         "Start": {
@@ -81,11 +79,11 @@
             "long_step": false,
             "completion": 60,
             "ingredients": [{
-                "name": "Garlic",
+                "name": "Minced Garlic",
                 "quantity": 4,
                 "unit": "Cloves"
             }, {
-                "name": "Onion",
+                "name": "Finely Chopped Onion",
                 "quantity": 1,
                 "unit": "Medium"
             }],
@@ -98,9 +96,9 @@
             "long_step": false,
             "completion": 70,
             "ingredients": [{
-                "name": "Extra Virgin Olive Oil and som",
+                "name": "Extra Virgin Olive Oil",
                 "quantity": 2,
-                "unit": "Tbsp and aa bb cc"
+                "unit": "Tbsp"
             }],
             "instruction": "Add oil to heavy pan and heat. Add chopped onion and garlic and cook, stirring constantly, just until onion is starting to brown around the edges.",
             "extra_info": ""

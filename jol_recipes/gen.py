@@ -98,15 +98,16 @@ class element_renderer():
     main_start_y = 40
     text_offset_x = 25
     node_text_char_width = 40
-    node_text_line_spacing_y = 19
+    node_text_line_spacing_y = 15
     node_extra_info_text_line_spacing_y = 30
 
     #ingredient node variables
     ingredient_node_spacing_y = 14 #this is the gap between bottom of one node and top of next one
     ingredient_square_side = 16
-    ingredient_name_text_char_width = 18
+    ingredient_name_text_char_width = 17
     ingredient_qty_text_char_width = 9
-    ingredient_text_line_spacing_y = 19
+    ingredient_text_line_spacing_y = 13
+    ingredient_text_x_offset = 16
 
     #path horizontal poisiotns
     main_path_x = 240
@@ -222,23 +223,25 @@ class element_renderer():
 
         # add the ingredient name text
         if name_number_of_lines > 1: #more then one line
+            base_y_pos = self.y_pos + (self.ingredient_square_side / 2) + (self.ingredient_text_line_spacing_y * ((max_lines - name_number_of_lines) / 2))
             for i in range(name_number_of_lines):
-                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2) + (i*19)+ 19*((max_lines-name_number_of_lines)/2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
                 text.text = name_text_lines[i]
                 group.append(text)
         else: #only one line
-            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
+            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
             text.text = ingredient['name']
             group.append(text)
 
         # add the qty name text
         if qty_number_of_lines > 1: #more then one line
+            base_y_pos = self.y_pos + (self.ingredient_square_side / 2) + (self.ingredient_text_line_spacing_y * ((max_lines - qty_number_of_lines) / 2))
             for i in range(qty_number_of_lines):
-                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2) + (i*19) + 19*((max_lines-qty_number_of_lines)/2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
                 text.text = qty_text_lines[i]
                 group.append(text)
         else: #only one line
-            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
             text.text = qty_text_string
             group.append(text)
         
@@ -247,11 +250,8 @@ class element_renderer():
         group.append(square)
 
         # increment y_pos for height of ingredient node
-        if name_number_of_lines > 1:
-            self.y_pos += node_height
-        else:
-            self.y_pos += self.ingredient_square_side
-
+        self.y_pos += node_height
+        
         # increment y_pos to add some space after the node
         self.y_pos += self.ingredient_node_spacing_y
 

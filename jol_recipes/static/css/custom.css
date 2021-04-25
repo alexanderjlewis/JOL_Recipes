@@ -21,7 +21,7 @@ svg {
 }
 
 .chart_text {
-    font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+    font-family: Courier New, Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace;
     font-size: small;
     fill: rgb(84, 84, 84);
     padding-left: 2px;
