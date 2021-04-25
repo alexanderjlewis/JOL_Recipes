@@ -53,5 +53,12 @@
         "tag_line": "~1 hr effort",
         "tags_info": ["Food Processor"],
         "tags_green": ["Vege"]
+    },
+    {
+        "name": "Vodka Pasta Sauce",
+        "safe_name": "vodka_pasta",
+        "tag_line": "~1 hr effort",
+        "tags_info": [""],
+        "tags_green": ["Vege"]
     }
 ]

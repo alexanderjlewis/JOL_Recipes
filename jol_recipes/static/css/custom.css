@@ -3,6 +3,23 @@
     font-size: small;
 }
 
+#chart_area {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-align: center;
+}
+
+#diagonalHatchPattern {
+    stroke: black;
+    stroke-width: .7
+}
+
+svg {
+    display: inline-block;
+    min-width: 660px;
+}
+
 .chart_text {
     font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
     font-size: small;
@@ -13,4 +30,32 @@
 .chart_a {
     padding-left: 2px;
     fill: #18bc9c;
+}
+
+.ingredient_square {
+    fill: #3D4242;
+    stroke: #3D4242;
+}
+
+.main_line {
+    stroke: #D7DADA;
+    stroke-width: 6;
+    fill: none
+}
+
+.secondary_line {
+    stroke: #add8e6;
+    stroke-width: 6;
+    fill: none
+}
+
+.text_connection_line {
+    stroke: #929292;
+    stroke-width: 1;
+    fill: none;
+}
+
+.node_outline {
+    fill: white;
+    stroke: #929292;
 }

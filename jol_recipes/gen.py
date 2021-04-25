@@ -7,7 +7,7 @@ class graph_renderer():
 
     def __init__(self, render_recipe, quantity_required = ''):
         # dynamic vars
-        self.svg = ET.Element('svg', attrib={'width':'100%', 'version':"1.1", 'xmlns':"http://www.w3.org/2000/svg"})
+        self.svg = ET.Element('svg', attrib={'version':"1.1", 'xmlns':"http://www.w3.org/2000/svg"})
         self.current_y = 0
         self.element_objs = []
         self.render_recipe = render_recipe
@@ -68,7 +68,7 @@ class graph_renderer():
             
             #add hatched pattern for long nodes
             pattern = ET.Element('pattern', attrib={'id':'diagonalHatch', 'patternUnits':'userSpaceOnUse', 'width':'4', 'height':'4'})
-            pattern_path = ET.Element('path', attrib={'d':'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2','style':'stroke:black; stroke-width:.7'})
+            pattern_path = ET.Element('path', attrib={'id':'diagonalHatchPattern', 'd':'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'})
             pattern.append(pattern_path)
             defs.append(pattern)
 
@@ -104,6 +104,9 @@ class element_renderer():
     #ingredient node variables
     ingredient_node_spacing_y = 14 #this is the gap between bottom of one node and top of next one
     ingredient_square_side = 16
+    ingredient_name_text_char_width = 18
+    ingredient_qty_text_char_width = 9
+    ingredient_text_line_spacing_y = 19
 
     #path horizontal poisiotns
     main_path_x = 240
@@ -134,7 +137,7 @@ class element_renderer():
         self.y_pos = 0
         self.x_pos = 0
 
-        self.svg = ET.Element('svg', attrib={'width':'100%'})
+        self.svg = ET.Element('svg')
 
     def process_data(self):     
         if self.is_node:
@@ -164,19 +167,21 @@ class element_renderer():
         #every node gets some spacing above        
         self.y_pos += self.main_node_spacing_y
 
+        #1) Check if ingredients are require for this node
         if self.ingredients > 0:
             ingredients_start_y_pos = self.y_pos
 
-            #for each ingredient, add a square node with appropriate text
+            #1a) for each ingredient, add a square node with appropriate text
             for i in range(self.ingredients):
                 self.svg.append(self.draw_ingredient(i))
-                self.y_pos += self.ingredient_node_spacing_y #add gap after the node
-
-            #draw the line that sits behind the ingredient nodes
+                
+            #1b) draw the line that sits behind the ingredient nodes
             self.svg.insert(0,self.draw_ingredients_line(ingredients_start_y_pos)) #need to insert this at the start so that the line is alawys behind the nodes
 
+        #2) Draw the round/oval node (this includes adding the text)
         self.svg.append(self.draw_node_shape())
 
+        #3) Draw the main vertical line
         self.svg.insert(0,self.draw_main_line()) #need to insert this at the start so that the main line is alawys behind the nodes
 
         self.height = self.y_pos
@@ -190,7 +195,7 @@ class element_renderer():
         else: #therefore it is the end of a split
             path = 'M{0} 0 v10 a20,20 0 0 1 -20,20 H{1} a20,20 0 0 0 -20,20 v10'.format(self.secondary_path_x,self.main_path_x + 20)
         
-        line = ET.Element('path', attrib={'d':path, 'stroke':'#add8e6', 'stroke-width':'6', 'fill':'none'})
+        line = ET.Element('path', attrib={'d':path, 'class':'secondary_line'})
         self.svg.append(line)
         self.y_pos += self.split_height
 
@@ -201,20 +206,54 @@ class element_renderer():
         
     def draw_ingredient(self,i):
         ingredient = self.data['ingredients'][i]
-        
-        group = ET.Element('g',attrib={})
-        square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8),'y':str(self.y_pos),'width':str(self.ingredient_square_side),'height':str(self.ingredient_square_side),'fill':'#3D4242','stroke':'#3D4242'})
-        group.append(square)
-        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text', 'fill':'#545454'})
-        text.text = ingredient['name']
-        group.append(text)
 
-        text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2)),'text-anchor':'start','font-style':'italic','alignment-baseline':'middle', 'class':'chart_text', 'fill':'#545454'})
-        text.text = str(ingredient['quantity']) + ' ' + str(ingredient['unit'])
-        group.append(text)
+        name_text_lines = textwrap.wrap(ingredient['name'], self.ingredient_name_text_char_width, break_long_words=False)
+        name_number_of_lines = len(name_text_lines)
+
+        qty_text_string = str(ingredient['quantity']) + ' ' + str(ingredient['unit'])
+        qty_text_lines = textwrap.wrap(qty_text_string, self.ingredient_qty_text_char_width, break_long_words=False)
+        qty_number_of_lines = len(qty_text_lines)
+
+        max_lines = max(name_number_of_lines,qty_number_of_lines)
+
+        node_height = ((max_lines - 1) * self.ingredient_text_line_spacing_y) + self.ingredient_square_side
+
+        group = ET.Element('g',attrib={})
+
+        # add the ingredient name text
+        if name_number_of_lines > 1: #more then one line
+            for i in range(name_number_of_lines):
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2) + (i*19)+ 19*((max_lines-name_number_of_lines)/2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
+                text.text = name_text_lines[i]
+                group.append(text)
+        else: #only one line
+            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x - 16), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'end','alignment-baseline':'middle', 'class':'chart_text'})
+            text.text = ingredient['name']
+            group.append(text)
+
+        # add the qty name text
+        if qty_number_of_lines > 1: #more then one line
+            for i in range(qty_number_of_lines):
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (self.ingredient_square_side / 2) + (i*19) + 19*((max_lines-qty_number_of_lines)/2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+                text.text = qty_text_lines[i]
+                group.append(text)
+        else: #only one line
+            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + 16), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+            text.text = qty_text_string
+            group.append(text)
         
+        #draw the square for the ingredient node
+        square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8),'y':str(self.y_pos),'width':str(self.ingredient_square_side),'height':str(node_height),'class':'ingredient_square'})
+        group.append(square)
+
         # increment y_pos for height of ingredient node
-        self.y_pos += self.ingredient_square_side
+        if name_number_of_lines > 1:
+            self.y_pos += node_height
+        else:
+            self.y_pos += self.ingredient_square_side
+
+        # increment y_pos to add some space after the node
+        self.y_pos += self.ingredient_node_spacing_y
 
         return group
 
@@ -225,10 +264,10 @@ class element_renderer():
         
         if self.main_path:
             s_path = 'M{0} {1} V{2} a20,20 0 0 0 20,20 H{3} a20,20 0 0 1 20,20 v5'.format(self.ingredient_path_x,top_pos,self.y_pos,self.main_path_x-20)
-            s_path = ET.Element('path', attrib={'d':s_path, 'stroke':'#D7DADA', 'stroke-width':'6', 'fill':'none'})
+            s_path = ET.Element('path', attrib={'d':s_path, 'class':'main_line'})
         else:
             s_path = 'M{0} {1} V{2} a20,20 0 0 0 20,20 H{4} m12 0 H{3} a20,20 0 0 1 20,20 v5'.format(self.ingredient_path_x,top_pos,self.y_pos,self.secondary_path_x-20,self.main_path_x-6)
-            s_path = ET.Element('path', attrib={'d':s_path, 'stroke':'#add8e6', 'stroke-width':'6', 'fill':'none'})
+            s_path = ET.Element('path', attrib={'d':s_path, 'class':'secondary_line'})
         
         self.y_pos += 45 #this is the height of the 'S' at the bottom of the ingredient path
 
@@ -251,7 +290,7 @@ class element_renderer():
 
             #first oval outline  
             s_path = 'M{0},{1} v{2} a{3},{3} 1 0 0 {3},{3} a{3},{3} 1 0 0 {3},-{3} v-{2} a-{3},{3} 1 0 0 -{3},-{3} a{3},{3} 1 0 0 -{3},{3}'.format(self.x_position - 13, node_draw_y_pos, oval_middle_length, self.main_node_radius)
-            oval = ET.Element('path', attrib={'d':s_path, 'fill':'white','stroke':'#929292'})
+            oval = ET.Element('path', attrib={'d':s_path, 'class':'node_outline'})
             group.append(oval)
             
             #then the fill
@@ -263,7 +302,7 @@ class element_renderer():
 
         else:
             #first cirlce is the outline
-            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius), 'fill':'white','stroke':'#929292'})
+            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius), 'class':'node_outline'})
             group.append(circle)
 
             #second circle is for the fill
@@ -307,7 +346,7 @@ class element_renderer():
         #add the 'extra info' section if required
         if self.extra_info:
             text_line = ET.Element('tspan', attrib={'x':str(text_x_pos) ,'dy':str(self.node_text_line_spacing_y)})
-            a = ET.Element('a', attrib={'color':'#18bc9c','alignment-baseline':'middle','tabindex':"0", 'class':"chart_a", "role":"button", 'data-toggle':"popover", "data-trigger":"focus", 'data-placement':"bottom", 'data-content':self.data['extra_info']})
+            a = ET.Element('a', attrib={'alignment-baseline':'middle','tabindex':"0", 'class':"chart_a", "role":"button", 'data-toggle':"popover", "data-trigger":"focus", 'data-placement':"bottom", 'data-content':self.data['extra_info']})
             a.text = "Click for More Details..."
             text_line.append(a)
             text_area.append(text_line)
@@ -318,33 +357,33 @@ class element_renderer():
         if self.in_split:
             if self.main_path:
                 path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,text_x_pos - 5)
-                path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                path = ET.Element('path', attrib={'d':path,'class':'text_connection_line'})
                 self.svg.insert(0,path)
                 if self.time:
                     path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,self.main_path_x - self.text_offset_x + 5)
-                    path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                    path = ET.Element('path', attrib={'d':path,'class':'text_connection_line'})
                     self.svg.insert(0,path)
             else:
                 path = 'M{0} {1} H{2}'.format(self.secondary_path_x,text_y_pos + 11,text_x_pos - 5)
-                path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                path = ET.Element('path', attrib={'d':path,'class':'text_connection_line'})
                 self.svg.insert(0,path)
                 if self.time:
                     path = 'M{0} {1} H{2}'.format(self.secondary_path_x,text_y_pos + 11,self.main_path_x - self.text_offset_x + 5)
-                    path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                    path = ET.Element('path', attrib={'d':path,'class':'text_connection_line'})
                     self.svg.insert(0,path)
         else:
             path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,text_x_pos - 5)
-            path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+            path = ET.Element('path', attrib={'d':path,'class':'text_connection_line'})
             self.svg.insert(0,path)
             if self.time:
                 path = 'M{0} {1} H{2}'.format(self.main_path_x,text_y_pos + 11,self.main_path_x - self.text_offset_x + 5)
-                path = ET.Element('path', attrib={'d':path,'stroke':'#929292'})
+                path = ET.Element('path', attrib={'d':path,'class':'text_connection_line'})
                 self.svg.insert(0,path)
 
         
         #add the 'time' text
         if self.time:
-            time_text = ET.Element('text', attrib={'x':str(self.main_path_x - self.text_offset_x), 'y':str(text_y_pos + 15), 'class':'chart_text', 'fill':'#545454', 'text-anchor':'end'})
+            time_text = ET.Element('text', attrib={'x':str(self.main_path_x - self.text_offset_x), 'y':str(text_y_pos + 15), 'class':'chart_text', 'text-anchor':'end'})
             time_text.text = self.data['time']
             g.append(time_text)
 
@@ -362,11 +401,11 @@ class element_renderer():
         if self.in_split: #if we are in a split state we draw two main lines - one per side of the split
             path1 = 'M{0},{1} V{2}'.format(self.main_path_x, line_start, self.y_pos)
             path2 = 'M{0},{1} V{2}'.format(self.secondary_path_x, line_start, self.y_pos)    
-            g.append(ET.Element('path', attrib={'d':path1, 'stroke':'#D7DADA', 'stroke-width':'6'}))
-            g.append(ET.Element('path', attrib={'d':path2, 'stroke':'#add8e6', 'stroke-width':'6'}))
+            g.append(ET.Element('path', attrib={'d':path1, 'class':' main_line'}))
+            g.append(ET.Element('path', attrib={'d':path2, 'class':' secondary_line'}))
         else:
             path = 'M{0},{1} V{2}'.format(self.main_path_x, line_start, self.y_pos)
-            g.append(ET.Element('path', attrib={'d':path, 'stroke':'#D7DADA', 'stroke-width':'6'}))
+            g.append(ET.Element('path', attrib={'d':path, 'class':' main_line'}))
         
         return g
 

@@ -1,0 +1,196 @@
+{
+    "name": "Vodka Pasta",
+    "safe_name": "vodka_pasta",
+    "description": "Before you convince yourself there's no way that a little onion, tomato paste, and cream can come together in mere minutes to make one of the best homemade pasta sauces you've ever had, hear us out. Better yet, make this recipe for yourself. Just try and use double-concentrated tomato paste, which packs more flavor than the standard stuff.",
+    "serving_tag": "makes sauce for",
+    "serving_qty": 500,
+    "serving_unit": "g of Dry Pasta",
+    "ingredients_pantry": [{
+        "name": "Vodka",
+        "quantity": 2,
+        "unit": "Oz."
+    }, {
+        "name": "Extra Virgin Olive Oil",
+        "quantity": 2,
+        "unit": "Tbsp"
+    }, {
+        "name": "Salt",
+        "quantity": "",
+        "unit": "To Taste"
+    }, {
+        "name": "Dried Pasta",
+        "quantity": 500,
+        "unit": "g"
+    }, {
+        "name": "Tomato Paste",
+        "quantity": 130,
+        "unit": "g"
+    }],
+    "ingredients_meat_veg": [{
+        "name": "Garlic",
+        "quantity": 4,
+        "unit": "Cloves"
+    }, {
+        "name": "Onion",
+        "quantity": 1,
+        "unit": "Medium"
+    }],
+    "ingredients_fridge_freezer": [{
+        "name": "Grated Parmesan",
+        "quantity": 110,
+        "unit": "g"
+    }, {
+        "name": "Heavy Cream",
+        "quantity": 0.75,
+        "unit": "Cups"
+    }],
+    "ingredients_herbs_spices": [{
+        "name": "Chilli Flakes",
+        "quantity": 0.5,
+        "unit": "Tsp"
+    }],
+    "equipment_standard": [
+        "Large Pot"
+    ],
+    "equipment_special": [
+        ""
+    ],
+    "step_layout": ["Start", 0, "SS", 1, 2, 3, 4, 5, "SE", 6, 7, 8, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 40,
+            "ingredients": [],
+            "instruction": "Fill a stock pot or other large pot three-quarters full with water and heat over high. Toss in a handful of salt and bring to a boil while you do your other prep",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 60,
+            "ingredients": [{
+                "name": "Garlic",
+                "quantity": 4,
+                "unit": "Cloves"
+            }, {
+                "name": "Onion",
+                "quantity": 1,
+                "unit": "Medium"
+            }],
+            "instruction": "Finely chop.",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "5-7 min",
+            "secondary": true,
+            "long_step": false,
+            "completion": 70,
+            "ingredients": [{
+                "name": "Extra Virgin Olive Oil and som",
+                "quantity": 2,
+                "unit": "Tbsp and aa bb cc"
+            }],
+            "instruction": "Add oil to heavy pan and heat. Add chopped onion and garlic and cook, stirring constantly, just until onion is starting to brown around the edges.",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "5-7 min",
+            "secondary": true,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [{
+                "name": "Tomato Paste",
+                "quantity": 130,
+                "unit": "g"
+            }, {
+                "name": "Chilli Flakes",
+                "quantity": 0.5,
+                "unit": "Tsp"
+            }],
+            "instruction": "Add ingredients and stir until paste evenly coats onion. Continue to cook, stirring often, until paste is deep red and starting to brown on bottom of pot.",
+            "extra_info": ""
+        },
+        "4": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Vodka",
+                "quantity": 2,
+                "unit": "Oz."
+            }],
+            "instruction": "Add vodka to deglaze pan and stir to incorporate, scraping bottom of pot. Reduce heat to low.",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Heavy Cream",
+                "quantity": 0.75,
+                "unit": "Cups"
+            }],
+            "instruction": "Scoop about 0.25 cup boiling water from pot, then add cream to measuring cup (this brings up the temperature of the cream so it won’t break when you add it to the pot). Slowly add warmed cream to Dutch oven, stirring constantly, until a smooth sauce forms. Remove from heat.",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "10 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Dried Pasta",
+                "quantity": 500,
+                "unit": "g"
+            }],
+            "instruction": "Add pasta to pot of boiling salted water and cook according to package instructions until al dente. About 1 minute before the timer goes off, reserve 1 cup of pasta water. Heat sauce over low.",
+            "extra_info": ""
+        },
+        "7": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [],
+            "instruction": "Transfer rigatoni to sauce along with any water that’s piggybacking on the pasta",
+            "extra_info": ""
+        },
+        "8": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Grated Parmesan",
+                "quantity": 110,
+                "unit": "g"
+            }],
+            "instruction": "Add 0.5 cup of the reserved pasta water to sauce and stir to incorporate, then gradually add half of Parmesan, stirring constantly to melt cheese. You should have a smooth, glossy sauce that coats each piece of pasta. Season with salt and add a splash more pasta cooking liquid to thin sauce, if needed.",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}
