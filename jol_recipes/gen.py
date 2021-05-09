@@ -336,22 +336,26 @@ class element_renderer():
             text_x_pos = self.main_path_x + self.text_offset_x
 
         # add the main node text
-        text_area = ET.Element('text', attrib={'x':str(text_x_pos), 'y':str(text_y_pos - 4), 'class':'chart_text'})
+        text_area = ET.Element('text', attrib={'x':str(text_x_pos), 'y':str(text_y_pos), 'class':'chart_text'})
 
         for line in self.lines_text:
             text_line = ET.Element('tspan', attrib={'x':str(text_x_pos) ,'dy':str(self.node_text_line_spacing_y)})
             text_line.text = line
             text_area.append(text_line)
 
+        g.append(text_area)
+
         #add the 'extra info' section if required
         if self.extra_info:
-            text_line = ET.Element('tspan', attrib={'x':str(text_x_pos) ,'dy':str(self.node_text_line_spacing_y)})
+
+            extra_info_text_y_pos = text_y_pos + (self.node_text_line_spacing_y * len(self.lines_text)) + self.node_text_line_spacing_y + 10
+
+            text_area = ET.Element('text', attrib={'x':str(text_x_pos), 'y':str(extra_info_text_y_pos), 'class':'chart_text'})
             a = ET.Element('a', attrib={'alignment-baseline':'middle','tabindex':"0", 'class':"chart_a", "role":"button", 'data-toggle':"popover", "data-trigger":"focus", 'data-placement':"bottom", 'data-content':self.data['extra_info']})
             a.text = "Click for More Details..."
-            text_line.append(a)
-            text_area.append(text_line)
+            text_area.append(a)
 
-        g.append(text_area)
+            g.append(text_area)
 
         # draw the connecting line if required
         if self.in_split:
