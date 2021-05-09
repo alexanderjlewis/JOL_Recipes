@@ -1,0 +1,232 @@
+{
+    "name": "One-pan Orecchiette Putanesca",
+    "safe_name": "orecchiette_putanesca",
+    "description": "Super quick and practical to make - pasta cooks in its own sauce. Adapted from Ottolenghi Flavour.",
+    "serving_tag": "makes sauce for",
+    "serving_qty": 250,
+    "serving_unit": "g of Dry Pasta",
+    "ingredients_pantry": [{
+        "name": "Chickpeas",
+        "quantity": 1,
+        "unit": "400g Can"
+    }, {
+        "name": "Extra Virgin Olive Oil",
+        "quantity": 50,
+        "unit": "mL"
+    }, {
+        "name": "Salt",
+        "quantity": "",
+        "unit": "To Taste"
+    }, {
+        "name": "Dried Orecchiette",
+        "quantity": 250,
+        "unit": "g"
+    }, {
+        "name": "Tomato Paste",
+        "quantity": 0.75,
+        "unit": "Tbsp"
+    }, {
+        "name": "Caster Sugar",
+        "quantity": 2,
+        "unit": "Tsp"
+    }, {
+        "name": "Vege Stock",
+        "quantity": 500,
+        "unit": "mL"
+    }],
+    "ingredients_meat_veg": [{
+        "name": "Garlic",
+        "quantity": 6,
+        "unit": "Cloves"
+    }, {
+        "name": "Lemon",
+        "quantity": 1,
+        "unit": ""
+    }, {
+        "name": "Cherry Tomatoes",
+        "quantity": 250,
+        "unit": "g"
+    }],
+    "ingredients_fridge_freezer": [],
+    "ingredients_herbs_spices": [{
+        "name": "Hot Smoked Paprika",
+        "quantity": 2,
+        "unit": "Tsp"
+    }, {
+        "name": "Ground Cumin",
+        "quantity": 2,
+        "unit": "Tsp"
+    }, {
+        "name": "Parsley",
+        "quantity": 0.5,
+        "unit": "Bunch"
+    }],
+    "equipment_standard": [
+        "Large Saute Pan"
+    ],
+    "equipment_special": [],
+    "step_layout": ["Start", 0, "SS", 1, 2, 3, 4, "SE", 5, 6, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 10,
+            "ingredients": [{
+                "name": "Chickpeas",
+                "quantity": 1,
+                "unit": "400g Can"
+            }, {
+                "name": "Garlic",
+                "quantity": 6,
+                "unit": "Cloves"
+            }],
+            "instruction": "Drain can of chickpeas and pat dry. Skin and crush garlic cloves.",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "12 min",
+            "secondary": false,
+            "long_step": 4,
+            "completion": 60,
+            "ingredients": [{
+                "name": "Drained Chickpeas",
+                "quantity": "",
+                "unit": ""
+            }, {
+                "name": "Crushed Garlic",
+                "quantity": "",
+                "unit": ""
+            }, {
+                "name": "Extra Virgin Olive Oil",
+                "quantity": 50,
+                "unit": "mL"
+            }, {
+                "name": "Salt",
+                "quantity": 0.5,
+                "unit": "Tsp"
+            }, {
+                "name": "Hot Smoked Paprika",
+                "quantity": 2,
+                "unit": "Tsp"
+            }, {
+                "name": "Ground Cumin",
+                "quantity": 2,
+                "unit": "Tsp"
+            }, {
+                "name": "Tomato Paste",
+                "quantity": 0.75,
+                "unit": "Tbsp"
+            }],
+            "instruction": "Add to a large saute pan on a medium-high heat. Fry, stirring occassionally until the chickpeas are crisp.",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 70,
+            "ingredients": [{
+                "name": "Parsley",
+                "quantity": 0.5,
+                "unit": "Bunch"
+            }],
+            "instruction": "Pick and roughly chop 40g of parsley.",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [{
+                "name": "Lemon",
+                "quantity": 1,
+                "unit": ""
+            }],
+            "instruction": "Zest 2 Tsp of lemon.",
+            "extra_info": ""
+        },
+        "4": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Chopped Cherry Tomatoes",
+                "quantity": 250,
+                "unit": "g"
+            }],
+            "instruction": "Wash and halve the tomatoes.",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Chopped Parsley",
+                "quantity": "",
+                "unit": ""
+            }, {
+                "name": "Lemon Zest",
+                "quantity": "",
+                "unit": ""
+            }, {
+                "name": "Cherry Tomatoes",
+                "quantity": "",
+                "unit": ""
+            }, {
+                "name": "Caster Sugar",
+                "quantity": 2,
+                "unit": "Tsp"
+            }],
+            "instruction": "Add to the pan. Cook for 2 min on medium-high.",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "12-14 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Dried Oreccheitte",
+                "quantity": 250,
+                "unit": "g"
+            }, {
+                "name": "Vege Stock",
+                "quantity": 500,
+                "unit": "mL"
+            }, {
+                "name": "Water",
+                "quantity": 200,
+                "unit": "mL"
+            }, {
+                "name": "Salt",
+                "quantity": 0.75,
+                "unit": "Tsp"
+            }],
+            "instruction": "Add pasta, stock and water. Bring to a simmer and cook until pasta is al dente.",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}
