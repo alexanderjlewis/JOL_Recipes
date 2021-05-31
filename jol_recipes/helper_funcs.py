@@ -11,9 +11,9 @@ def get_recipe_data(submitted_name,recipes):
     return False
 
 
-def adjust_recipe_qty(recipe, quantity_required):
+def adjust_recipe_qty(recipe, multiplier):
     
-    multiplier = float(quantity_required) / float(recipe['serving_qty'])
+    #multiplier = float(quantity_required) / float(recipe['serving_qty'])
 
     for step_id in recipe['steps']:
         for ingredient in recipe['steps'][str(step_id)]['ingredients']:

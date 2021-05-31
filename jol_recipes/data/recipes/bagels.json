@@ -29,7 +29,7 @@
     "ingredients_meat_veg": [{
         "name": "Eggs",
         "quantity": 1,
-        "unit": ""
+        "unit": "Whole"
     }],
     "ingredients_herbs_spices": [{
         "name": "Toppings",

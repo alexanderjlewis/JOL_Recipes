@@ -98,18 +98,64 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Adjust Recipe Quantity</h5>
+          <h5 class="modal-title">Adjust Recipe Quantity</h5>
         </div>
         <div class="modal-body">
+
           <div class="form-group">
-            <label for="exampleInputPassword1">Update to:</label>
+            <label for="ingredientSelect" class="form-label mt-4">Adjust Based On</label>
             <div class="input-group">
-              <input data_qty="{{ recipe['serving_qty'] }}" id="updatedScaleFactor" min="0" step="1" type="number" class="form-control" value="{{ recipe['serving_qty'] }}">
-              <div class="input-group-append">
-                <span class="input-group-text">{{ recipe['serving_unit'] }}</span>
-              </div>
+              <select class="form-control" id="ingredientSelect">
+                <option value={{ recipe.serving_qty }} data-unit={{ recipe.serving_unit }}>Total Recipe</option>
+                {% for ingredient in recipe['ingredients_pantry'] %}  
+                  {% if not ingredient.quantity == "" %}
+                    <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
+                  {% endif %}
+                {% endfor %}
+                {% for ingredient in recipe['ingredients_meat_veg'] %}  
+                  {% if not ingredient.quantity == "" %}
+                    <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
+                  {% endif %}
+                {% endfor %}
+                {% for ingredient in recipe['ingredients_herbs_spices'] %}  
+                  {% if not ingredient.quantity == "" %}
+                    <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
             </div>
           </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                
+                <label for="qtyInput">Base Qty:</label>
+                <div class="input-group">
+                  <input class="form-control" id="baseValue" type="text" placeholder="{{ recipe.serving_qty }}" readonly>
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="baseUnit">{{ recipe.serving_unit }}</span>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col">
+                
+                <label for="qtyInput">Update to:</label>
+                <div class="input-group">
+                  <input data_qty="{{ recipe.serving_qty }}" id="updatedValue" min="0" step="1" type="number" class="form-control" value="{{ recipe['serving_qty'] }}">
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="updatedUnit">{{ recipe.serving_unit }}</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            
+            
+            
+          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -136,22 +182,38 @@
     
     }
 
+    
+    $('#ingredientSelect').on("change",function(){
+      var baseUnit = $("#ingredientSelect option:selected").attr('data-unit');
+      var baseValue = $("#ingredientSelect option:selected").attr('value');
+      $('#baseUnit').text(baseUnit);
+      $('#updatedUnit').text(baseUnit);
+      $('#baseValue')[0].placeholder = baseValue;
+      $('#updatedValue')[0].value = baseValue;
+    });
+
+
     function updateScaling() {
       var serving_tag = '{{ recipe['serving_tag'] }}';
       var serving_qty = '{{ recipe['serving_qty'] }}';
       var serving_unit = '{{ recipe['serving_unit'] }}';
       //Quantity shown  {{ recipe['serving_qty'] }} {{ recipe['serving_unit'] }}.
 
-      var new_qty = $('#updatedScaleFactor').val()
+      var updatedValue = $('#updatedValue').val();
+      var baseValue = $('#baseValue')[0].placeholder;
+      var multiplier = updatedValue / baseValue;
 
-      if (new_qty != serving_qty) {
-        serving_qty = new_qty
+      serving_qty = serving_qty * multiplier;
+      serving_qty = +(Math.round(serving_qty + "e+2")  + "e-2");
+
+      if (updatedValue != baseValue) {
+        // serving_qty = new_qty
         // trigger request to back end for updated chart for new qty.
         $.ajax({
           type : "GET",
           url : '/api/getChart',
           dataType: "html",
-          data: {recipe:'{{ recipe['safe_name'] }}', quantity:serving_qty},
+          data: {recipe:'{{ recipe['safe_name'] }}', multiplier:multiplier},
           contentType: 'application/json;charset=UTF-8',
           success: function (data) {
             $('#chart_area').html(data); //replace the chart with the new one returned from the back end
@@ -165,7 +227,7 @@
           type : "GET",
           url : '/api/getIngredientList',
           dataType: "html",
-          data: {recipe:'{{ recipe['safe_name'] }}', quantity:serving_qty},
+          data: {recipe:'{{ recipe['safe_name'] }}', multiplier:multiplier},
           contentType: 'application/json;charset=UTF-8',
           success: function (data) {
             $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end

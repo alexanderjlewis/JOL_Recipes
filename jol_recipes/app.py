@@ -20,18 +20,18 @@ def list_page():
 @app.route('/api/getChart')
 def api_getChart():
     submitted_name = request.args.get('recipe')
-    required_quantity = int(request.args.get('quantity'))
+    multiplier = float(request.args.get('multiplier'))
     recipe_data = get_recipe_data(submitted_name, recipes)
-    recipe_data = adjust_recipe_qty(recipe_data, required_quantity)
+    recipe_data = adjust_recipe_qty(recipe_data, multiplier)
     chart = generate(recipe_data)
     return chart
 
 @app.route('/api/getIngredientList')
 def api_getIngredientList():
     submitted_name = request.args.get('recipe')
-    required_quantity = int(request.args.get('quantity'))
+    multiplier = float(request.args.get('multiplier'))
     recipe_data = get_recipe_data(submitted_name, recipes)
-    recipe_data = adjust_recipe_qty(recipe_data, required_quantity)
+    recipe_data = adjust_recipe_qty(recipe_data, multiplier)
     return render_template('ingredient_list.html', recipe=recipe_data)
 
 @app.route('/recipe/<name>')

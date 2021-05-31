@@ -17,23 +17,23 @@
         "name": "Soy Sauce",
         "quantity": 90,
         "unit": "mL"
-    },{
+    }, {
         "name": "Dried Lentils",
         "quantity": 180,
         "unit": "g"
-    },{
+    }, {
         "name": "Pearl Barley",
         "quantity": 100,
         "unit": "g"
-    },{
+    }, {
         "name": "Vege Stock",
         "quantity": 1,
         "unit": "L"
-    },{
+    }, {
         "name": "Coconut Cream",
         "quantity": 160,
         "unit": "g"
-    },{
+    }, {
         "name": "Red Wine",
         "quantity": 100,
         "unit": "mL"
@@ -41,20 +41,20 @@
     "ingredients_meat_veg": [{
         "name": "Carrots",
         "quantity": 3,
-        "unit": ""
-    },{
+        "unit": "Medium"
+    }, {
         "name": "Onions",
         "quantity": 2,
-        "unit": ""
-    },{
+        "unit": "Medium"
+    }, {
         "name": "Oyster Mushrooms",
         "quantity": 300,
         "unit": "g"
-    },{
+    }, {
         "name": "Dried Porcini",
         "quantity": 60,
         "unit": "g"
-    },{
+    }, {
         "name": "Plum Tomatoes",
         "quantity": 350,
         "unit": "g"
@@ -63,15 +63,15 @@
         "name": "Garlic",
         "quantity": "4",
         "unit": "Cloves"
-    },{
+    }, {
         "name": "Rose Harissa",
         "quantity": 40,
         "unit": "g"
-    },{
+    }, {
         "name": "Cumin Seeds",
         "quantity": 2,
         "unit": "Tsp"
-    },{
+    }, {
         "name": "White Miso Paste",
         "quantity": 70,
         "unit": "g"
@@ -110,31 +110,30 @@
             "long_step": false,
             "completion": 15,
             "ingredients": [{
-                    "name": "Carrots",
-                    "quantity": 3,
-                    "unit": ""
-                },{
-                    "name": "Onions",
-                    "quantity": 2,
-                    "unit": ""
-                },{
-                    "name": "Oyster Mushrooms",
-                    "quantity": 300,
-                    "unit": "g"
-                },{
-                    "name": "Dried Porcini",
-                    "quantity": 60,
-                    "unit": "g"
-                },{
-                    "name": "Garlic",
-                    "quantity": "4",
-                    "unit": "Cloves"
-                },{
-                    "name": "Plum Tomatoes",
-                    "quantity": 350,
-                    "unit": "g"
-                }
-            ],
+                "name": "Carrots",
+                "quantity": 3,
+                "unit": ""
+            }, {
+                "name": "Onions",
+                "quantity": 2,
+                "unit": ""
+            }, {
+                "name": "Oyster Mushrooms",
+                "quantity": 300,
+                "unit": "g"
+            }, {
+                "name": "Dried Porcini",
+                "quantity": 60,
+                "unit": "g"
+            }, {
+                "name": "Garlic",
+                "quantity": "4",
+                "unit": "Cloves"
+            }, {
+                "name": "Plum Tomatoes",
+                "quantity": 350,
+                "unit": "g"
+            }],
             "instruction": "Peel and roughly chop vegetables, then use food processor to very finely chop.",
             "extra_info": ""
         },
@@ -144,31 +143,30 @@
             "long_step": false,
             "completion": 20,
             "ingredients": [{
-                    "name": "Olive Oil",
-                    "quantity": 120,
-                    "unit": "mL"
-                }, {
-                    "name": "Tomato Paste",
-                    "quantity": 4,
-                    "unit": "Tbsp"
-                }, {
-                    "name": "Soy Sauce",
-                    "quantity": 90,
-                    "unit": "mL"
-                },{
-                    "name": "Rose Harissa",
-                    "quantity": 40,
-                    "unit": "g"
-                },{
-                    "name": "Cumin Seeds",
-                    "quantity": 2,
-                    "unit": "Tsp"
-                },{
-                    "name": "White Miso Paste",
-                    "quantity": 70,
-                    "unit": "g"
-                }
-            ],
+                "name": "Olive Oil",
+                "quantity": 120,
+                "unit": "mL"
+            }, {
+                "name": "Tomato Paste",
+                "quantity": 4,
+                "unit": "Tbsp"
+            }, {
+                "name": "Soy Sauce",
+                "quantity": 90,
+                "unit": "mL"
+            }, {
+                "name": "Rose Harissa",
+                "quantity": 40,
+                "unit": "g"
+            }, {
+                "name": "Cumin Seeds",
+                "quantity": 2,
+                "unit": "Tsp"
+            }, {
+                "name": "White Miso Paste",
+                "quantity": 70,
+                "unit": "g"
+            }],
             "instruction": "Put chopped vegetables and extra ingredients into a large baking tray and mix well.",
             "extra_info": ""
         },
@@ -196,39 +194,38 @@
             "long_step": false,
             "completion": 60,
             "ingredients": [{
-                    "name": "Dried Lentils",
-                    "quantity": 180,
-                    "unit": "g"
-                },{
-                    "name": "Pearl Barley",
-                    "quantity": 100,
-                    "unit": "g"
-                },{
-                    "name": "Vege Stock",
-                    "quantity": 1,
-                    "unit": "L"
-                },{
-                    "name": "Coconut Cream",
-                    "quantity": 160,
-                    "unit": "g"
-                },{
-                    "name": "Red Wine",
-                    "quantity": 100,
-                    "unit": "mL"
-                },{
-                    "name": "Water",
-                    "quantity": 150,
-                    "unit": "mL"
-                },{
-                    "name": "Salt",
-                    "quantity": 0.3,
-                    "unit": "Tsp"
-                },{
-                    "name": "Pepper",
-                    "quantity": "",
-                    "unit": "Generous Grind"
-                }
-            ],
+                "name": "Dried Lentils",
+                "quantity": 180,
+                "unit": "g"
+            }, {
+                "name": "Pearl Barley",
+                "quantity": 100,
+                "unit": "g"
+            }, {
+                "name": "Vege Stock",
+                "quantity": 1,
+                "unit": "L"
+            }, {
+                "name": "Coconut Cream",
+                "quantity": 160,
+                "unit": "g"
+            }, {
+                "name": "Red Wine",
+                "quantity": 100,
+                "unit": "mL"
+            }, {
+                "name": "Water",
+                "quantity": 150,
+                "unit": "mL"
+            }, {
+                "name": "Salt",
+                "quantity": 0.3,
+                "unit": "Tsp"
+            }, {
+                "name": "Pepper",
+                "quantity": "",
+                "unit": "Generous Grind"
+            }],
             "instruction": "Add all remaining ingredients. Stir very well, scraping sides and bottom. Cover tightly with foil",
             "extra_info": ""
         },
