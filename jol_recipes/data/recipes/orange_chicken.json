@@ -5,91 +5,109 @@
     "serving_tag": "serves",
     "serving_qty": 4,
     "serving_unit": "adults",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Brown Sugar",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tbsp"
     }, {
         "name": "Caster Sugar",
+        "category": "Pantry",
         "quantity": 1,
         "unit": "Cup"
     }, {
         "name": "MSG",
+        "category": "Pantry",
         "quantity": 0.75,
         "unit": "Tsp"
     }, {
         "name": "Rice Wine Vinegar",
+        "category": "Pantry",
         "quantity": 5,
         "unit": "Tbsp"
     }, {
         "name": "Soy Sauce",
+        "category": "Pantry",
         "quantity": 0.25,
         "unit": "Cup"
     }, {
         "name": "Shaoxing Wine",
+        "category": "Pantry",
         "quantity": 4,
         "unit": "Tbsp"
     }, {
         "name": "Peanut Oil",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "L"
     }, {
         "name": "Rice Flour",
+        "category": "Pantry",
         "quantity": 1,
         "unit": "Cup"
     }, {
         "name": "Salt",
+        "category": "Herbs & Spices",
         "quantity": 2,
         "unit": "Tsp"
     }, {
         "name": "Baking Powder",
+        "category": "Pantry",
         "quantity": 0.5,
         "unit": "Tsp"
     }, {
         "name": "Pepper",
+        "category": "Herbs & Spices",
         "quantity": 0.5,
         "unit": "Tsp"
     }, {
         "name": "Corn Starch",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tbsp"
     }, {
         "name": "Sesame Oil",
+        "category": "Pantry",
         "quantity": 1,
         "unit": "Tsp"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Oranges",
+        "category": "Fresh Produce",
         "quantity": 6,
         "unit": ""
     }, {
         "name": "Chicken",
+        "category": "Meat",
         "quantity": 700,
         "unit": "g"
     }, {
         "name": "Eggs",
+        "category": "Fresh Produce",
         "quantity": 2,
         "unit": ""
     }, {
         "name": "Spring Onion",
+        "category": "Fresh Produce",
         "quantity": 1,
         "unit": "Stalk"
     }, {
         "name": "White Rice",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Cups"
-    }],
-    "ingredients_fridge_freezer": [],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Ginger",
+        "category": "Herbs & Spices",
         "quantity": 1,
         "unit": "Tsp"
     }, {
         "name": "Garlic",
+        "category": "Herbs & Spices",
         "quantity": 2,
         "unit": "Cloves"
     }, {
         "name": "Birds Eye Chilli",
+        "category": "Herbs & Spices",
         "quantity": 1,
         "unit": "Small"
     }],

@@ -5,74 +5,89 @@
     "serving_tag": "serves",
     "serving_qty": 4,
     "serving_unit": "adults",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Olive Oil",
+        "category": "Pantry",
         "quantity": 120,
         "unit": "mL"
     }, {
         "name": "Tomato Paste",
+        "category": "Pantry",
         "quantity": 4,
         "unit": "Tbsp"
     }, {
         "name": "Soy Sauce",
+        "category": "Pantry",
         "quantity": 90,
         "unit": "mL"
     }, {
         "name": "Dried Lentils",
+        "category": "Pantry",
         "quantity": 180,
         "unit": "g"
     }, {
         "name": "Pearl Barley",
+        "category": "Pantry",
         "quantity": 100,
         "unit": "g"
     }, {
         "name": "Vege Stock",
+        "category": "Pantry",
         "quantity": 1,
         "unit": "L"
     }, {
         "name": "Coconut Cream",
+        "category": "Pantry",
         "quantity": 160,
         "unit": "g"
     }, {
         "name": "Red Wine",
+        "category": "Pantry",
         "quantity": 100,
         "unit": "mL"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Carrots",
+        "category": "Vegetables",
         "quantity": 3,
         "unit": "Medium"
     }, {
         "name": "Onions",
+        "category": "Vegetables",
         "quantity": 2,
         "unit": "Medium"
     }, {
         "name": "Oyster Mushrooms",
+        "category": "Vegetables",
         "quantity": 300,
         "unit": "g"
     }, {
         "name": "Dried Porcini",
+        "category": "Vegetables",
         "quantity": 60,
         "unit": "g"
     }, {
         "name": "Plum Tomatoes",
+        "category": "Vegetables",
         "quantity": 350,
         "unit": "g"
-    }],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Garlic",
+        "category": "Herbs & Spices",
         "quantity": "4",
         "unit": "Cloves"
     }, {
         "name": "Rose Harissa",
+        "category": "Herbs & Spices",
         "quantity": 40,
         "unit": "g"
     }, {
         "name": "Cumin Seeds",
+        "category": "Herbs & Spices",
         "quantity": 2,
         "unit": "Tsp"
     }, {
         "name": "White Miso Paste",
+        "category": "Herbs & Spices",
         "quantity": 70,
         "unit": "g"
     }],

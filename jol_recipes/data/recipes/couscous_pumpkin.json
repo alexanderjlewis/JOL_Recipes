@@ -5,63 +5,74 @@
     "serving_tag": "serves",
     "serving_qty": 4,
     "serving_unit": "adults",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Olive Oil",
+        "category": "Pantry",
         "quantity": 105,
         "unit": "mL"
     }, {
         "name": "Caster Sugar",
+        "category": "Pantry",
         "quantity": 2.5,
         "unit": "Tsp"
     }, {
         "name": "Giant Couscous",
+        "category": "Pantry",
         "quantity": 250,
         "unit": "g"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Crown Prince Pumpkin",
+        "category": "Vegetables",
         "quantity": 750,
         "unit": "g"
     }, {
         "name": "Garlic",
+        "category": "Vegetables",
         "quantity": 8,
         "unit": "Cloves"
     }, {
         "name": "Onion",
+        "category": "Vegetables",
         "quantity": 2,
         "unit": "Large"
     }, {
         "name": "Plum Tomatos",
+        "category": "Vegetables",
         "quantity": 750,
         "unit": "g"
     }, {
         "name": "Onion",
+        "category": "Vegetables",
         "quantity": 2,
         "unit": "Large"
     }, {
         "name": "Baby Spinach",
+        "category": "Vegetables",
         "quantity": 250,
         "unit": "g"
     }, {
         "name": "Fresh Coriander",
+        "category": "Vegetables",
         "quantity": 15,
         "unit": "g"
-    }],
-    "ingredients_fridge_freezer": [{
+    }, {
         "name": "Parmesan",
+        "category": "Fridge",
         "quantity": 60,
         "unit": "g"
-    }],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Star Anise",
+        "category": "Herbs & Spices",
         "quantity": 4,
         "unit": "Whole"
     }, {
         "name": "Ground Cinnamon",
+        "category": "Herbs & Spices",
         "quantity": 3,
         "unit": "Tsp"
     }, {
         "name": "Chilli Flakes",
+        "category": "Herbs & Spices",
         "quantity": 0.3,
         "unit": "Tsp"
     }],

@@ -5,66 +5,79 @@
     "serving_tag": "makes sauce for",
     "serving_qty": 4,
     "serving_unit": "adults",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Soy Sauce",
+        "category": "Pantry",
         "quantity": 5.5,
         "unit": "Tbsp"
     }, {
         "name": "Pecans",
+        "category": "Pantry",
         "quantity": 0.5,
         "unit": "Cups"
     }, {
         "name": "Sui Mi Ya Cai",
+        "category": "Pantry",
         "quantity": 0.33,
         "unit": "Cups"
     }, {
         "name": "Shaoxing Wine",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tbsp"
     }, {
         "name": "Sesame Paste",
+        "category": "Pantry",
         "quantity": 4,
         "unit": "Tbsp"
     }, {
         "name": "Chinkian Vinegar",
+        "category": "Pantry",
         "quantity": 4,
         "unit": "Tbsp"
     }, {
         "name": "Sugar",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tbsp"
     }, {
         "name": "Chili Oil",
+        "category": "Pantry",
         "quantity": 0.5,
         "unit": "Cups"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Mushrooms",
+        "category": "Fresh Produce",
         "quantity": 225,
         "unit": "g"
     }, {
         "name": "Spring Onions",
+        "category": "Fresh Produce",
         "quantity": 6,
-        "unit": ""
+        "unit": "Whole"
     }, {
         "name": "Firm Tofu",
+        "category": "Fresh Produce",
         "quantity": 225,
         "unit": "g"
     }, {
         "name": "Boc Choy",
+        "category": "Fresh Produce",
         "quantity": 1,
         "unit": "Bunch"
     }, {
         "name": "Eggs",
+        "category": "Fresh Produce",
         "quantity": 4,
         "unit": "Cups"
-    }],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Garlic",
+        "category": "Herbs & Spices",
         "quantity": 7,
         "unit": "Cloves"
     }, {
         "name": "Sichuan Pepper Corns",
+        "category": "Herbs & Spices",
         "quantity": 1,
         "unit": "Tsp"
     }],

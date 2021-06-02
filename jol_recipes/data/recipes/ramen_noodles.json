@@ -5,22 +5,24 @@
     "serving_tag": "makes noodles for",
     "serving_qty": 4,
     "serving_unit": "adults",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Baked Baking Soda",
+        "category": "Pantry",
         "quantity": 6,
         "unit": "g"
     }, {
         "name": "Bread Flour",
+        "category": "Pantry",
         "quantity": 396,
         "unit": "g"
     }, {
         "name": "Vital Wheat Gluten",
+        "category": "Pantry",
         "quantity": 4,
         "unit": "g"
-    }],
-    "ingredients_meat_veg": [],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Kosher Salt",
+        "category": "Herbs & Spices",
         "quantity": 4,
         "unit": "g"
     }],

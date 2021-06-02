@@ -5,34 +5,39 @@
     "serving_tag": "makes dough for",
     "serving_qty": 2,
     "serving_unit": "pizzas",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Dry Yeast",
+        "category": "Pantry",
         "quantity": 2.25,
         "unit": "Tsp"
     }, {
         "name": "Bread Flour",
+        "category": "Pantry",
         "quantity": 450,
         "unit": "g"
     }, {
         "name": "Salt",
+        "category": "Pantry",
         "quantity": 0.75,
         "unit": "Tsp"
     }, {
         "name": "Caster Sugar",
+        "category": "Pantry",
         "quantity": 1,
         "unit": "Tbsp"
     }, {
         "name": "Olive Oil",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tbsp"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Toppings",
+        "category": "Meat & Veg",
         "quantity": "",
         "unit": "Various"
-    }],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Toppings",
+        "category": "Herbs & Spices",
         "quantity": "",
         "unit": "Various"
     }],

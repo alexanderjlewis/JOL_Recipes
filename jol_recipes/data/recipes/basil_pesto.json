@@ -5,35 +5,39 @@
     "serving_tag": "makes sauce for",
     "serving_qty": 500,
     "serving_unit": "g of Dry Pasta",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Extra-Virgin Olive Oil",
+        "category": "Pantry",
         "quantity": 120,
         "unit": "mL"
     }, {
         "name": "Pine Nuts",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tbsp"
     }, {
         "name": "Salt",
+        "category": "Pantry",
         "quantity": "",
         "unit": "To Taste"
     }, {
         "name": "Dried Pasta",
+        "category": "Pantry",
         "quantity": 500,
         "unit": "g"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Garlic",
+        "category": "Herbs & Spices",
         "quantity": 2,
         "unit": "Cloves"
-    }],
-    "ingredients_fridge_freezer": [{
+    }, {
         "name": "Parmesan",
+        "category": "Fridge",
         "quantity": 60,
         "unit": "g"
-    }],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Basil Leaves",
+        "category": "Herbs & Spices",
         "quantity": 60,
         "unit": "g"
     }],

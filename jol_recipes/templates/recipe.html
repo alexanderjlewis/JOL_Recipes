@@ -107,17 +107,7 @@
             <div class="input-group">
               <select class="form-control" id="ingredientSelect">
                 <option value={{ recipe.serving_qty }} data-unit={{ recipe.serving_unit }}>Total Recipe</option>
-                {% for ingredient in recipe['ingredients_pantry'] %}  
-                  {% if not ingredient.quantity == "" %}
-                    <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
-                  {% endif %}
-                {% endfor %}
-                {% for ingredient in recipe['ingredients_meat_veg'] %}  
-                  {% if not ingredient.quantity == "" %}
-                    <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
-                  {% endif %}
-                {% endfor %}
-                {% for ingredient in recipe['ingredients_herbs_spices'] %}  
+                {% for ingredient in recipe['ingredients'] %}  
                   {% if not ingredient.quantity == "" %}
                     <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
                   {% endif %}

@@ -5,59 +5,69 @@
     "serving_tag": "makes sauce for",
     "serving_qty": 250,
     "serving_unit": "g of Dry Pasta",
-    "ingredients_pantry": [{
-        "name": "Chickpeas",
-        "quantity": 1,
-        "unit": "400g Can"
+    "ingredients": [{
+        "name": "Canned Chickpeas",
+        "category": "Pantry",
+        "quantity": 400,
+        "unit": "g"
     }, {
         "name": "Extra Virgin Olive Oil",
+        "category": "Pantry",
         "quantity": 50,
         "unit": "mL"
     }, {
         "name": "Salt",
+        "category": "Herbs & Spices",
         "quantity": "",
         "unit": "To Taste"
     }, {
         "name": "Dried Orecchiette",
+        "category": "Pantry",
         "quantity": 250,
         "unit": "g"
     }, {
         "name": "Tomato Paste",
+        "category": "Pantry",
         "quantity": 0.75,
         "unit": "Tbsp"
     }, {
         "name": "Caster Sugar",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tsp"
     }, {
         "name": "Vege Stock",
+        "category": "Pantry",
         "quantity": 500,
         "unit": "mL"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Garlic",
+        "category": "Herbs & Spices",
         "quantity": 6,
         "unit": "Cloves"
     }, {
         "name": "Lemon",
+        "category": "Fruit & Vegetables",
         "quantity": 1,
-        "unit": ""
+        "unit": "Whole"
     }, {
         "name": "Cherry Tomatoes",
+        "category": "Fruit & Vegetables",
         "quantity": 250,
         "unit": "g"
-    }],
-    "ingredients_fridge_freezer": [],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Hot Smoked Paprika",
+        "category": "Herbs & Spices",
         "quantity": 2,
         "unit": "Tsp"
     }, {
         "name": "Ground Cumin",
+        "category": "Herbs & Spices",
         "quantity": 2,
         "unit": "Tsp"
     }, {
         "name": "Parsley",
+        "category": "Herbs & Spices",
         "quantity": 0.5,
         "unit": "Bunch"
     }],
@@ -82,9 +92,9 @@
             "long_step": false,
             "completion": 10,
             "ingredients": [{
-                "name": "Chickpeas",
-                "quantity": 1,
-                "unit": "400g Can"
+                "name": "Canned Chickpeas",
+                "quantity": 400,
+                "unit": "g"
             }, {
                 "name": "Garlic",
                 "quantity": 6,
@@ -151,7 +161,7 @@
             "ingredients": [{
                 "name": "Lemon",
                 "quantity": 1,
-                "unit": ""
+                "unit": "Whole"
             }],
             "instruction": "Zest 2 Tsp of lemon.",
             "extra_info": ""

@@ -5,9 +5,7 @@
     "serving_tag": "makes",
     "serving_qty": 8,
     "serving_unit": "servings",
-    "ingredients_pantry": [],
-    "ingredients_meat_veg": [],
-    "ingredients_herbs_spices": [],
+    "ingredients": [],
     "equipment_standard": [
         "Stove",
         "Oven",

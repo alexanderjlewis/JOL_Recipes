@@ -110,9 +110,9 @@ class element_renderer():
     ingredient_text_x_offset = 16
 
     #path horizontal poisiotns
-    main_path_x = 240
+    main_path_x = 250
     ingredient_path_x = 150
-    secondary_path_x = 320
+    secondary_path_x = 300
 
     #secondary path       
     secondary_text_offset_x = 86

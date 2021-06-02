@@ -33,8 +33,9 @@ svg {
 }
 
 .ingredient_square {
-    fill: #3D4242;
+    fill: white;
     stroke: #3D4242;
+    stroke-width: 2;
 }
 
 .main_line {

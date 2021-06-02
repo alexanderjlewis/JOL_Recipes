@@ -5,47 +5,54 @@
     "serving_tag": "makes sauce for",
     "serving_qty": 500,
     "serving_unit": "g of Dry Pasta",
-    "ingredients_pantry": [{
+    "ingredients": [{
         "name": "Vodka",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Oz."
     }, {
         "name": "Extra Virgin Olive Oil",
+        "category": "Pantry",
         "quantity": 2,
         "unit": "Tbsp"
     }, {
         "name": "Salt",
+        "category": "Herbs & Spices",
         "quantity": "",
         "unit": "To Taste"
     }, {
         "name": "Dried Pasta",
+        "category": "Pantry",
         "quantity": 500,
         "unit": "g"
     }, {
         "name": "Tomato Paste",
+        "category": "Pantry",
         "quantity": 130,
         "unit": "g"
-    }],
-    "ingredients_meat_veg": [{
+    }, {
         "name": "Garlic",
+        "category": "Herbs & Spices",
         "quantity": 4,
         "unit": "Cloves"
     }, {
         "name": "Onion",
+        "category": "Vegetables",
         "quantity": 1,
         "unit": "Medium"
-    }],
-    "ingredients_fridge_freezer": [{
+    }, {
         "name": "Grated Parmesan",
+        "category": "Dairy",
         "quantity": 110,
         "unit": "g"
     }, {
         "name": "Heavy Cream",
+        "category": "Dairy",
         "quantity": 0.75,
         "unit": "Cups"
-    }],
-    "ingredients_herbs_spices": [{
+    }, {
         "name": "Chilli Flakes",
+        "category": "Herbs & Spices",
         "quantity": 0.5,
         "unit": "Tsp"
     }],
