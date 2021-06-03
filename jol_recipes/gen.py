@@ -246,8 +246,14 @@ class element_renderer():
             group.append(text)
         
         #draw the square for the ingredient node
-        square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8),'y':str(self.y_pos),'width':str(self.ingredient_square_side),'height':str(node_height),'class':'ingredient_square'})
+        square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8),'y':str(self.y_pos),'width':str(self.ingredient_square_side),'height':str(node_height),'class':'ingredient_square','rx':'5','onclick':'markIngredentComplete(this)'})
         group.append(square)
+        
+        #draw a 'tick' mark in the svg for use when the user clicks the ingredient to mark as complete. Initially set visibility to hidden so it's not visible on page load.
+        tick_svg = ET.Element('svg', attrib={'xmlns':'http://www.w3.org/2000/svg', 'width':'10', 'height':'10', 'viewBox':'0 0 24 24', 'x':str(self.ingredient_path_x - 5), 'y':str(self.y_pos + (node_height / 2) - 5), 'class':'tick'})
+        tick_path = ET.Element('path', attrib={'d':'M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'})
+        tick_svg.append(tick_path)
+        group.append(tick_svg)
 
         # increment y_pos for height of ingredient node
         self.y_pos += node_height
@@ -302,12 +308,18 @@ class element_renderer():
 
         else:
             #first cirlce is the outline
-            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius), 'class':'node_outline'})
+            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius), 'class':'node_outline', 'onclick':'markStepComplete_NodeClick(this)'})
             group.append(circle)
 
             #second circle is for the fill
-            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius - 2), 'fill':'url(#grd_' + str(self.id) + ')'})
+            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius - 2), 'fill':'url(#grd_' + str(self.id) + ')', 'class':'node_gradient', 'onclick':'markStepComplete_GradientClick(this)'})
             group.append(circle)
+
+            #draw a 'tick' mark in the svg for use when the user clicks the ingredient to mark as complete. Initially set visibility to hidden so it's not visible on page load.
+            tick_svg = ET.Element('svg', attrib={'xmlns':'http://www.w3.org/2000/svg', 'width':'10', 'height':'10', 'viewBox':'0 0 24 24', 'x':str(self.x_position - 5), 'y':str(node_draw_y_pos - 5), 'class':'tick'})
+            tick_path = ET.Element('path', attrib={'d':'M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'})
+            tick_svg.append(tick_path)
+            group.append(tick_svg)
 
             calc_node_height += (2 * self.main_node_radius)
         

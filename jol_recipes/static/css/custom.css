@@ -34,8 +34,22 @@ svg {
 
 .ingredient_square {
     fill: white;
-    stroke: #3D4242;
-    stroke-width: 2;
+    stroke: #929292;
+}
+
+.ingredient_square.checked {
+    fill: #696969;
+}
+
+.tick {
+    fill: #FFFFFF;
+    stroke: #FFFFFF;
+    stroke-width: 0;
+    visibility: hidden;
+}
+
+.tick.checked {
+    visibility: visible;
 }
 
 .main_line {
@@ -59,4 +73,16 @@ svg {
 .node_outline {
     fill: white;
     stroke: #929292;
+}
+
+.node_gradient {
+    visibility: visible;
+}
+
+.node_gradient.checked {
+    visibility: hidden;
+}
+
+.node_outline.checked {
+    fill: #696969;
 }
