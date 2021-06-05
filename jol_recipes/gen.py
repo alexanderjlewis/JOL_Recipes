@@ -68,7 +68,13 @@ class graph_renderer():
             
             #add hatched pattern for long nodes
             pattern = ET.Element('pattern', attrib={'id':'diagonalHatch', 'patternUnits':'userSpaceOnUse', 'width':'4', 'height':'4'})
-            pattern_path = ET.Element('path', attrib={'id':'diagonalHatchPattern', 'd':'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'})
+            pattern_path = ET.Element('path', attrib={'class':'diagonalHatchPattern', 'd':'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'})
+            pattern.append(pattern_path)
+            defs.append(pattern)
+
+            #add hatched pattern for long nodes (in a selected state)
+            pattern = ET.Element('pattern', attrib={'id':'diagonalHatchChecked', 'class':'checked', 'patternUnits':'userSpaceOnUse', 'width':'4', 'height':'4'})
+            pattern_path = ET.Element('path', attrib={'class':'diagonalHatchPattern', 'd':'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2'})
             pattern.append(pattern_path)
             defs.append(pattern)
 
@@ -78,10 +84,10 @@ class graph_renderer():
                 step_completion = str(self.render_recipe['steps'][step]['completion'])
 
                 gradient = ET.Element('linearGradient', attrib={'id':('grd_' + str(step_id)), 'x1':'0.5', 'y1':'1', 'x2':'0.5', 'y2':'0'})
-                offset1 = ET.Element('stop', attrib={'offset':'0%', 'stop-opacity':'1', 'stop-color':'#474747'})
-                offset2 = ET.Element('stop', attrib={'offset':step_completion + '%', 'stop-opacity':'1', 'stop-color':'#474747'})
-                offset3 = ET.Element('stop', attrib={'offset':step_completion + '%', 'stop-opacity':'1', 'stop-color':'white'})
-                offset4 = ET.Element('stop', attrib={'offset':'100%', 'stop-opacity':'1', 'stop-color':'white'})
+                offset1 = ET.Element('stop', attrib={'offset':'0%', 'class':'gradientFilled'})
+                offset2 = ET.Element('stop', attrib={'offset':step_completion + '%', 'class':'gradientFilled'})
+                offset3 = ET.Element('stop', attrib={'offset':step_completion + '%', 'class':'gradientEmpty'})
+                offset4 = ET.Element('stop', attrib={'offset':'100%', 'class':'gradientEmpty'})
                 gradient.append(offset1)
                 gradient.append(offset2)
                 gradient.append(offset3)
@@ -180,7 +186,9 @@ class element_renderer():
             self.svg.insert(0,self.draw_ingredients_line(ingredients_start_y_pos)) #need to insert this at the start so that the line is alawys behind the nodes
 
         #2) Draw the round/oval node (this includes adding the text)
-        self.svg.append(self.draw_node_shape())
+        node_group, text_group = self.draw_node_shape()
+        self.svg.append(node_group)
+        self.svg.append(text_group)
 
         #3) Draw the main vertical line
         self.svg.insert(0,self.draw_main_line()) #need to insert this at the start so that the main line is alawys behind the nodes
@@ -237,23 +245,26 @@ class element_renderer():
         if qty_number_of_lines > 1: #more then one line
             base_y_pos = self.y_pos + (self.ingredient_square_side / 2) + (self.ingredient_text_line_spacing_y * ((max_lines - qty_number_of_lines) / 2))
             for i in range(qty_number_of_lines):
-                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty'})
                 text.text = qty_text_lines[i]
                 group.append(text)
         else: #only one line
-            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty'})
             text.text = qty_text_string
             group.append(text)
         
         #draw the square for the ingredient node
-        square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8),'y':str(self.y_pos),'width':str(self.ingredient_square_side),'height':str(node_height),'class':'ingredient_square','rx':'5','onclick':'markIngredentComplete(this)'})
-        group.append(square)
+        square_group = ET.Element('g', attrib={'id':'ingredientSquare_' + str(self.id) + '_' + str(i), 'onclick':'markComplete(this)', 'class':'ingredientNode'})
+
+        square = ET.Element('rect', attrib={'x':str(self.ingredient_path_x - 8), 'y':str(self.y_pos), 'width':str(self.ingredient_square_side), 'height':str(node_height), 'class':'ingredient_square', 'rx':'5'})
+        square_group.append(square)
         
         #draw a 'tick' mark in the svg for use when the user clicks the ingredient to mark as complete. Initially set visibility to hidden so it's not visible on page load.
-        tick_svg = ET.Element('svg', attrib={'xmlns':'http://www.w3.org/2000/svg', 'width':'10', 'height':'10', 'viewBox':'0 0 24 24', 'x':str(self.ingredient_path_x - 5), 'y':str(self.y_pos + (node_height / 2) - 5), 'class':'tick'})
+        tick_svg = ET.Element('svg', attrib={'xmlns':'http://www.w3.org/2000/svg', 'width':'8', 'height':'8', 'viewBox':'0 0 24 24', 'x':str(self.ingredient_path_x - 4), 'y':str(self.y_pos + (node_height / 2) - 4), 'class':'tick'})
         tick_path = ET.Element('path', attrib={'d':'M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'})
         tick_svg.append(tick_path)
-        group.append(tick_svg)
+        square_group.append(tick_svg)
+        group.append(square_group)
 
         # increment y_pos for height of ingredient node
         self.y_pos += node_height
@@ -288,7 +299,7 @@ class element_renderer():
         calc_node_height = 0
         calc_text_height = 0
 
-        group = ET.Element('g')
+        node_group = ET.Element('g', attrib={'id':'node' + str(self.id), 'onclick':'markComplete(this)', 'class':'node'})
 
         #1) work out how tall the node shape will be
         if self.long_node:  
@@ -297,29 +308,35 @@ class element_renderer():
             #first oval outline  
             s_path = 'M{0},{1} v{2} a{3},{3} 1 0 0 {3},{3} a{3},{3} 1 0 0 {3},-{3} v-{2} a-{3},{3} 1 0 0 -{3},-{3} a{3},{3} 1 0 0 -{3},{3}'.format(self.x_position - 13, node_draw_y_pos, oval_middle_length, self.main_node_radius)
             oval = ET.Element('path', attrib={'d':s_path, 'class':'node_outline'})
-            group.append(oval)
+            node_group.append(oval)
             
             #then the fill
             s_path = 'M{0},{1} v{2} a{3},{3} 1 0 0 {3},{3} a{3},{3} 1 0 0 {3},-{3} v-{2} a-{3},{3} 1 0 0 -{3},-{3} a{3},{3} 1 0 0 -{3},{3}'.format(self.x_position - 11, node_draw_y_pos, oval_middle_length, self.main_node_radius - 2)
-            oval = ET.Element('path', attrib={'d':s_path, 'fill':'url(#diagonalHatch)'})
-            group.append(oval)
+            oval = ET.Element('path', attrib={'d':s_path, 'class':'diagonalHatch'})
+            node_group.append(oval)
+            
+            #draw a 'tick' mark in the svg for use when the user clicks the ingredient to mark as complete. Initially set visibility to hidden so it's not visible on page load.
+            tick_svg = ET.Element('svg', attrib={'xmlns':'http://www.w3.org/2000/svg', 'width':'10', 'height':'10', 'viewBox':'0 0 24 24', 'x':str(self.x_position - 5), 'y':str(node_draw_y_pos - 5 + (oval_middle_length/2)), 'class':'tick'})
+            tick_path = ET.Element('path', attrib={'d':'M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'})
+            tick_svg.append(tick_path)
+            node_group.append(tick_svg)
 
             calc_node_height += (2 * self.main_node_radius) + oval_middle_length
 
         else:
             #first cirlce is the outline
-            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius), 'class':'node_outline', 'onclick':'markStepComplete_NodeClick(this)'})
-            group.append(circle)
+            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius), 'class':'node_outline'})
+            node_group.append(circle)
 
             #second circle is for the fill
-            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius - 2), 'fill':'url(#grd_' + str(self.id) + ')', 'class':'node_gradient', 'onclick':'markStepComplete_GradientClick(this)'})
-            group.append(circle)
+            circle = ET.Element('circle', attrib={'cx': str(self.x_position),'cy':str(node_draw_y_pos),'r': str(self.main_node_radius - 2), 'fill':'url(#grd_' + str(self.id) + ')', 'class':'node_gradient'})
+            node_group.append(circle)
 
             #draw a 'tick' mark in the svg for use when the user clicks the ingredient to mark as complete. Initially set visibility to hidden so it's not visible on page load.
             tick_svg = ET.Element('svg', attrib={'xmlns':'http://www.w3.org/2000/svg', 'width':'10', 'height':'10', 'viewBox':'0 0 24 24', 'x':str(self.x_position - 5), 'y':str(node_draw_y_pos - 5), 'class':'tick'})
             tick_path = ET.Element('path', attrib={'d':'M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'})
             tick_svg.append(tick_path)
-            group.append(tick_svg)
+            node_group.append(tick_svg)
 
             calc_node_height += (2 * self.main_node_radius)
         
@@ -329,16 +346,16 @@ class element_renderer():
         if self.extra_info:
             calc_text_height += self.node_extra_info_text_line_spacing_y
 
-        group.append(self.draw_node_text(calc_text_height))
+        text_group = self.draw_node_text(calc_text_height)
 
         #3) take the max of 1) and 2)
         self.y_pos += max(calc_text_height, calc_node_height)
 
-        return group
+        return node_group, text_group
 
     def draw_node_text(self,calc_text_height):
         
-        g = ET.Element('g', attrib={})
+        g = ET.Element('g', attrib={'class':'nodeText'})
 
         text_y_pos = self.y_pos + 2
 

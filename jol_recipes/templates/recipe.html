@@ -158,59 +158,43 @@
 
 {% block scripts %}
   <script>
-    var recipe_quantity = {{recipe.serving_qty}};
 
-    function markIngredentComplete(ingredient_node_elt) {
-    
-      ingredient_tick_elt = ingredient_node_elt.nextSibling;
-
-      if (ingredient_node_elt.classList.contains('checked')) {
-        ingredient_node_elt.classList.remove('checked');
-        ingredient_tick_elt.classList.remove('checked');
-      }
-      else {
-        ingredient_node_elt.classList.add('checked');
-        ingredient_tick_elt.classList.add('checked');
-      };
-    
+    if (sessionStorage.getItem("{{ recipe.safe_name }}_checkedElements")) {
+      // Restore the contents of the checked elements value from session storage
+      var checkedElements = JSON.parse(sessionStorage.getItem("{{ recipe.safe_name }}_checkedElements"));
+      updateCheckedElementsFromSessionStorage();
+    } else {
+      var checkedElements = {};
+      sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements',JSON.stringify(checkedElements));
     };
 
-    function markStepComplete_NodeClick(step_node_elt) {
-      
-      step_gradient_fill_elt = step_node_elt.nextSibling;
-      step_tick_elt = step_gradient_fill_elt.nextSibling;
-
-      if (step_node_elt.classList.contains('checked')) {
-        step_node_elt.classList.remove('checked');
-        step_gradient_fill_elt.classList.remove('checked');
-        step_tick_elt.classList.remove('checked');
-      }
-      else {
-        step_node_elt.classList.add('checked');
-        step_gradient_fill_elt.classList.add('checked');
-        step_tick_elt.classList.add('checked');
-      };
-    
+    function addCheckedElementToSessionStorage(element) {
+      checkedElements[element.id] = true
+      sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements',JSON.stringify(checkedElements));
     };
 
-    function markStepComplete_GradientClick(step_gradient_fill_elt) {
-      
-      step_node_elt = step_gradient_fill_elt.previousSibling;
-      step_tick_elt = step_gradient_fill_elt.nextSibling;
-
-      if (step_node_elt.classList.contains('checked')) {
-        step_node_elt.classList.remove('checked');
-        step_gradient_fill_elt.classList.remove('checked');
-        step_tick_elt.classList.remove('checked');
-      }
-      else {
-        step_node_elt.classList.add('checked');
-        step_gradient_fill_elt.classList.add('checked');
-        step_tick_elt.classList.add('checked');
-      };
-    
+    function removeCheckedElementFromSessionStorage(element) {
+      checkedElements[element.id] = false
+      sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements',JSON.stringify(checkedElements));
     };
 
+    function markComplete(group_element) {
+      if (group_element.classList.contains('checked')) {
+        group_element.classList.remove('checked');
+        removeCheckedElementFromSessionStorage(group_element)
+      } else {
+        group_element.classList.add('checked');
+        addCheckedElementToSessionStorage(group_element)
+      }
+    };
+
+    function updateCheckedElementsFromSessionStorage() {
+      for (var key in checkedElements) {
+        if (checkedElements[key] === true) {
+          $('#' + key)[0].classList.add('checked');
+        };
+      }
+    };
     
     $('#ingredientSelect').on("change",function(){
       var baseUnit = $('#ingredientSelect option:selected').attr('data-unit');
@@ -226,7 +210,6 @@
       var serving_tag = '{{ recipe.serving_tag }}';
       var serving_qty = '{{ recipe.serving_qty }}';
       var serving_unit = '{{ recipe.serving_unit }}';
-      //Quantity shown {{ recipe.serving_qty }} {{ recipe.serving_unit }}.
 
       var updatedValue = $('#updatedValue').val();
       var baseValue = $('#baseValue')[0].placeholder;
@@ -236,7 +219,6 @@
       serving_qty = +(Math.round(serving_qty + "e+2")  + "e-2");
 
       if (updatedValue != baseValue) {
-        // serving_qty = new_qty
         // trigger request to back end for updated chart for new qty.
         $.ajax({
           type : "GET",
@@ -248,6 +230,7 @@
             $('#chart_area').html(data); //replace the chart with the new one returned from the back end
             $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
             $('[data-toggle="popover"]').popover() //re-enable the popovers
+            updateCheckedElementsFromSessionStorage()        
           }
         });
 
@@ -260,13 +243,13 @@
           contentType: 'application/json;charset=UTF-8',
           success: function (data) {
             $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end
+            updateCheckedElementsFromSessionStorage()
           }
         });
 
       }   
 
     }
-
 
 
     $(function () {
