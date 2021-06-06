@@ -85,5 +85,13 @@
         "tags_info": ["One-Pan"],
         "tags_green": ["Vege"],
         "publish": true
+    },
+    {
+        "name": "Chicken Chilli Basil",
+        "safe_name": "chicken_chilli_basil",
+        "tag_line": "30 min to Complete",
+        "tags_info": ["One-Pan"],
+        "tags_green": ["Vege"],
+        "publish": true
     }
 ]

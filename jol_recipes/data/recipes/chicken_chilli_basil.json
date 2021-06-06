@@ -1,0 +1,239 @@
+{
+    "name": "Chicken Chilli Basil",
+    "safe_name": "chicken_chilli_basil",
+    "description": "",
+    "serving_tag": "makes sauce for",
+    "serving_qty": 4,
+    "serving_unit": "Servings",
+    "ingredients": [{
+        "name": "Garlic",
+        "category": "Herbs & Spices",
+        "quantity": 4,
+        "unit": "Cloves"
+    }, {
+        "name": "Long Red Chillies",
+        "category": "Herbs & Spices",
+        "quantity": 3,
+        "unit": "Whole"
+    }, {
+        "name": "Birds Eye Chillies",
+        "category": "Herbs & Spices",
+        "quantity": 3,
+        "unit": "Whole"
+    }, {
+        "name": "Olive Oil",
+        "category": "Pantry",
+        "quantity": 4,
+        "unit": "Tbsp"
+    }, {
+        "name": "Chicken",
+        "category": "Meat",
+        "quantity": 350,
+        "unit": "g"
+    }, {
+        "name": "Chicken Stock",
+        "category": "Pantry",
+        "quantity": 6,
+        "unit": "Tbsp"
+    }, {
+        "name": "Light Soy",
+        "category": "Pantry",
+        "quantity": 4,
+        "unit": "Tbsp"
+    }, {
+        "name": "Dark Soy",
+        "category": "Pantry",
+        "quantity": 2,
+        "unit": "Tbsp"
+    }, {
+        "name": "Caster Sugar",
+        "category": "Pantry",
+        "quantity": 4,
+        "unit": "Tsp"
+    }, {
+        "name": "Thai Basil",
+        "category": "Herbs & Spices",
+        "quantity": 1,
+        "unit": "Bunch"
+    }, {
+        "name": "Rice",
+        "category": "Pantry",
+        "quantity": 360,
+        "unit": "g"
+    }],
+    "equipment_standard": [
+        "Mortar & Pestle", "Sauce Pan", "Wok or Large Fry Pan"
+    ],
+    "equipment_special": [],
+    "step_layout": ["Start", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 10,
+            "ingredients": [{
+                "name": "Rice",
+                "quantity": 360,
+                "unit": "g"
+            }],
+            "instruction": "Rinse rice and put on to cook.",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 20,
+            "ingredients": [{
+                "name": "Chicken",
+                "quantity": 350,
+                "unit": "g"
+            }],
+            "instruction": "Prepare and slice into small pieces",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 30,
+            "ingredients": [{
+                "name": "Thai Basil",
+                "quantity": 1,
+                "unit": "Bunch"
+            }],
+            "instruction": "Pick leaves.",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 40,
+            "ingredients": [{
+                "name": "Chicken Stock",
+                "quantity": 6,
+                "unit": "Tbsp"
+            }, {
+                "name": "Light Soy",
+                "quantity": 4,
+                "unit": "Tbsp"
+            }, {
+                "name": "Dark Soy",
+                "quantity": 2,
+                "unit": "Tbsp"
+            }, {
+                "name": "Caster Sugar",
+                "quantity": 4,
+                "unit": "Tsp"
+            }],
+            "instruction": "Mix ingredients in a bowl and set aside.",
+            "extra_info": ""
+        },
+        "4": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 50,
+            "ingredients": [{
+                "name": "Garlic",
+                "quantity": 4,
+                "unit": "Cloves"
+            }, {
+                "name": "Long Red Chillies",
+                "quantity": 3,
+                "unit": "Whole"
+            }, {
+                "name": "Birds Eye Chillies",
+                "quantity": 3,
+                "unit": "Whole"
+            }],
+            "instruction": "Cut (and deseed depending on heat level) the chillis. Combine with garlic and chop into a paste. Use a mortar & pestle if desired.",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "1-2 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 60,
+            "ingredients": [{
+                "name": "Olive Oil",
+                "quantity": 4,
+                "unit": "Tbsp"
+            }, {
+                "name": "Chilli and Garlic Paste",
+                "quantity": "",
+                "unit": ""
+            }],
+            "instruction": "Heat oil in a large wok. Fry off the chilli/garlic paste.",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "1-2 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 9700,
+            "ingredients": [{
+                "name": "Sliced Chicken",
+                "quantity": "",
+                "unit": ""
+            }],
+            "instruction": "Add to the wok. Stir fry.",
+            "extra_info": ""
+        },
+        "7": {
+            "time": "2 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [{
+                "name": "Sauce Mixture",
+                "quantity": "",
+                "unit": ""
+            }],
+            "instruction": "Add to the wok. Continue to cook.",
+            "extra_info": ""
+        },
+        "8": {
+            "time": "30 sec",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [{
+                "name": "Basil Leaves",
+                "quantity": "",
+                "unit": ""
+            }],
+            "instruction": "Add to the wok. Cook breifly",
+            "extra_info": ""
+        },
+        "9": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Serve over the cooked rice.",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}

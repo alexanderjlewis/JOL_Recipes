@@ -200,7 +200,7 @@ class element_renderer():
         self.svg.set('y',str(svg_y_pos))
 
         if self.start_split:
-            path = 'M{0} 0 v10 a20,20 1 0 0 20,20 H{1} a20,20 0 0 1 20,20 v10'.format(self.main_path_x,self.secondary_path_x - 20)
+            path = 'M{0} 0 v10 a20,20 1 0 0 20,20 H{1} a20,20 0 0 1 20,20 v12'.format(self.main_path_x,self.secondary_path_x - 20)
         else: #therefore it is the end of a split
             path = 'M{0} 0 v10 a20,20 0 0 1 -20,20 H{1} a20,20 0 0 0 -20,20 v10'.format(self.secondary_path_x,self.main_path_x + 20)
         
@@ -430,15 +430,18 @@ class element_renderer():
             line_start = self.main_node_spacing_y + self.main_node_radius
         else:
             line_start = 0
+        
+        if not self.last_node:
+            self.y_pos += 2
 
         if self.in_split: #if we are in a split state we draw two main lines - one per side of the split
             path1 = 'M{0},{1} V{2}'.format(self.main_path_x, line_start, self.y_pos)
             path2 = 'M{0},{1} V{2}'.format(self.secondary_path_x, line_start, self.y_pos)    
-            g.append(ET.Element('path', attrib={'d':path1, 'class':' main_line'}))
-            g.append(ET.Element('path', attrib={'d':path2, 'class':' secondary_line'}))
+            g.append(ET.Element('path', attrib={'d':path1, 'class':'main_line'}))
+            g.append(ET.Element('path', attrib={'d':path2, 'class':'secondary_line'}))
         else:
             path = 'M{0},{1} V{2}'.format(self.main_path_x, line_start, self.y_pos)
-            g.append(ET.Element('path', attrib={'d':path, 'class':' main_line'}))
+            g.append(ET.Element('path', attrib={'d':path, 'class':'main_line'}))
         
         return g
 
