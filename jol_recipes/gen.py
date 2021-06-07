@@ -143,6 +143,7 @@ class element_renderer():
         self.long_node = False
         self.y_pos = 0
         self.x_pos = 0
+        self.ingredient_units_without_link = ['Various', '', 'To Taste']
 
         self.svg = ET.Element('svg')
 
@@ -219,7 +220,11 @@ class element_renderer():
         name_text_lines = textwrap.wrap(ingredient['name'], self.ingredient_name_text_char_width, break_long_words=False)
         name_number_of_lines = len(name_text_lines)
 
-        qty_text_string = str(ingredient['quantity']) + ' ' + str(ingredient['unit'])
+        if ingredient['quantity'] and ingredient['unit']:
+            qty_text_string = str(ingredient['quantity']) + ' ' + str(ingredient['unit'])
+        else: #if there is no quantity then only take the unit
+            qty_text_string = str(ingredient['unit'])
+
         qty_text_lines = textwrap.wrap(qty_text_string, self.ingredient_qty_text_char_width, break_long_words=False)
         qty_number_of_lines = len(qty_text_lines)
 
@@ -245,11 +250,17 @@ class element_renderer():
         if qty_number_of_lines > 1: #more then one line
             base_y_pos = self.y_pos + (self.ingredient_square_side / 2) + (self.ingredient_text_line_spacing_y * ((max_lines - qty_number_of_lines) / 2))
             for i in range(qty_number_of_lines):
-                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty'})
+                if qty_text_string in self.ingredient_units_without_link: #if it's in the no link list we render the same but without the class or onclick to make it active
+                    text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+                else:
+                    text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty_link', 'onclick':'showUnitConversionModal(this)'})
                 text.text = qty_text_lines[i]
                 group.append(text)
         else: #only one line
-            text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty'})
+            if qty_text_string in self.ingredient_units_without_link: #if it's in the no link list we render the same but without the class or onclick to make it active
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
+            else:
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty_link', 'onclick':'showUnitConversionModal(this)'})
             text.text = qty_text_string
             group.append(text)
         

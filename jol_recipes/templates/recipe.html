@@ -154,13 +154,8 @@
         <div class="modal-header">
           <h5 class="modal-title">Unit Conversion</h5>
         </div>
-        <div class="modal-body">
-          <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action active">2 Tbsp is Equivalent to:</a>
-            <a href="#" class="list-group-item list-group-item-action">6 Tsp</a>
-            <a href="#" class="list-group-item list-group-item-action">40 mL</a>
-            <a href="#" class="list-group-item list-group-item-action">1 Fl Oz</a>
-          </div>
+        <div class="modal-body" id="unitConversionModalBody">
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -219,11 +214,6 @@
       $('#updatedValue')[0].value = baseValue;
     });
 
-    $('.chart_text.text_qty').on('click',function(){
-      $("#unitConversionModal").modal();
-    });
-
-
     function updateScaling() {
       var serving_tag = '{{ recipe.serving_tag }}';
       var serving_qty = '{{ recipe.serving_qty }}';
@@ -248,6 +238,10 @@
             $('#chart_area').html(data); //replace the chart with the new one returned from the back end
             $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
             $('[data-toggle="popover"]').popover() //re-enable the popovers
+            // reapply the binding to the conversion modals
+            $('.chart_text.text_qty_link').on('click',function(){
+              $("#unitConversionModal").modal();
+            });
             updateCheckedElementsFromSessionStorage()        
           }
         });
@@ -269,11 +263,19 @@
 
     }
 
-
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    });
-
+    function showUnitConversionModal(element) {
+      $.ajax({
+        type : "GET",
+        url : '/api/getIngredientConversion',
+        dataType: "html",
+        data: {input: element.innerHTML},
+        contentType: 'application/json;charset=UTF-8',
+        success: function (data) {
+          $('#unitConversionModalBody').html(data); //replace the modal content with the new data returned from the back end
+          $('[data-toggle="popover"]').popover();       
+        }
+      });
+    }
       
   </script>
 

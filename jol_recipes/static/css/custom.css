@@ -50,12 +50,12 @@ svg {
     padding-left: 2px;
 }
 
-.chart_text.text_qty {
+.chart_text.text_qty_link {
     text-decoration: underline;
     font-style: italic;
 }
 
-.chart_text.text_qty:hover {
+.chart_text.text_qty_link:hover {
     fill: #18bc9c;
 }
 

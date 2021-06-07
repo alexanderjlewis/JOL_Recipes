@@ -3,7 +3,7 @@ import json
 from gen import generate
 from flask import Flask, render_template, url_for, send_file, request, jsonify
 import config
-from helper_funcs import get_recipe_data, adjust_recipe_qty
+from helper_funcs import get_recipe_data, adjust_recipe_qty, unit_conversion
 
 app = Flask(__name__)
 recipes = config.load_recipes()
@@ -33,6 +33,12 @@ def api_getIngredientList():
     recipe_data = get_recipe_data(submitted_name, recipes)
     recipe_data = adjust_recipe_qty(recipe_data, multiplier)
     return render_template('ingredient_list.html', recipe=recipe_data)
+
+@app.route('/api/getIngredientConversion')
+def api_getIngredientConversion():
+    submitted_ingredient = request.args.get('input')
+    processed_data = unit_conversion(submitted_ingredient)
+    return render_template('conversion_modal.html', data=processed_data)
 
 @app.route('/recipe/<name>')
 def render_recipe_page(name=None):

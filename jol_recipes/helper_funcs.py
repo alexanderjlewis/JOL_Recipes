@@ -37,3 +37,26 @@ def adjust_recipe_qty(recipe, multiplier):
             pass
     
     return recipe
+
+
+def unit_conversion(submitted_ingredient):
+
+    with open('data/conversions.json') as f1:
+        conversion_data = json.load(f1)
+
+    output = {}
+    output['input'] = submitted_ingredient
+
+    input_qty, input_unit = submitted_ingredient.split(' ')
+    input_qty = float(input_qty)
+    output['conversions'] = []
+
+    if conversion_data.get(input_unit):
+        for item in conversion_data[input_unit]:
+            output_qty = float(input_qty) * item['factor']
+            output_qty = str(round(output_qty, 3)).rstrip('0').rstrip('.')
+            output['conversions'].append({'qty':output_qty,'unit':item['to_unit']})
+    else:
+        output['conversions'].append({'qty':'No Conversion Available for this Unit','unit':''})
+        
+    return output

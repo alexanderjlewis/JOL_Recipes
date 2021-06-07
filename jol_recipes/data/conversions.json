@@ -1,0 +1,87 @@
+{
+    "Tbsp": [{
+        "to_unit": "Tsp",
+        "factor": 3
+    }, {
+        "to_unit": "Cups",
+        "factor": 0.0625
+    }, {
+        "to_unit": "mL",
+        "factor": 15
+    }, {
+        "to_unit": "L",
+        "factor": 0.015
+    }],
+    "Cups": [{
+        "to_unit": "Tbsp",
+        "factor": 16
+    }, {
+        "to_unit": "Tsp",
+        "factor": 48
+    }, {
+        "to_unit": "mL",
+        "factor": 240
+    }, {
+        "to_unit": "L",
+        "factor": 0.24
+    }],
+    "Tsp": [{
+        "to_unit": "Tbsp",
+        "factor": 0.33
+    }, {
+        "to_unit": "Cups",
+        "factor": 0.0208333
+    }, {
+        "to_unit": "mL",
+        "factor": 5
+    }, {
+        "to_unit": "L",
+        "factor": 0.005
+    }],
+    "g": [{
+        "to_unit": "kg",
+        "factor": 0.001
+    }, {
+        "to_unit": "lbs",
+        "factor": 0.0022
+    }, {
+        "to_unit": "oz",
+        "factor": 0.0353
+    }],
+    "kg": [{
+        "to_unit": "g",
+        "factor": 1000
+    }, {
+        "to_unit": "lbs",
+        "factor": 2.2046
+    }, {
+        "to_unit": "oz",
+        "factor": 35.274
+    }],
+    "mL": [{
+        "to_unit": "Tbsp",
+        "factor": 0.06667
+    }, {
+        "to_unit": "Tsp",
+        "factor": 0.2
+    }, {
+        "to_unit": "Cups",
+        "factor": 0.0041667
+    }, {
+        "to_unit": "L",
+        "factor": 0.001
+    }],
+    "L": [{
+        "to_unit": "Tbsp",
+        "factor": 66.667
+    }, {
+        "to_unit": "Tsp",
+        "factor": 200
+    }, {
+        "to_unit": "Cups",
+        "factor": 4.1667
+    }, {
+        "to_unit": "mL",
+        "factor": 1000
+    }]
+}

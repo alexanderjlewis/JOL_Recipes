@@ -1,0 +1,6 @@
+<div class="list-group">
+  <a class="list-group-item list-group-item-action active">{{data.input}} is Equivalent to:</a>
+  {% for item in data.conversions %}  
+    <a class="list-group-item list-group-item-action">{{item.qty}} {{item.unit}}</a>
+  {% endfor %}
+</div>
