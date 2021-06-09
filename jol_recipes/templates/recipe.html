@@ -1,111 +1,104 @@
-{% extends "base.html" %}
-{% block title %}JOL Recipe - {{ recipe.name }}{% endblock title %}
-
-{% block content %}
-  <div class="container">
+{% extends "base.html" %} {% block title %}JOL Recipe - {{ recipe.name }}{% endblock title %} {% block content %}
+<div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="/">JOL Recipe Book</a>
+        <a class="navbar-brand" href="/">JOL Recipe Book</a>
         <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/list">List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/conversion">Unit Conversion</a>
-            </li>
-          </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/conversion">Unit Conversion</a>
+                </li>
+            </ul>
         </div>
     </nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item"><a href="/list">List</a></li>
-      <li class="breadcrumb-item active">{{ recipe.name }}</li>
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/list">List</a></li>
+        <li class="breadcrumb-item active">{{ recipe.name }}</li>
     </ol>
     <div class="jumbotron py-4">
-      <h2>{{ recipe.name }}</h2>
-      <p class="lead">{{ recipe.description }}</p>
-      <p class="mb-0">
-        <button type="button" class="mr-2 btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#scalingModal">
+        <h2>{{ recipe.name }}</h2>
+        <p class="lead">{{ recipe.description }}</p>
+        <p class="mb-0">
+            <button type="button" class="mr-2 btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#scalingModal">
           Adjust Qty
         </button><span></span>
-        <em id="heading_quantity" data_qty={{ recipe.serving_qty }}>Quantity shown {{ recipe.serving_tag }} {{ recipe.serving_qty }} {{ recipe.serving_unit }}.</em>
-      </p>
+            <em id="heading_quantity" data_qty={{ recipe.serving_qty }}>Quantity shown {{ recipe.serving_tag }} {{ recipe.serving_qty }} {{ recipe.serving_unit }}.</em>
+        </p>
     </div>
     <ul class="nav nav-tabs">
-      <li class="nav-item mr-1">
-        <a class="nav-link active" data-toggle="tab" href="#ingredients_tab">Ingredients</a>
-      </li>
-      <li class="nav-item mr-1">
-        <a class="nav-link" data-toggle="tab" href="#equipment_tab">Equipment</a>
-      </li>
-      <li class="nav-item mr-1">
-        <a class="nav-link" data-toggle="tab" href="#method_tab">Method</a>
-      </li>
+        <li class="nav-item mr-1">
+            <a class="nav-link active" data-toggle="tab" href="#ingredients_tab">Ingredients</a>
+        </li>
+        <li class="nav-item mr-1">
+            <a class="nav-link" data-toggle="tab" href="#equipment_tab">Equipment</a>
+        </li>
+        <li class="nav-item mr-1">
+            <a class="nav-link" data-toggle="tab" href="#method_tab">Method</a>
+        </li>
     </ul>
     <div id="myTabContent" class="tab-content">
-      <div class="tab-pane fade active show" id="ingredients_tab">
-        {% include 'ingredient_list.html' %}
-      </div>
-      <div class="tab-pane fade" id="equipment_tab">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mt-2">
-            <h5 class="mt-2">Standard</h5>
-            <ul class="list-group">
-                {% if recipe.equipment_standard %}
-                  {% for item in recipe.equipment_standard %}  
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <span class="flex-grow-1">{{item}}</span>
-                    </li>
-                  {% endfor %}
-                {% else %}
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="flex-grow-1"><i>None</i></span>
-                  </li>
-                {% endif %}
-              </ul>
-          </div>
-          <div class="col-lg-4 col-md-6 mt-2">
-            <h5 class="mt-2">Specialised</h5>
-            <ul class="list-group">
-                {% if recipe.equipment_special %}
-                  {% for item in recipe.equipment_special %}  
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      <span class="flex-grow-1">{{item}}</span>
-                    </li>
-                  {% endfor %}
-                {% else %}
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="flex-grow-1"><i>None</i></span>
-                  </li>
-                {% endif %}
-              </ul>
-          </div>
+        <div class="tab-pane fade active show" id="ingredients_tab">
+            {% include 'ingredient_list.html' %}
         </div>
-      </div>
-      <div class="tab-pane fade" id="method_tab">
-        <div class="col-lg-12">
-          <div id="chart_area">
-            {% block chart_svg %}{% endblock %}
-          </div>
+        <div class="tab-pane fade" id="equipment_tab">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mt-2">
+                    <h5 class="mt-2">Standard</h5>
+                    <ul class="list-group">
+                        {% if recipe.equipment_standard %} {% for item in recipe.equipment_standard %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="flex-grow-1">{{item}}</span>
+                        </li>
+                        {% endfor %} {% else %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="flex-grow-1"><i>None</i></span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-2">
+                    <h5 class="mt-2">Specialised</h5>
+                    <ul class="list-group">
+                        {% if recipe.equipment_special %} {% for item in recipe.equipment_special %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="flex-grow-1">{{item}}</span>
+                        </li>
+                        {% endfor %} {% else %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="flex-grow-1"><i>None</i></span>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="tab-pane fade" id="method_tab">
+            <div class="col-lg-12">
+                <div id="chart_area">
+                    {% block chart_svg %}{% endblock %}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <br class="mb-4">
+</div>
+<br class="mb-4">
 
-  <!-- Scaling Modal -->
-  <div class="modal fade" id="scalingModal" tabindex="-1" role="dialog">
+<!-- Scaling Modal -->
+<div class="modal fade" id="scalingModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Adjust Recipe Quantity</h5>
-        </div>
-        <div class="modal-body">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adjust Recipe Quantity</h5>
+            </div>
+            <div class="modal-body">
 
-          <div class="form-group">
-            <label for="ingredientSelect" class="form-label mt-4">Adjust Based On</label>
-            <div class="input-group">
-              <select class="form-control" id="ingredientSelect">
+                <div class="form-group">
+                    <label for="ingredientSelect" class="form-label mt-4">Adjust Based On</label>
+                    <div class="input-group">
+                        <select class="form-control" id="ingredientSelect">
                 <option value={{ recipe.serving_qty }} data-unit={{ recipe.serving_unit }}>Total Recipe</option>
                 {% for ingredient in recipe.ingredients %}  
                   {% if not ingredient.quantity == "" %}
@@ -113,171 +106,178 @@
                   {% endif %}
                 {% endfor %}
               </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="qtyInput">Base Qty:</label>
+                            <div class="input-group">
+                                <input class="form-control" id="baseValue" type="text" placeholder="{{ recipe.serving_qty }}" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="baseUnit">{{ recipe.serving_unit }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="qtyInput">Update to:</label>
+                            <div class="input-group">
+                                <input type="number" data_qty="{{ recipe.serving_qty }}" id="updatedValue" min="0" step="1" type="number" class="form-control" value="{{ recipe.serving_qty }}">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="updatedUnit">{{ recipe.serving_unit }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="form-group">
-            <div class="row">
-              <div class="col">
-                <label for="qtyInput">Base Qty:</label>
-                <div class="input-group">
-                  <input class="form-control" id="baseValue" type="text" placeholder="{{ recipe.serving_qty }}" readonly>
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="baseUnit">{{ recipe.serving_unit }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <label for="qtyInput">Update to:</label>
-                <div class="input-group">
-                  <input type="number" data_qty="{{ recipe.serving_qty }}" id="updatedValue" min="0" step="1" type="number" class="form-control" value="{{ recipe.serving_qty }}">
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="updatedUnit">{{ recipe.serving_unit }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>   
-          </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" onclick="updateScaling()" class="btn btn-primary" data-dismiss="modal">Apply</button>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" onclick="updateScaling()" class="btn btn-primary" data-dismiss="modal">Apply</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <!-- Unit Conversion Modal -->
-  <div class="modal fade" id="unitConversionModal" tabindex="-1" role="dialog">
+<!-- Unit Conversion Modal -->
+<div class="modal fade" id="unitConversionModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Unit Conversion</h5>
-        </div>
-        <div class="modal-body" id="unitConversionModalBody">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Unit Conversion</h5>
+            </div>
+            <div class="modal-body" id="unitConversionModalBody">
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
-{% endblock content %}
-
-{% block scripts %}
-  <script>
-
+</div>
+{% endblock content %} {% block scripts %}
+<script>
     if (sessionStorage.getItem("{{ recipe.safe_name }}_checkedElements")) {
-      // Restore the contents of the checked elements value from session storage
-      var checkedElements = JSON.parse(sessionStorage.getItem("{{ recipe.safe_name }}_checkedElements"));
-      updateCheckedElementsFromSessionStorage();
+        // Restore the contents of the checked elements value from session storage
+        var checkedElements = JSON.parse(sessionStorage.getItem("{{ recipe.safe_name }}_checkedElements"));
+        updateCheckedElementsFromSessionStorage();
     } else {
-      var checkedElements = {};
-      sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements',JSON.stringify(checkedElements));
+        var checkedElements = {};
+        sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements', JSON.stringify(checkedElements));
     };
 
     function addCheckedElementToSessionStorage(element) {
-      checkedElements[element.id] = true
-      sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements',JSON.stringify(checkedElements));
+        checkedElements[element.id] = true
+        sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements', JSON.stringify(checkedElements));
     };
 
     function removeCheckedElementFromSessionStorage(element) {
-      checkedElements[element.id] = false
-      sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements',JSON.stringify(checkedElements));
+        checkedElements[element.id] = false
+        sessionStorage.setItem('{{ recipe.safe_name }}_checkedElements', JSON.stringify(checkedElements));
     };
 
     function markComplete(group_element) {
-      if (group_element.classList.contains('checked')) {
-        group_element.classList.remove('checked');
-        removeCheckedElementFromSessionStorage(group_element)
-      } else {
-        group_element.classList.add('checked');
-        addCheckedElementToSessionStorage(group_element)
-      }
+        if (group_element.classList.contains('checked')) {
+            group_element.classList.remove('checked');
+            removeCheckedElementFromSessionStorage(group_element)
+        } else {
+            group_element.classList.add('checked');
+            addCheckedElementToSessionStorage(group_element)
+        }
     };
 
     function updateCheckedElementsFromSessionStorage() {
-      for (var key in checkedElements) {
-        if (checkedElements[key] === true) {
-          $('#' + key)[0].classList.add('checked');
-        };
-      }
+        for (var key in checkedElements) {
+            if (checkedElements[key] === true) {
+                $('#' + key)[0].classList.add('checked');
+            };
+        }
     };
-    
-    $('#ingredientSelect').on("change",function(){
-      var baseUnit = $('#ingredientSelect option:selected').attr('data-unit');
-      var baseValue = $("#ingredientSelect option:selected").attr('value');
-      $('#baseUnit').text(baseUnit);
-      $('#updatedUnit').text(baseUnit);
-      $('#baseValue')[0].placeholder = baseValue;
-      $('#updatedValue')[0].value = baseValue;
+
+    $('#ingredientSelect').on("change", function() {
+        var baseUnit = $('#ingredientSelect option:selected').attr('data-unit');
+        var baseValue = $("#ingredientSelect option:selected").attr('value');
+        $('#baseUnit').text(baseUnit);
+        $('#updatedUnit').text(baseUnit);
+        $('#baseValue')[0].placeholder = baseValue;
+        $('#updatedValue')[0].value = baseValue;
     });
 
     function updateScaling() {
-      var serving_tag = '{{ recipe.serving_tag }}';
-      var serving_qty = '{{ recipe.serving_qty }}';
-      var serving_unit = '{{ recipe.serving_unit }}';
+        var serving_tag = '{{ recipe.serving_tag }}';
+        var serving_qty = '{{ recipe.serving_qty }}';
+        var serving_unit = '{{ recipe.serving_unit }}';
 
-      var updatedValue = $('#updatedValue').val();
-      var baseValue = $('#baseValue')[0].placeholder;
-      var multiplier = updatedValue / baseValue;
+        var updatedValue = $('#updatedValue').val();
+        var baseValue = $('#baseValue')[0].placeholder;
+        var multiplier = updatedValue / baseValue;
 
-      serving_qty = serving_qty * multiplier;
-      serving_qty = +(Math.round(serving_qty + "e+2")  + "e-2");
+        serving_qty = serving_qty * multiplier;
+        serving_qty = +(Math.round(serving_qty + "e+2") + "e-2");
 
-      if (updatedValue != baseValue) {
-        // trigger request to back end for updated chart for new qty.
-        $.ajax({
-          type : "GET",
-          url : '/api/getChart',
-          dataType: "html",
-          data: {recipe:'{{ recipe.safe_name }}', multiplier:multiplier},
-          contentType: 'application/json;charset=UTF-8',
-          success: function (data) {
-            $('#chart_area').html(data); //replace the chart with the new one returned from the back end
-            $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
-            $('[data-toggle="popover"]').popover() //re-enable the popovers
-            // reapply the binding to the conversion modals
-            $('.chart_text.text_qty_link').on('click',function(){
-              $("#unitConversionModal").modal();
+        if (updatedValue != baseValue) {
+            // trigger request to back end for updated chart for new qty.
+            $.ajax({
+                type: "GET",
+                url: '/api/getChart',
+                dataType: "html",
+                data: {
+                    recipe: '{{ recipe.safe_name }}',
+                    multiplier: multiplier
+                },
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                    $('#chart_area').html(data); //replace the chart with the new one returned from the back end
+                    $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
+                    $('[data-toggle="popover"]').popover() //re-enable the popovers
+                        // rebind qty links to to the conversion modals with click handler
+                    $('.chart_text.text_qty_link').on('click', function() {
+                        $("#unitConversionModal").modal();
+                    });
+                    updateCheckedElementsFromSessionStorage()
+                }
             });
-            updateCheckedElementsFromSessionStorage()        
-          }
-        });
 
-        // trigger request to back end for updated ingredient list with new qty.
-        $.ajax({
-          type : "GET",
-          url : '/api/getIngredientList',
-          dataType: "html",
-          data: {recipe:'{{ recipe.safe_name }}', multiplier:multiplier},
-          contentType: 'application/json;charset=UTF-8',
-          success: function (data) {
-            $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end
-            updateCheckedElementsFromSessionStorage()
-          }
-        });
+            // trigger request to back end for updated ingredient list with new qty.
+            $.ajax({
+                type: "GET",
+                url: '/api/getIngredientList',
+                dataType: "html",
+                data: {
+                    recipe: '{{ recipe.safe_name }}',
+                    multiplier: multiplier
+                },
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                    $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end
+                    updateCheckedElementsFromSessionStorage()
+                }
+            });
 
-      }   
+        }
 
     }
+
+    // bind qty links to to the conversion modals with click handler
+    $('.chart_text.text_qty_link').on('click', function() {
+        $("#unitConversionModal").modal();
+    });
 
     function showUnitConversionModal(element) {
-      $.ajax({
-        type : "GET",
-        url : '/api/getIngredientConversion',
-        dataType: "html",
-        data: {input: element.innerHTML},
-        contentType: 'application/json;charset=UTF-8',
-        success: function (data) {
-          $('#unitConversionModalBody').html(data); //replace the modal content with the new data returned from the back end
-          $('[data-toggle="popover"]').popover();       
-        }
-      });
+        $.ajax({
+            type: "GET",
+            url: '/api/getIngredientConversion',
+            dataType: "html",
+            data: {
+                input: element.innerHTML
+            },
+            contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+                $('#unitConversionModalBody').html(data); //replace the modal content with the new data returned from the back end
+            }
+        });
     }
-      
-  </script>
+</script>
 
 {% endblock scripts %}
-   
