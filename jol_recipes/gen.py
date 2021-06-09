@@ -143,7 +143,7 @@ class element_renderer():
         self.long_node = False
         self.y_pos = 0
         self.x_pos = 0
-        self.ingredient_units_without_link = ['Various', '', 'To Taste']
+        self.ingredient_units_without_link = ['Various', '', 'To Taste', 'Whole']
 
         self.svg = ET.Element('svg')
 

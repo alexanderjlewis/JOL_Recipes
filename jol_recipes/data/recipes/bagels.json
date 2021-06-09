@@ -184,7 +184,7 @@
             "ingredients": [{
                     "name": "Eggs",
                     "quantity": 1,
-                    "unit": ""
+                    "unit": "Whole"
                 },
                 {
                     "name": "Toppings",
