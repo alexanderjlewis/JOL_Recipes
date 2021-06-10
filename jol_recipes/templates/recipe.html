@@ -181,11 +181,19 @@
         if (group_element.classList.contains('checked')) {
             group_element.classList.remove('checked');
             removeCheckedElementFromSessionStorage(group_element)
-            $('#' + group_element.dataset.fillurl)[0].classList.remove('checked');
+
+            // for the node elements it will have a dataset 'fillurl' that points to the gradient fill
+            if (group_element.dataset.fillurl) {
+              $('#' + group_element.dataset.fillurl)[0].classList.remove('checked');
+            }
+            
         } else {
             group_element.classList.add('checked');
             addCheckedElementToSessionStorage(group_element)
-            $('#' + group_element.dataset.fillurl)[0].classList.add('checked');
+            // for the node elements it will have a dataset 'fillurl' that points to the gradient fill
+            if (group_element.dataset.fillurl) {
+              $('#' + group_element.dataset.fillurl)[0].classList.add('checked');
+            }
         }
     };
 
@@ -275,6 +283,7 @@
             }
         });
     }
+
 </script>
 
 {% endblock scripts %}
