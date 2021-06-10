@@ -83,11 +83,11 @@ class graph_renderer():
                 step_id = step
                 step_completion = str(self.render_recipe['steps'][step]['completion'])
 
-                gradient = ET.Element('linearGradient', attrib={'id':('grd_' + str(step_id)), 'x1':'0.5', 'y1':'1', 'x2':'0.5', 'y2':'0'})
-                offset1 = ET.Element('stop', attrib={'offset':'0%', 'class':'gradientFilled'})
-                offset2 = ET.Element('stop', attrib={'offset':step_completion + '%', 'class':'gradientFilled'})
-                offset3 = ET.Element('stop', attrib={'offset':step_completion + '%', 'class':'gradientEmpty'})
-                offset4 = ET.Element('stop', attrib={'offset':'100%', 'class':'gradientEmpty'})
+                gradient = ET.Element('linearGradient', attrib={'id':('grd_' + str(step_id)), 'x1':'0.5', 'y1':'1', 'x2':'0.5', 'y2':'0', 'class':'nodeGradient'})
+                offset1 = ET.Element('stop', attrib={'offset':'0%', 'stop-color':'var(--stop-color-filled)'})
+                offset2 = ET.Element('stop', attrib={'offset':step_completion + '%', 'stop-color':'var(--stop-color-filled)'})
+                offset3 = ET.Element('stop', attrib={'offset':step_completion + '%', 'stop-color':'var(--stop-color-empty)'})
+                offset4 = ET.Element('stop', attrib={'offset':'100%', 'stop-color':'var(--stop-color-empty)'})
                 gradient.append(offset1)
                 gradient.append(offset2)
                 gradient.append(offset3)
@@ -143,7 +143,7 @@ class element_renderer():
         self.long_node = False
         self.y_pos = 0
         self.x_pos = 0
-        self.ingredient_units_without_link = ['Various', '', 'To Taste', 'Whole']
+        self.ingredient_units_to_convert = ['g', 'Tbsp', 'Tsp', 'mL', 'L', 'kg', 'Cups']
 
         self.svg = ET.Element('svg')
 
@@ -225,6 +225,10 @@ class element_renderer():
         else: #if there is no quantity then only take the unit
             qty_text_string = str(ingredient['unit'])
 
+        add_link = False
+        if ingredient['unit'] in self.ingredient_units_to_convert:
+            add_link = True
+
         qty_text_lines = textwrap.wrap(qty_text_string, self.ingredient_qty_text_char_width, break_long_words=False)
         qty_number_of_lines = len(qty_text_lines)
 
@@ -250,17 +254,17 @@ class element_renderer():
         if qty_number_of_lines > 1: #more then one line
             base_y_pos = self.y_pos + (self.ingredient_square_side / 2) + (self.ingredient_text_line_spacing_y * ((max_lines - qty_number_of_lines) / 2))
             for i in range(qty_number_of_lines):
-                if qty_text_string in self.ingredient_units_without_link: #if it's in the no link list we render the same but without the class or onclick to make it active
-                    text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
-                else:
+                if add_link: #if it's in the no link list we render the same but without the class or onclick to make it active
                     text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty_link', 'onclick':'showUnitConversionModal(this)'})
+                else:
+                    text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(base_y_pos + (i * self.ingredient_text_line_spacing_y)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty'})
                 text.text = qty_text_lines[i]
                 group.append(text)
         else: #only one line
-            if qty_text_string in self.ingredient_units_without_link: #if it's in the no link list we render the same but without the class or onclick to make it active
-                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text'})
-            else:
+            if add_link: #if it's in the no link list we render the same but without the class or onclick to make it active
                 text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty_link', 'onclick':'showUnitConversionModal(this)'})
+            else:
+                text = ET.Element('text', attrib={'x': str(self.ingredient_path_x + self.ingredient_text_x_offset), 'y':str(self.y_pos + (node_height / 2)),'text-anchor':'start','alignment-baseline':'middle', 'class':'chart_text text_qty'})
             text.text = qty_text_string
             group.append(text)
         
@@ -310,7 +314,7 @@ class element_renderer():
         calc_node_height = 0
         calc_text_height = 0
 
-        node_group = ET.Element('g', attrib={'id':'node' + str(self.id), 'onclick':'markComplete(this)', 'class':'node'})
+        node_group = ET.Element('g', attrib={'id':'node' + str(self.id), 'onclick':'markComplete(this)', 'class':'node', 'data-fillurl':'grd_' + str(self.id)})
 
         #1) work out how tall the node shape will be
         if self.long_node:  

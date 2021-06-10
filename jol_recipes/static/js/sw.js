@@ -44,23 +44,6 @@ self.addEventListener('activate', (e) => {
     );
 });
 
-// Serve from cache, and return offline page if client is offline 
-/* this.addEventListener('fetch', event => {
-    if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
-        event.respondWith(
-            fetch(event.request.url).catch(error => {
-                return caches.match('/offline');
-            })
-        );
-    } else {
-        event.respondWith(caches.match(event.request)
-            .then(function(response) {
-                return response || fetch(event.request);
-            })
-        );
-    }
-}); */
-
 self.addEventListener('fetch', (e) => {
     e.respondWith(
         caches.match(e.request).then((r) => {

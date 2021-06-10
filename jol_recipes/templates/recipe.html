@@ -181,20 +181,25 @@
         if (group_element.classList.contains('checked')) {
             group_element.classList.remove('checked');
             removeCheckedElementFromSessionStorage(group_element)
+            $('#' + group_element.dataset.fillurl)[0].classList.remove('checked');
         } else {
             group_element.classList.add('checked');
             addCheckedElementToSessionStorage(group_element)
+            $('#' + group_element.dataset.fillurl)[0].classList.add('checked');
         }
     };
 
     function updateCheckedElementsFromSessionStorage() {
         for (var key in checkedElements) {
             if (checkedElements[key] === true) {
-                $('#' + key)[0].classList.add('checked');
+                element = $('#' + key)[0]
+                element.classList.add('checked');
+                $('#' + element.dataset.fillurl)[0].classList.add('checked');
             };
         }
     };
 
+    //handle change of ingredient in the scaling modal
     $('#ingredientSelect').on("change", function() {
         var baseUnit = $('#ingredientSelect option:selected').attr('data-unit');
         var baseValue = $("#ingredientSelect option:selected").attr('value');
@@ -231,10 +236,6 @@
                     $('#chart_area').html(data); //replace the chart with the new one returned from the back end
                     $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
                     $('[data-toggle="popover"]').popover() //re-enable the popovers
-                        // rebind qty links to to the conversion modals with click handler
-                    $('.chart_text.text_qty_link').on('click', function() {
-                        $("#unitConversionModal").modal();
-                    });
                     updateCheckedElementsFromSessionStorage()
                 }
             });
@@ -259,11 +260,6 @@
 
     }
 
-    // bind qty links to to the conversion modals with click handler
-    $('.chart_text.text_qty_link').on('click', function() {
-        $("#unitConversionModal").modal();
-    });
-
     function showUnitConversionModal(element) {
         $.ajax({
             type: "GET",
@@ -275,6 +271,7 @@
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
                 $('#unitConversionModalBody').html(data); //replace the modal content with the new data returned from the back end
+                $("#unitConversionModal").modal(); // show the modal
             }
         });
     }

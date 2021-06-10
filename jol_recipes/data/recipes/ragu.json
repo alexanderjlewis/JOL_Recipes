@@ -127,11 +127,11 @@
             "ingredients": [{
                 "name": "Carrots",
                 "quantity": 3,
-                "unit": ""
+                "unit": "Medium"
             }, {
                 "name": "Onions",
                 "quantity": 2,
-                "unit": ""
+                "unit": "Medium"
             }, {
                 "name": "Oyster Mushrooms",
                 "quantity": 300,

@@ -28,14 +28,16 @@
     stroke-width: .7;
 }
 
-.gradientFilled {
+.nodeGradient {
     stop-opacity: 1;
-    stop-color: #666666;
+    --stop-color-filled: #666666;
+    --stop-color-empty: white;
 }
 
-.gradientEmpty {
+.checked.nodeGradient {
     stop-opacity: 1;
-    stop-color: white;
+    --stop-color-filled: rgb(184, 183, 183);
+    --stop-color-empty: #666666;
 }
 
 svg {
@@ -52,6 +54,10 @@ svg {
 
 .chart_text.text_qty_link {
     text-decoration: underline;
+    font-style: italic;
+}
+
+.chart_text.text_qty {
     font-style: italic;
 }
 
@@ -110,14 +116,6 @@ svg {
 .node_outline {
     fill: white;
     stroke: #929292;
-}
-
-.node_gradient {
-    visibility: visible;
-}
-
-.checked .node_gradient {
-    visibility: hidden;
 }
 
 .checked .node_outline {
