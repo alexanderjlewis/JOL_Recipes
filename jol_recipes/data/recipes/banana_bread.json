@@ -1,0 +1,212 @@
+{
+    "name": "Banana Bread",
+    "safe_name": "banana_bread",
+    "description": "Get your tastebuds buzzing for this for this best banana bread recipe - simply make, bake and watch it go!",
+    "serving_tag": "makes",
+    "serving_qty": 1,
+    "serving_unit": "loaf",
+    "ingredients": [{
+        "name": "Self-Raising Flour",
+        "category": "Pantry",
+        "quantity": 265,
+        "unit": "g"
+    }, {
+        "name": "Plain Flour",
+        "category": "Pantry",
+        "quantity": 40,
+        "unit": "g"
+    }, {
+        "name": "Ground Cinnamon",
+        "category": "Pantry",
+        "quantity": 1,
+        "unit": "Tsp"
+    }, {
+        "name": "Brown Sugar",
+        "category": "Pantry",
+        "quantity": 140,
+        "unit": "g"
+    }, {
+        "name": "Eggs",
+        "category": "Fridge",
+        "quantity": 2,
+        "unit": "Whole"
+    }, {
+        "name": "Butter",
+        "category": "Fridge",
+        "quantity": 50,
+        "unit": "g"
+    }, {
+        "name": "Bananas",
+        "category": "Fruit & Veg",
+        "quantity": 2,
+        "unit": "Large"
+    }, {
+        "name": "Milk",
+        "category": "Fridge",
+        "quantity": 125,
+        "unit": "mL"
+    }],
+    "equipment_standard": [
+        "Oven",
+        "11 x 21cm Load Pan"
+    ],
+    "equipment_special": [
+        "Stand Mixer (optional)"
+    ],
+    "step_layout": ["Start", 0, 1, 2, 3, "SS", 4, 5, "SE", 6, 7, 8, 9, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 5,
+            "ingredients": [],
+            "instruction": "Preheat oven to 180C.",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 5,
+            "ingredients": [{
+                "name": "Butter",
+                "category": "Fridge",
+                "quantity": 50,
+                "unit": "g"
+            }],
+            "instruction": "Melt",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "12 hrs",
+            "secondary": false,
+            "long_step": false,
+            "completion": 10,
+            "ingredients": [],
+            "instruction": "Grease the loaf pan with some of the melted butter and line the bottom / long sides with a strip of baking paper. Keep 40g of butter for later.",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 15,
+            "ingredients": [{
+                "name": "Self-Raising Flour",
+                "category": "Pantry",
+                "quantity": 265,
+                "unit": "g"
+            }, {
+                "name": "Plain Flour",
+                "category": "Pantry",
+                "quantity": 40,
+                "unit": "g"
+            }, {
+                "name": "Ground Cinnamon",
+                "category": "Pantry",
+                "quantity": 1,
+                "unit": "Tsp"
+            }, {
+                "name": "Brown Sugar",
+                "category": "Pantry",
+                "quantity": 140,
+                "unit": "g"
+            }],
+            "instruction": "Mix together in the bowl of a stand mixer.",
+            "extra_info": ""
+        },
+        "4": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 20,
+            "ingredients": [{
+                "name": "Bananas",
+                "category": "Fruit & Veg",
+                "quantity": 2,
+                "unit": "Large"
+            }],
+            "instruction": "Mash in a separate bowl.",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 30,
+            "ingredients": [{
+                "name": "Melted Butter",
+                "category": "Fridge",
+                "quantity": "",
+                "unit": ""
+            }, {
+                "name": "Eggs",
+                "category": "Fridge",
+                "quantity": 2,
+                "unit": "Whole"
+            }, {
+                "name": "Milk",
+                "category": "Fridge",
+                "quantity": 125,
+                "unit": "mL"
+            }],
+            "instruction": "Whisk eggs lightly, then add to the mashed banana along with the milk. Stir to combine.",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "2 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 45,
+            "ingredients": [],
+            "instruction": "Add the banana mixture to the flour and mix well to combine.",
+            "extra_info": ""
+        },
+        "7": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 45,
+            "ingredients": [],
+            "instruction": "Transfer mixture to load pan.",
+            "extra_info": ""
+        },
+        "8": {
+            "time": "45-50 min",
+            "secondary": false,
+            "long_step": 4,
+            "completion": 50,
+            "ingredients": [],
+            "instruction": "Bake until a skewer comes out clean.",
+            "extra_info": ""
+        },
+        "9": {
+            "time": "10 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [],
+            "instruction": "Allow to cool before removing to pan. Cut and serve.",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}

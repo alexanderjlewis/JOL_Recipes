@@ -93,5 +93,13 @@
         "tags_info": ["One-Pan"],
         "tags_green": ["Vege"],
         "publish": true
+    },
+    {
+        "name": "Banana Bread",
+        "safe_name": "banana_bread",
+        "tag_line": "1 hr min to Complete, 15min Prep.",
+        "tags_info": ["Stand Mixer"],
+        "tags_green": ["Vege"],
+        "publish": true
     }
 ]
