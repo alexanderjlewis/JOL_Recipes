@@ -4,12 +4,6 @@
         <a class="navbar-brand" href="/">JOL Recipe Book</a>
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/list">List</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/conversion">Unit Conversion</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -181,11 +175,19 @@
         if (group_element.classList.contains('checked')) {
             group_element.classList.remove('checked');
             removeCheckedElementFromSessionStorage(group_element)
-            $('#' + group_element.dataset.fillurl)[0].classList.remove('checked');
+
+            // for the node elements it will have a dataset 'fillurl' that points to the gradient fill
+            if (group_element.dataset.fillurl) {
+              $('#' + group_element.dataset.fillurl)[0].classList.remove('checked');
+            }
+            
         } else {
             group_element.classList.add('checked');
             addCheckedElementToSessionStorage(group_element)
-            $('#' + group_element.dataset.fillurl)[0].classList.add('checked');
+            // for the node elements it will have a dataset 'fillurl' that points to the gradient fill
+            if (group_element.dataset.fillurl) {
+              $('#' + group_element.dataset.fillurl)[0].classList.add('checked');
+            }
         }
     };
 
@@ -275,6 +277,7 @@
             }
         });
     }
+
 </script>
 
 {% endblock scripts %}
