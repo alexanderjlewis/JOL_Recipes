@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% block title %}JOL Recipe List{% endblock title %}
+
+{% block title %}
+  JOL Recipe List
+{% endblock title %}
+
 {% block content %}
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -20,40 +24,170 @@
     </div>
     <div class="container">
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for recipe in recipes %}
-          {% if recipe.publish  %}
-            <div class="col" id="{{ recipe.safe_name }}">
-              <div class="card border-primary mb-3">
-                <div class="card-header">{{ recipe.name }}</div>
-                <div class="card-body">
-                  <p>
-                    {% for tag in recipe.tags_info %}
-                      <span class="badge badge-pill badge-info">{{ tag }}</span>
-                    {% endfor %}
-                    {% for tag in recipe.tags_green %}
-                      <span class="badge badge-pill badge-success">{{ tag }}</span>
-                    {% endfor %}
-                  </p>
-                  <p class="card-text">{{ recipe.tag_line }}</p>
-                  <a href="/recipe/{{ recipe.safe_name }}" class="btn btn-primary stretched-link">See Details</a>
-                </div>
-              </div>
+        {% include 'recipe_list.html' %}
+      </div>
+      <div class="row">
+        <div class="col" id="new_recipe">
+          <div class="card border-primary mb-3">
+            <div class="card-body mx-auto">
+              <a class="my-4 btn btn-primary stretched-link" data-toggle="modal" data-target="#newRecipeModal">Add New Recipe</a>
             </div>
-          {% endif %}
-        {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <br class="mb-4">
+
+  <!-- New Recipe Modal -->
+  <div class="modal fade" id="newRecipeModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Add New Recipe</h5>
+              </div>
+              <form id="createNewRecipeForm">
+                <div class="modal-body" id="unitConversionModalBody">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <label for="inputRecipeName" class="form-label">Recipe Name</label>
+                        <input type="text" class="form-control" name="inputRecipeName" placeholder="Enter Recipe Name (e.g. 'Bagels')">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="inputTagLine" class="form-label mt-4">Tag Line (Optional)</label>
+                        <input type="text" class="form-control" name="inputTagLine" placeholder="Enter Tag Line (e.g. 'Ready in 30min')">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="inputInfoTag1" class="form-label mt-4">Info Tags (Optional)</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <input type="text" class="form-control" name="inputInfoTag1" placeholder="Enter Tag 1">
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" name="inputInfoTag2" placeholder="Enter Tag 2">
+                      </div>
+                      <div class="col">
+                        <input type="text" class="form-control" name="inputInfoTag3" placeholder="Enter Tag 3">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <label for="vegeQnYes" class="form-label mt-4">Is Recipe Vegetarian?</label>
+                          <div class="form-check ml-2">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="vegeQn" value="Yes" checked="">Yes
+                            </label>
+                          </div>
+                          <div class="form-check ml-2">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="vegeQn" value="Optional">Optional
+                            </label>
+                          </div>
+                          <div class="form-check ml-2">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="vegeQn" value="No">No
+                            </label>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <input type="submit" class="btn btn-primary" value="Create"></button>
+              </div>
+            </form>
+          </div>
+      </div>
+  </div>
+
+  {% if mode == 'edit' %}
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Recipe?</h5>
+          </div>
+          <div class="modal-body" id="deleteConfirmationModalBody" data-recipe=''>
+            <p>Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" onclick="deleteRecipe()" class="btn btn-secondary">Proceed with Delete</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
 {% endblock content %}
 
 {% block scripts %}
+  
   <script>
-    $(document).ready(function() {
-      $.get( "/api/getList", function( data ) {
-        console.log( typeof data ); // string
-        console.log( data ); // HTML content of the jQuery.ajax page
+
+      $("#createNewRecipeForm").on("submit", function(event){
+        event.preventDefault(); //stop the form being handled by the default handler and use this custom one..
+
+        var formValues= $(this).serialize();
+
+        $.ajax({
+          type: "POST",
+          url: '/api/createRecipe',
+          dataType: 'json',
+          data: formValues,
+          contentType: 'application/x-www-form-urlencoded',
+          success: function(data) {
+            if (data.redirect) {
+            // data.redirect contains the string URL to redirect to
+              window.location.href = data.redirect;
+            } else {
+                // data.form contains the HTML for the replacement form
+                console.log(data);
+            }
+          },
+          error: function(data) {
+            console.log(data);
+          }
+        });
       });
-    });
+
+      function showDeleteRecipeModal(recipe_name, recipe_safe_name) {
+        $('#deleteConfirmationModalBody').html('<p>Are you sure you want to the delete the \'' + recipe_name + '\' recipe?</p>'); //replace the modal content with the new data returned from the back end
+        $('#deleteConfirmationModalBody')[0].dataset.recipe = recipe_safe_name;
+        $('#deleteConfirmationModal').modal(); // show the modal
+      }
+
+      function deleteRecipe() {
+        var recipeToDelete = JSON.stringify({recipe_to_delete: $('#deleteConfirmationModalBody')[0].dataset.recipe})
+        
+        $.ajax({
+          type: "DELETE",
+          url: '/api/deleteRecipe',
+          dataType: 'json',
+          data: recipeToDelete,
+          contentType: 'application/json',
+          success: function(data) {
+            $('#deleteConfirmationModal').modal('hide'); // hide the modal
+            location.reload();
+          },
+          error: function(data) {
+            alert('error');
+            console.log(data);
+          }
+        });
+      }
+    
+
+  
   </script>
+
 {% endblock scripts %}

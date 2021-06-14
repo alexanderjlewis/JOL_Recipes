@@ -1,18 +1,29 @@
 <div class="row">
-  {% for category in recipe['ingredient_categories'] %}  
+  {% if recipe.ingredient_categories %} 
+    {% for category in recipe.ingredient_categories %}  
+      <div class="col-lg-5 col-md-6 mt-2">
+        <ul class="list-group">
+          <h5 class="mt-2">{{ category }}</h5> 
+          {% for ingredient in recipe.ingredients %}  
+            {% if ingredient.category == category %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+                <span class="flex-grow-1">{{ingredient.name}}</span>
+                <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}" data_qty='{{ingredient.quantity}}' data_unit='{{ingredient.unit}}'>{{ingredient.quantity}} {{ingredient.unit}}</em>
+              </li>
+            {% endif %}
+          {% endfor %}    
+        </ul>
+      </div>
+    {% endfor %}
+  {% else %}
     <div class="col-lg-5 col-md-6 mt-2">
-      <ul class="list-group">
-        <h5 class="mt-2">{{ category }}</h5> 
-        {% for ingredient in recipe.ingredients %}  
-          {% if ingredient.category == category %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
-              <span class="flex-grow-1">{{ingredient['name']}}</span>
-              <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}" data_qty='{{ingredient['quantity']}}' data_unit='{{ingredient['unit']}}'>{{ingredient['quantity']}} {{ingredient['unit']}}</em>
-            </li>
-          {% endif %}
-        {% endfor %}    
-      </ul>
-    </div>
-  {% endfor %}
+        <ul class="list-group">
+          <h5 class="mt-2">Ingredients</h5> 
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="flex-grow-1"><i>None</i></span>
+          </li> 
+        </ul>
+      </div>
+  {% endif %}
 </div>

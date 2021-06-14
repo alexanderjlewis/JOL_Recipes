@@ -1,0 +1,25 @@
+{% for recipe in recipes %}
+    {% if recipe.publish  %}
+    <div class="col" id="{{ recipe.safe_name }}">
+        <div class="card border-primary mb-3">
+        <div class="card-header">{{ recipe.name }}</div>
+        <div class="card-body">
+            <p>
+            {% for tag in recipe.tags_info %}
+                <span class="badge badge-pill badge-info">{{ tag }}</span>
+            {% endfor %}
+            {% for tag in recipe.tags_green %}
+                <span class="badge badge-pill badge-success">{{ tag }}</span>
+            {% endfor %}
+            </p>
+            <p class="card-text">{{ recipe.tag_line }}</p>
+            <button href="/recipe/{{ recipe.safe_name }}" class="btn btn-primary stretched-link">See Details</button>
+            {% if mode == 'edit' %}
+                <button href="/recipe/{{ recipe.safe_name }}" class="btn btn-info stretched-link ml-2">Edit</button>
+                <button onclick="showDeleteRecipeModal('{{ recipe.name }}' ,'{{ recipe.safe_name }}')" class="btn btn-danger stretched-link ml-2">Delete</button>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

@@ -38,20 +38,7 @@
     {% endblock scripts %}
 
     {% block serviceworker %}
-    <script type="text/javascript">
-      if ("serviceWorker" in navigator) {
-          window.addEventListener("load", () => {
-          navigator.serviceWorker
-              .register("/sw.js")
-              .then((registration) => {
-                console.log(`Yay! ServiceWorker is loaded 🎉`)
-              })
-              .catch((err) => {
-                console.log(`Boo! ServiceWorker didn't load 😬: ${err}`);
-              });
-          });
-      }
-    </script>
+
     {% endblock serviceworker %}
 
     {% endblock body %}

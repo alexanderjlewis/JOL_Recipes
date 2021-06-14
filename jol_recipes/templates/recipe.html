@@ -1,4 +1,10 @@
-{% extends "base.html" %} {% block title %}JOL Recipe - {{ recipe.name }}{% endblock title %} {% block content %}
+{% extends "base.html" %} 
+
+{% block title %}
+JOL Recipe - {{ recipe.name }}
+{% endblock title %}
+
+{% block content %}
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">JOL Recipe Book</a>
@@ -38,36 +44,7 @@
             {% include 'ingredient_list.html' %}
         </div>
         <div class="tab-pane fade" id="equipment_tab">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mt-2">
-                    <h5 class="mt-2">Standard</h5>
-                    <ul class="list-group">
-                        {% if recipe.equipment_standard %} {% for item in recipe.equipment_standard %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="flex-grow-1">{{item}}</span>
-                        </li>
-                        {% endfor %} {% else %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="flex-grow-1"><i>None</i></span>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6 mt-2">
-                    <h5 class="mt-2">Specialised</h5>
-                    <ul class="list-group">
-                        {% if recipe.equipment_special %} {% for item in recipe.equipment_special %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="flex-grow-1">{{item}}</span>
-                        </li>
-                        {% endfor %} {% else %}
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span class="flex-grow-1"><i>None</i></span>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
+            {% include 'equipment_list.html' %}
         </div>
         <div class="tab-pane fade" id="method_tab">
             <div class="col-lg-12">
@@ -88,23 +65,23 @@
                 <h5 class="modal-title">Adjust Recipe Quantity</h5>
             </div>
             <div class="modal-body">
-
-                <div class="form-group">
-                    <label for="ingredientSelect" class="form-label mt-4">Adjust Based On</label>
-                    <div class="input-group">
-                        <select class="form-control" id="ingredientSelect">
-                <option value={{ recipe.serving_qty }} data-unit={{ recipe.serving_unit }}>Total Recipe</option>
-                {% for ingredient in recipe.ingredients %}  
-                  {% if not ingredient.quantity == "" %}
-                    <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
-                  {% endif %}
-                {% endfor %}
-              </select>
-                    </div>
-                </div>
-
                 <div class="form-group">
                     <div class="row">
+                        <div class="col">
+                            <label for="ingredientSelect" class="form-label">Adjust Based On</label>
+                            <div class="input-group">
+                                <select class="form-control" id="ingredientSelect">
+                                    <option value={{ recipe.serving_qty }} data-unit={{ recipe.serving_unit }}>Total Recipe</option>
+                                    {% for ingredient in recipe.ingredients %}  
+                                        {% if not ingredient.quantity == "" %}
+                                            <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
                         <div class="col">
                             <label for="qtyInput">Base Qty:</label>
                             <div class="input-group">
@@ -150,8 +127,12 @@
         </div>
     </div>
 </div>
-{% endblock content %} {% block scripts %}
+
+{% endblock content %}
+
+{% block scripts %}
 <script>
+
     if (sessionStorage.getItem("{{ recipe.safe_name }}_checkedElements")) {
         // Restore the contents of the checked elements value from session storage
         var checkedElements = JSON.parse(sessionStorage.getItem("{{ recipe.safe_name }}_checkedElements"));
