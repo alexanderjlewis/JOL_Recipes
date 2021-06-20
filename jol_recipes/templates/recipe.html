@@ -57,76 +57,11 @@ JOL Recipe - {{ recipe.name }}
 </div>
 <br class="mb-4">
 
-<!-- Scaling Modal -->
-<div class="modal fade" id="scalingModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Adjust Recipe Quantity</h5>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            <label for="ingredientSelect" class="form-label">Adjust Based On</label>
-                            <div class="input-group">
-                                <select class="form-control" id="ingredientSelect">
-                                    <option value={{ recipe.serving_qty }} data-unit={{ recipe.serving_unit }}>Total Recipe</option>
-                                    {% for ingredient in recipe.ingredients %}  
-                                        {% if not ingredient.quantity == "" %}
-                                            <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col">
-                            <label for="qtyInput">Base Qty:</label>
-                            <div class="input-group">
-                                <input class="form-control" id="baseValue" type="text" placeholder="{{ recipe.serving_qty }}" readonly>
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="baseUnit">{{ recipe.serving_unit }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="qtyInput">Update to:</label>
-                            <div class="input-group">
-                                <input type="number" data_qty="{{ recipe.serving_qty }}" id="updatedValue" min="0" step="1" type="number" class="form-control" value="{{ recipe.serving_qty }}">
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="updatedUnit">{{ recipe.serving_unit }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" onclick="updateScaling()" class="btn btn-primary" data-dismiss="modal">Apply</button>
-            </div>
-        </div>
-    </div>
-</div>
+{% include '/recipe/modals.html' %}
 
-<!-- Unit Conversion Modal -->
-<div class="modal fade" id="unitConversionModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Unit Conversion</h5>
-            </div>
-            <div class="modal-body" id="unitConversionModalBody">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+{% if mode == 'edit' %}
+    {% include '/recipe/edit_modals.html' %}
+{% endif %}
 
 {% endblock content %}
 
@@ -177,7 +112,9 @@ JOL Recipe - {{ recipe.name }}
             if (checkedElements[key] === true) {
                 element = $('#' + key)[0]
                 element.classList.add('checked');
-                $('#' + element.dataset.fillurl)[0].classList.add('checked');
+                if ($(element).data('fillurl')) { //need this to exclude the ingredient nodes that don't have a fill URL.
+                    $('#' + element.dataset.fillurl)[0].classList.add('checked');
+                };
             };
         }
     };
@@ -204,46 +141,48 @@ JOL Recipe - {{ recipe.name }}
         serving_qty = serving_qty * multiplier;
         serving_qty = +(Math.round(serving_qty + "e+2") + "e-2");
 
-        if (updatedValue != baseValue) {
-            // trigger request to back end for updated chart for new qty.
-            $.ajax({
-                type: "GET",
-                url: '/api/getChart',
-                dataType: "html",
-                data: {
-                    recipe: '{{ recipe.safe_name }}',
-                    multiplier: multiplier
-                },
-                contentType: 'application/json;charset=UTF-8',
-                success: function(data) {
-                    $('#chart_area').html(data); //replace the chart with the new one returned from the back end
-                    $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
-                    $('[data-toggle="popover"]').popover() //re-enable the popovers
-                    updateCheckedElementsFromSessionStorage()
-                }
-            });
 
-            // trigger request to back end for updated ingredient list with new qty.
-            $.ajax({
-                type: "GET",
-                url: '/api/getIngredientList',
-                dataType: "html",
-                data: {
-                    recipe: '{{ recipe.safe_name }}',
-                    multiplier: multiplier
-                },
-                contentType: 'application/json;charset=UTF-8',
-                success: function(data) {
-                    $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end
-                    updateCheckedElementsFromSessionStorage()
-                }
-            });
+        // trigger request to back end for updated chart for new qty.
+        $.ajax({
+            type: "GET",
+            url: '/api/getChart',
+            dataType: "html",
+            data: {
+                recipe: '{{ recipe.safe_name }}',
+                multiplier: multiplier
+            },
+            contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+                $('#chart_area').html(data); //replace the chart with the new one returned from the back end
+                $('#heading_quantity').html('Quantity shown ' + serving_tag + ' ' + serving_qty + ' ' + serving_unit); //update the text that states the qty
+                $('[data-toggle="popover"]').popover() //re-enable the popovers
+                updateCheckedElementsFromSessionStorage()
+            }
+        });
 
-        }
-
+        // trigger request to back end for updated ingredient list with new qty.
+        $.ajax({
+            type: "GET",
+            url: '/api/getIngredientList',
+            dataType: "html",
+            data: {
+                recipe: '{{ recipe.safe_name }}',
+                multiplier: multiplier
+            },
+            contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+                $('#ingredients_tab').html(data); //replace the chart with the new one returned from the back end
+                updateCheckedElementsFromSessionStorage()
+            }
+        });
     }
 
-    function showUnitConversionModal(element) {
+    function showUnitConversionModal(element) {       
+               
+        $("#unitConversionModal").modal(); // show the modal
+
+        $( "#unitConversionModal .modal-body" ).toggle(); // show the loading spinner
+
         $.ajax({
             type: "GET",
             url: '/api/getIngredientConversion',
@@ -253,11 +192,15 @@ JOL Recipe - {{ recipe.name }}
             },
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
-                $('#unitConversionModalBody').html(data); //replace the modal content with the new data returned from the back end
-                $("#unitConversionModal").modal(); // show the modal
+                $('#unitConversionModalBody').html(data); //replace the modal content with the new data returned from the back end  
+                $( "#unitConversionModal .modal-body" ).toggle(); // once data is back from server side toggle the loading spinner off and data on
             }
-        });
+        });        
     }
+
+    {% if mode == 'edit' %}
+        {% include '/recipe/edit_mode.js' %}
+    {% endif %}    
 
 </script>
 

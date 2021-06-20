@@ -126,6 +126,24 @@
         </div>
       </div>
     </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Recipe?</h5>
+          </div>
+          <div class="modal-body" id="deleteConfirmationModalBody" data-recipe=''>
+            <p>Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" onclick="deleteRecipe()" class="btn btn-secondary">Proceed with Delete</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
   {% endif %}
 
 {% endblock content %}

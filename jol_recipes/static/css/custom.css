@@ -126,3 +126,7 @@ svg {
     stroke: #18bc9c;
     stroke-width: 2;
 }
+
+.toast {
+    z-index: 9999999;
+}

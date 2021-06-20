@@ -3,7 +3,7 @@ import json
 from gen import generate
 from flask import Flask, render_template, url_for, send_file, request, jsonify, redirect
 import config
-from helper_funcs import get_recipe_data, adjust_recipe_qty, unit_conversion, create_new_recipe, delete_recipe
+from helper_funcs import get_recipe_data, adjust_recipe_qty, unit_conversion, create_new_recipe, delete_recipe, add_ingredient
 
 app = Flask(__name__)
 recipes = config.load_recipes()
@@ -36,13 +36,13 @@ def api_getIngredientList():
     multiplier = float(request.args.get('multiplier'))
     recipe_data = get_recipe_data(submitted_name, recipes)
     recipe_data = adjust_recipe_qty(recipe_data, multiplier)
-    return render_template('ingredient_list.html', recipe=recipe_data)
+    return render_template('ingredient_list.html', recipe=recipe_data, mode='edit')
 
 @app.route('/api/getIngredientConversion')
 def api_getIngredientConversion():
     submitted_ingredient = request.args.get('input')
     processed_data = unit_conversion(submitted_ingredient)
-    return render_template('conversion_modal.html', data=processed_data)
+    return render_template('conversion_modal.html', data=processed_data, mode='edit')
 
 @app.route('/api/createRecipe', methods=['POST'])
 def api_createRecipe():
@@ -60,13 +60,22 @@ def api_createRecipe():
 @app.route('/api/deleteRecipe', methods=['DELETE'])
 def api_deleteRecipe():
     global recipes
-    
+
     data = request.get_json()
     success = delete_recipe(data['recipe_to_delete'])
 
     #refresh the cached json data
     recipes = config.load_recipes()
 
+    return (jsonify('success'), 200)
+
+@app.route('/api/addEditIngredient', methods=['POST'])
+def api_addIngredient():
+    response = add_ingredient(request.form)
+    return (jsonify(response), 200)
+
+@app.route('/api/addIngredientCategory', methods=['POST'])
+def api_addIngredientCategory():
     return (jsonify('success'), 200)
 
 @app.route('/recipe/<name>')
@@ -79,7 +88,7 @@ def render_recipe_page(name=None):
 def render_recipe_edit_page(name=None):
     recipe_data = get_recipe_data(name, recipes)
     chart = generate(recipe_data)
-    return render_template('chart.html', recipe=recipe_data, chart=chart)
+    return render_template('chart.html', recipe=recipe_data, chart=chart, mode='edit')
 
 @app.route('/sw.js')
 def sw():

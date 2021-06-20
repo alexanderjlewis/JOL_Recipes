@@ -13,10 +13,11 @@
             {% endfor %}
             </p>
             <p class="card-text">{{ recipe.tag_line }}</p>
-            <button href="/recipe/{{ recipe.safe_name }}" class="btn btn-primary stretched-link">See Details</button>
             {% if mode == 'edit' %}
-                <button href="/recipe/{{ recipe.safe_name }}" class="btn btn-info stretched-link ml-2">Edit</button>
-                <button onclick="showDeleteRecipeModal('{{ recipe.name }}' ,'{{ recipe.safe_name }}')" class="btn btn-danger stretched-link ml-2">Delete</button>
+                <a href="/recipe/{{ recipe.safe_name }}/edit" class="btn btn-info ml-2">Edit</a>
+                <button onclick="showDeleteRecipeModal('{{ recipe.name }}' ,'{{ recipe.safe_name }}')" class="btn btn-danger ml-2">Delete</button>
+            {% else %}
+                <a href="/recipe/{{ recipe.safe_name }}" class="btn btn-primary stretched-link">See Details</a>
             {% endif %}
         </div>
         </div>

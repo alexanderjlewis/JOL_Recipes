@@ -1,0 +1,77 @@
+<!-- Scaling Modal -->
+<div class="modal fade" id="scalingModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adjust Recipe Quantity</h5>
+            </div>
+            <div id="scalingModalBody" class="modal-body" hidden>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="ingredientSelect" class="form-label">Adjust Based On</label>
+                            <div class="input-group">
+                                <select class="form-control" id="ingredientSelect">
+                                    <option value={{ recipe.serving_qty }} data-unit={{ recipe.serving_unit }}>Total Recipe</option>
+                                    {% for ingredient in recipe.ingredients %}  
+                                        {% if not ingredient.quantity == "" %}
+                                            <option value="{{ ingredient.quantity }}" data-unit="{{ ingredient.unit }}">{{ingredient.name}}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <label for="qtyInput">Base Qty:</label>
+                            <div class="input-group">
+                                <input class="form-control" id="baseValue" type="text" placeholder="{{ recipe.serving_qty }}" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="baseUnit">{{ recipe.serving_unit }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="qtyInput">Update to:</label>
+                            <div class="input-group">
+                                <input type="number" data_qty="{{ recipe.serving_qty }}" id="updatedValue" min="0" step="1" type="number" class="form-control" value="{{ recipe.serving_qty }}">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="updatedUnit">{{ recipe.serving_unit }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" onclick="updateScaling()" class="btn btn-primary" data-dismiss="modal">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Unit Conversion Modal -->
+<div class="modal fade" id="unitConversionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Unit Conversion</h5>
+            </div>
+            <div id="unitConversionModalLoadingBody" class="modal-body" style="display: none;">
+                <div class="d-flex justify-content-center mt-4 mb-4">
+                    <div class="spinner-border">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" id="unitConversionModalBody" style="display: block;">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

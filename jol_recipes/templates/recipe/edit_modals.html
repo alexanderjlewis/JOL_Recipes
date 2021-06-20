@@ -1,0 +1,83 @@
+<!-- Add Ingredient Modal -->
+<div class="modal fade" id="addEditIngredientModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Add Ingredient</h5>
+        </div>
+        <form id="addEditIngredientForm" method="POST" novalidate>
+            <input type="hidden" name="inputRecipeSafeName" value="{{ recipe.safe_name }}">
+            <input type="hidden" id="inputMode" name="inputMode" value="">
+            <div class="modal-body" id="addEditIngredientModalBody">
+              <div class="alert alert-danger collapse"></div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col">
+                    <label for="inputIngredientName" class="form-label">Name *</label>
+                    <input type="text" class="form-control" name="inputIngredientName" placeholder="Enter Ingredient Name (e.g. 'Flour')">
+                    <div class="invalid-feedback" for="inputIngredientName"></div>
+                    <div class="valid-feedback" for="inputIngredientName">Looks good!</div>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <label for="inputIngredientCategory" class="form-label">Category (Select or Enter) *</label>
+                    <input list="categoryList" class="form-control" name="inputIngredientCategory">
+                    <datalist id="categoryList">
+                      {% if recipe.ingredient_categories %} 
+                        {% for category in recipe.ingredient_categories %}  
+                          <option value="{{ category }}">
+                        {% endfor %}
+                      {% endif %}
+                    </datalist>
+                    <div class="invalid-feedback" for="inputIngredientCategory"></div>
+                    <div class="valid-feedback" for="inputIngredientCategory">Looks good!</div>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <div class="col">
+                    <label for="inputIngredientQty" class="form-label">Quantity (Numeric)</label>
+                    <input type="number" class="form-control" name="inputIngredientQty" placeholder="Enter Ingredient Quantity (e.g. '4')">
+                  </div>
+                  <div class="col">
+                    <label for="browser">Unit (Select or Enter)</label>
+                    <input list="unitsList" class="form-control" name="inputIngredientUnit">
+                    <datalist id="unitsList">
+                        <option value="Tbsp">
+                        <option value="Tsp">
+                        <option value="Cups">
+                        <option value="g">
+                        <option value="kg">
+                        <option value="mL">
+                        <option value="L">
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <input type="submit" class="btn btn-primary" value="Create"></button>
+          </div>
+        </form>
+    </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Recipe?</h5>
+      </div>
+      <div class="modal-body" id="deleteConfirmationModalBody" data-recipe=''>
+        <p>Are you sure?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="deleteRecipe()" class="btn btn-secondary">Proceed with Delete</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

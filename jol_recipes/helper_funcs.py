@@ -143,3 +143,92 @@ def delete_recipe(recipe_to_delete):
         os.remove(path_to_recipe)
 
     pass
+
+def add_ingredient(form_data):
+    
+    response = {"status":"success","data":{}}
+
+    while True:
+        #Check 1: Confirm the submitted recipe name exists (hidden field on the front end form)
+        try: #try parse the submitted name and open the file
+            submitted_recipe_safe_name = str(form_data['inputRecipeSafeName'])
+            file_path = 'data/recipes/' + submitted_recipe_safe_name + '.json'
+            with open(file_path, "r") as f:
+                recipe = json.load(f)  
+        except: #if that fails we need to throw a generic error response. It probably means someone is manipulating requests rather then using the UI.
+            response['status'] = 'general_error'
+            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.001</span>'
+            break
+
+        #Check 2: Confirm if the ingredient name already exists
+        try:
+            submitted_ingredient_name = str(form_data['inputIngredientName'])
+            if submitted_ingredient_name:
+                ingredient_found = False
+                for ingredient in recipe['ingredients']:
+                    if ingredient['name'].lower() == submitted_ingredient_name.lower():
+                        ingredient_found = True
+            else:
+                response['status'] = 'error'
+                response['data']['inputIngredientName'] = 'This field is mandatory - please enter an ingredient category.'
+        except:
+            response['status'] = 'general_error'
+            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.002</span>'
+            break
+
+        #Check 3: Check that the mode value is allowable makes sense in context with the supplied ingredient name 
+        try:
+            mode = str(form_data['inputMode'])
+            if mode != 'edit' and mode != 'add': # only 'edit' and 'add' are valid mode values 
+                raise ValueError('Unexpected value in form mode attribute')
+        except:
+            response['status'] = 'general_error'
+            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.003</span>'
+            break
+
+        #Check 4: Check that mode/ingredient name make sense with each other in context
+        try:
+            if mode == 'edit':    
+                if not ingredient_found: # in edit mode, the ingredient name is expected to be found
+                    raise ValueError('Unexpected value in form mode attribute')
+            elif mode == 'add':
+                print('a')
+                if ingredient_found: # in add mode, the ingredient name supplied shouldn't exist. If it does we return an error to UI.
+                    response['status'] = 'error'
+                    response['data']['inputIngredientName'] = 'This ingredient name already exists. Please enter a different name.' 
+        except:
+            response['status'] = 'general_error'
+            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.004</span>'
+            break
+
+        #Check 5: Check that the category can be cast to a string and is not null.
+        try:
+            submitted_ingredient_category = str(form_data['inputIngredientCategory'])
+            if not submitted_ingredient_category:
+                response['status'] = 'error'
+                response['data']['inputIngredientCategory'] = 'This field is mandatory - please enter an ingredient category.' 
+        except:
+            response['status'] = 'error'
+            response['data']['inputIngredientCategory'] = 'The provided value is not a valid input.' 
+            break
+
+        #Check 6: Check that the qty can be cast to a floatl
+        try:
+            if form_data['inputIngredientQty']:
+                submitted_ingredient_qty = float(form_data['inputIngredientQty'])
+        except:
+            response['status'] = 'error'
+            response['data']['inputIngredientQty'] = 'The provided value is not a valid number.' 
+            break
+
+        #Check 7: Check that the unit can be cast to a string
+        try:
+            submitted_ingredient_unit = str(form_data['inputIngredientUnit'])
+        except:
+            response['status'] = 'error'
+            response['data']['inputIngredientUnit'] = 'The provided value is not a valid input.' 
+            break
+
+        break
+
+    return response

@@ -6,24 +6,42 @@
           <h5 class="mt-2">{{ category }}</h5> 
           {% for ingredient in recipe.ingredients %}  
             {% if ingredient.category == category %}
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
-                <span class="flex-grow-1">{{ingredient.name}}</span>
-                <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}" data_qty='{{ingredient.quantity}}' data_unit='{{ingredient.unit}}'>{{ingredient.quantity}} {{ingredient.unit}}</em>
-              </li>
+              {% if mode == 'edit' %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="flex-grow-1">{{ingredient.name}}</span>
+                  <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}">{{ingredient.quantity}} {{ingredient.unit}}</em>
+                  <a class="open-ingredientModal-edit ml-3" data-toggle="modal" data-target="#addEditIngredientModal" data-qty='{{ingredient.quantity}}' data-unit='{{ingredient.unit}}' data-category='{{ category }}' data-name='{{ ingredient.name }}'><i class="fas fa-edit"></i></a>
+                  <a class="open-deleteIngredientModal ml-3" data-toggle="modal" data-target="#addEditIngredientModal" data-name='{{ ingredient.name }}'><i class="fas fa-trash-alt"></i></a>
+                </li>
+              {% else %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <input type="checkbox" aria-label="Checkbox for following text input">&emsp;
+                  <span class="flex-grow-1">{{ingredient.name}}</span>
+                  <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}" data_qty='{{ingredient.quantity}}' data_unit='{{ingredient.unit}}'>{{ingredient.quantity}} {{ingredient.unit}}</em>
+                </li>
+              {% endif %}
             {% endif %}
-          {% endfor %}    
+          {% endfor %}
         </ul>
       </div>
     {% endfor %}
   {% else %}
     <div class="col-lg-5 col-md-6 mt-2">
-        <ul class="list-group">
+      <ul class="list-group">
+        
           <h5 class="mt-2">Ingredients</h5> 
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <span class="flex-grow-1"><i>None</i></span>
-          </li> 
-        </ul>
-      </div>
+          </li>
+      </ul>
+    </div>
   {% endif %}
 </div>
+
+{% if mode == 'edit' %}
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <button class="mt-4 btn btn-success open-ingredientModal-add btn-block" data-toggle="modal" data-target="#addEditIngredientModal" data-category='{{ category }}'><i class="fas fa-plus-square"></i> Add New Ingredient</button>
+    </div>
+  </div>
+{% endif %}
