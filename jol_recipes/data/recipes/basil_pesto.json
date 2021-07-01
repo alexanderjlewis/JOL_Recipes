@@ -6,48 +6,70 @@
     "serving_qty": 500,
     "serving_unit": "g of Dry Pasta",
     "ingredients": [{
-        "name": "Extra-Virgin Olive Oil",
-        "category": "Pantry",
-        "quantity": 120,
-        "unit": "mL"
-    }, {
-        "name": "Pine Nuts",
-        "category": "Pantry",
-        "quantity": 2,
-        "unit": "Tbsp"
-    }, {
-        "name": "Salt",
-        "category": "Pantry",
-        "quantity": "",
-        "unit": "To Taste"
-    }, {
-        "name": "Dried Pasta",
-        "category": "Pantry",
-        "quantity": 500,
-        "unit": "g"
-    }, {
-        "name": "Garlic",
-        "category": "Herbs & Spices",
-        "quantity": 2,
-        "unit": "Cloves"
-    }, {
-        "name": "Parmesan",
-        "category": "Fridge",
-        "quantity": 60,
-        "unit": "g"
-    }, {
-        "name": "Basil Leaves",
-        "category": "Herbs & Spices",
-        "quantity": 60,
-        "unit": "g"
-    }],
+            "name": "Extra-Virgin Olive Oil",
+            "safe_name": "extra-virgin_olive_oil",
+            "category": "Pantry",
+            "quantity": 120,
+            "unit": "mL"
+        },
+        {
+            "name": "Pine Nuts",
+            "safe_name": "pine_nuts",
+            "category": "Pantry",
+            "quantity": 2,
+            "unit": "Tbsp"
+        },
+        {
+            "name": "Salt",
+            "safe_name": "salt",
+            "category": "Pantry",
+            "quantity": "",
+            "unit": "To Taste"
+        },
+        {
+            "name": "Dried Pasta",
+            "safe_name": "dried_pasta",
+            "category": "Pantry",
+            "quantity": 500,
+            "unit": "g"
+        },
+        {
+            "name": "Garlic",
+            "safe_name": "garlic",
+            "category": "Herbs & Spices",
+            "quantity": 2,
+            "unit": "Cloves"
+        },
+        {
+            "name": "Parmesan",
+            "safe_name": "parmesan",
+            "category": "Fridge",
+            "quantity": 60,
+            "unit": "g"
+        },
+        {
+            "name": "Basil Leaves",
+            "safe_name": "basil_leaves",
+            "category": "Herbs & Spices",
+            "quantity": 60,
+            "unit": "g"
+        }
+    ],
     "equipment_standard": [
         "Large Pot"
     ],
     "equipment_special": [
         "Blender"
     ],
-    "step_layout": ["Start", 0, 1, 2, 3, 4, "Finish"],
+    "step_layout": [
+        "Start",
+        0,
+        1,
+        2,
+        3,
+        4,
+        "Finish"
+    ],
     "steps": {
         "Start": {
             "time": "",

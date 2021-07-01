@@ -60,7 +60,7 @@
         "Large Pot", "Sauce Pan", "Strainer"
     ],
     "equipment_special": [],
-    "step_layout": ["Start", 0, "SS", 1, 2, 3, 4, 5, "SE", 6, 7, 8, "Finish"],
+    "step_layout": ["Start", "SS", 0, 1, 2, 3, 4, 5, "SE", 6, 7, 8, "Finish"],
     "steps": {
         "Start": {
             "time": "",
@@ -75,7 +75,7 @@
             "time": "5 min",
             "secondary": false,
             "long_step": false,
-            "completion": 40,
+            "completion": 10,
             "ingredients": [],
             "instruction": "Fill a stock pot or other large pot three-quarters full with water and heat over high. Toss in a handful of salt and bring to a boil while you do your other prep",
             "extra_info": ""
@@ -84,7 +84,7 @@
             "time": "",
             "secondary": true,
             "long_step": false,
-            "completion": 60,
+            "completion": 20,
             "ingredients": [{
                 "name": "Minced Garlic",
                 "quantity": 4,
@@ -101,7 +101,7 @@
             "time": "5-7 min",
             "secondary": true,
             "long_step": false,
-            "completion": 70,
+            "completion": 30,
             "ingredients": [{
                 "name": "Extra Virgin Olive Oil",
                 "quantity": 2,
@@ -114,7 +114,7 @@
             "time": "5-7 min",
             "secondary": true,
             "long_step": false,
-            "completion": 80,
+            "completion": 50,
             "ingredients": [{
                 "name": "Tomato Paste",
                 "quantity": 130,
@@ -131,7 +131,7 @@
             "time": "",
             "secondary": true,
             "long_step": false,
-            "completion": 90,
+            "completion": 60,
             "ingredients": [{
                 "name": "Vodka",
                 "quantity": 2,
@@ -144,7 +144,7 @@
             "time": "",
             "secondary": true,
             "long_step": false,
-            "completion": 90,
+            "completion": 70,
             "ingredients": [{
                 "name": "Heavy Cream",
                 "quantity": 0.75,
@@ -157,7 +157,7 @@
             "time": "10 min",
             "secondary": false,
             "long_step": false,
-            "completion": 90,
+            "completion": 70,
             "ingredients": [{
                 "name": "Dried Pasta",
                 "quantity": 500,
@@ -170,7 +170,7 @@
             "time": "",
             "secondary": false,
             "long_step": false,
-            "completion": 90,
+            "completion": 80,
             "ingredients": [],
             "instruction": "Transfer rigatoni to sauce along with any water that’s piggybacking on the pasta",
             "extra_info": ""

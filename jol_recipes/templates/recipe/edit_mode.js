@@ -1,33 +1,30 @@
-//initialise toasts
-//$('.toast').toast(option)
-
 $(document).on("click", ".open-ingredientModal-add", function() {
-    $('input').prop('readonly', false);
-    $('input').removeClass('is-invalid is-valid');
-    $('.invalid-feedback').empty();
-    $("#addEditIngredientForm")[0].reset();
-
+    resetAddEditIngredientForm()
 
     $("#addEditIngredientForm #inputMode")[0].value = "add";
 });
 
 $(document).on("click", ".open-ingredientModal-edit", function(event) {
+    resetAddEditIngredientForm()
+
+    $("#addEditIngredientForm #inputMode")[0].value = "edit";
+    $('input[name=inputIngredientName]')[0].value = $(this)[0].dataset.name;
+    $('input[name=inputIngredientName]')[0].readOnly = true;
+});
+
+function resetAddEditIngredientForm() {
     $('input').prop('readonly', false);
     $('input').removeClass('is-invalid is-valid');
     $('.invalid-feedback').empty();
     $("#addEditIngredientForm")[0].reset();
-
-
-    $("#addEditIngredientForm #inputMode")[0].value = "edit";
-
-    $('input[name=inputIngredientName]')[0].value = $(this)[0].dataset.name + '123';
-    $('input[name=inputIngredientName]')[0].readOnly = true;
-});
+    $('#addEditIngredientForm .alert').hide();
+};
 
 $("#addEditIngredientForm").on("submit", function(event) {
     event.preventDefault(); //stop the form being handled by the default handler and use this custom one..
 
     $('input').removeClass('is-invalid is-valid')
+    $('#addEditIngredientForm .alert').hide();
 
     var formValues = $(this).serialize();
 
@@ -41,19 +38,15 @@ $("#addEditIngredientForm").on("submit", function(event) {
         contentType: 'application/x-www-form-urlencoded',
         success: function(response) {
             if (response.status == 'success') {
-                // data.redirect contains the string URL to redirect to
-                location.reload();
+                location.reload(); //reload the page so the update data is retrieved
             } else if (response.status == 'general_error') {
-                console.log(response)
-                $('#addEditIngredientForm .alert').html(response.error_msg);
+                $('#addEditIngredientForm .alert').html(response.data.error_msg);
                 $('#addEditIngredientForm .alert').show();
             } else {
                 $.each(response.data, function(k, v) {
                     $('input[name=' + k + ']')[0].classList.add('is-invalid');
                     $('div[for=' + k + '].invalid-feedback').html(v);
                 });
-
-                console.log(response);
             };
         },
         error: function(data) {

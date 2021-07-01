@@ -2,6 +2,16 @@ import json
 import urllib.parse
 import os
 
+def load_recipes():
+    with open('data/recipe_list.json') as f:
+        recipes = json.load(f)
+    return recipes
+    
+def load_ingredients(): 
+    with open('data/ingredient_list.json') as f:
+        ingredients = json.load(f)
+    return ingredients
+    
 def get_recipe_data(submitted_name,recipes):
 
     for recipe in recipes:
@@ -63,10 +73,24 @@ def unit_conversion(submitted_ingredient):
         
     return output
 
+def url_safe_string(string_data):
+    '''
+    Transformhelp() a string in a url safe form
+
+            Parameters:
+                    string_data (str): A string to tranform
+
+            Returns:
+                    string_data (str): A url safe version of the supplied string
+    '''
+    
+    #proceess the name into a url safe format with '_' instead of space chars
+    string_data = string_data.replace(' ', '_').lower()
+    string_data = urllib.parse.quote(string_data, safe='')
+
+    return string_data
 
 def create_new_recipe(form_data, recipes):
-    
-    print(form_data)
 
     response_success = True
     response_data = {}
@@ -74,9 +98,7 @@ def create_new_recipe(form_data, recipes):
 
     new_recipe['name'] = form_data['inputRecipeName']
     
-    #proceess the name into a url safe format with '_' instead of space chars
-    new_recipe['safe_name'] = new_recipe['name'].replace(' ', '_').lower()
-    new_recipe['safe_name'] = urllib.parse.quote(new_recipe['safe_name'], safe='')
+    new_recipe['safe_name'] = url_safe_string(new_recipe['safe_name'])
 
     new_recipe['tag_line'] = form_data['inputTagLine']
     new_recipe['tags_info'] = []
@@ -144,91 +166,33 @@ def delete_recipe(recipe_to_delete):
 
     pass
 
-def add_ingredient(form_data):
+def add_ingredient(data):
     
-    response = {"status":"success","data":{}}
+    response = {"status":'',"data":{}}
 
-    while True:
-        #Check 1: Confirm the submitted recipe name exists (hidden field on the front end form)
-        try: #try parse the submitted name and open the file
-            submitted_recipe_safe_name = str(form_data['inputRecipeSafeName'])
-            file_path = 'data/recipes/' + submitted_recipe_safe_name + '.json'
-            with open(file_path, "r") as f:
-                recipe = json.load(f)  
-        except: #if that fails we need to throw a generic error response. It probably means someone is manipulating requests rather then using the UI.
-            response['status'] = 'general_error'
-            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.001</span>'
-            break
+    try:
+        new_ingredient = {}
+        new_ingredient['name'] = data['name']
+        new_ingredient['category'] = data['category']
+        new_ingredient['qty'] = data['qty']
+        new_ingredient['unit'] = data['unit']
+        
+        file_path = 'data/recipes/' + data['recipe_safe_name'] + '.json'
+        with open(file_path, "r") as f: # the recipe name should exist as a file.
+            recipe = json.load(f)
 
-        #Check 2: Confirm if the ingredient name already exists
-        try:
-            submitted_ingredient_name = str(form_data['inputIngredientName'])
-            if submitted_ingredient_name:
-                ingredient_found = False
-                for ingredient in recipe['ingredients']:
-                    if ingredient['name'].lower() == submitted_ingredient_name.lower():
-                        ingredient_found = True
-            else:
-                response['status'] = 'error'
-                response['data']['inputIngredientName'] = 'This field is mandatory - please enter an ingredient category.'
-        except:
-            response['status'] = 'general_error'
-            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.002</span>'
-            break
+        recipe['ingredients'].append(new_ingredient)
 
-        #Check 3: Check that the mode value is allowable makes sense in context with the supplied ingredient name 
-        try:
-            mode = str(form_data['inputMode'])
-            if mode != 'edit' and mode != 'add': # only 'edit' and 'add' are valid mode values 
-                raise ValueError('Unexpected value in form mode attribute')
-        except:
-            response['status'] = 'general_error'
-            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.003</span>'
-            break
+        with open(file_path, "w") as f:
+            json.dump(recipe, f)
 
-        #Check 4: Check that mode/ingredient name make sense with each other in context
-        try:
-            if mode == 'edit':    
-                if not ingredient_found: # in edit mode, the ingredient name is expected to be found
-                    raise ValueError('Unexpected value in form mode attribute')
-            elif mode == 'add':
-                print('a')
-                if ingredient_found: # in add mode, the ingredient name supplied shouldn't exist. If it does we return an error to UI.
-                    response['status'] = 'error'
-                    response['data']['inputIngredientName'] = 'This ingredient name already exists. Please enter a different name.' 
-        except:
-            response['status'] = 'general_error'
-            response['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.004</span>'
-            break
+    except:
+        response['status'] = 'general_error'
+        response['status']['error_msg'] = '<strong>An unexpected error occured.</strong><br>Please reload the page and/or try agin later.<span style="float:right;">ERR#1.003</span>'
 
-        #Check 5: Check that the category can be cast to a string and is not null.
-        try:
-            submitted_ingredient_category = str(form_data['inputIngredientCategory'])
-            if not submitted_ingredient_category:
-                response['status'] = 'error'
-                response['data']['inputIngredientCategory'] = 'This field is mandatory - please enter an ingredient category.' 
-        except:
-            response['status'] = 'error'
-            response['data']['inputIngredientCategory'] = 'The provided value is not a valid input.' 
-            break
+    return response
 
-        #Check 6: Check that the qty can be cast to a floatl
-        try:
-            if form_data['inputIngredientQty']:
-                submitted_ingredient_qty = float(form_data['inputIngredientQty'])
-        except:
-            response['status'] = 'error'
-            response['data']['inputIngredientQty'] = 'The provided value is not a valid number.' 
-            break
-
-        #Check 7: Check that the unit can be cast to a string
-        try:
-            submitted_ingredient_unit = str(form_data['inputIngredientUnit'])
-        except:
-            response['status'] = 'error'
-            response['data']['inputIngredientUnit'] = 'The provided value is not a valid input.' 
-            break
-
-        break
-
+def edit_ingredient(data):
+    response = {"status":'success',"data":{}}
+    
     return response

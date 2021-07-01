@@ -10,7 +10,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <span class="flex-grow-1">{{ingredient.name}}</span>
                   <em text-muted data_role='list_ingredient_qty' id="list_mv_qty_{{loop.index}}">{{ingredient.quantity}} {{ingredient.unit}}</em>
-                  <a class="open-ingredientModal-edit ml-3" data-toggle="modal" data-target="#addEditIngredientModal" data-qty='{{ingredient.quantity}}' data-unit='{{ingredient.unit}}' data-category='{{ category }}' data-name='{{ ingredient.name }}'><i class="fas fa-edit"></i></a>
+                  <a class="open-ingredientModal-edit ml-3" data-toggle="modal" data-target="#addEditIngredientModal" data-qty='{{ingredient.quantity}}' data-unit='{{ingredient.unit}}' data-category='{{ category }}' data-safe_name='{{ ingredient.safe_name }}'><i class="fas fa-edit"></i></a>
                   <a class="open-deleteIngredientModal ml-3" data-toggle="modal" data-target="#addEditIngredientModal" data-name='{{ ingredient.name }}'><i class="fas fa-trash-alt"></i></a>
                 </li>
               {% else %}
