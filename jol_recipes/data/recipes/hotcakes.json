@@ -162,7 +162,7 @@
         },
         "5": {
             "time": "",
-            "secondary": true,
+            "secondary": false,
             "long_step": false,
             "completion": 60,
             "ingredients": [],
@@ -171,7 +171,7 @@
         },
         "6": {
             "time": "",
-            "secondary": true,
+            "secondary": false,
             "long_step": false,
             "completion": 70,
             "ingredients": [{
