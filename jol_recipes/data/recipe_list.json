@@ -101,5 +101,13 @@
         "tags_info": ["Stand Mixer"],
         "tags_green": ["Vege"],
         "publish": true
+    },
+    {
+        "name": "Hotcakes",
+        "safe_name": "hotcakes",
+        "tag_line": "30 min to Complete",
+        "tags_info": [""],
+        "tags_green": ["Vege"],
+        "publish": true
     }
 ]

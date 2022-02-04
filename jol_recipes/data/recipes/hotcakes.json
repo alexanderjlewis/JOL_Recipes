@@ -1,0 +1,214 @@
+{
+    "name": "Hotcakes",
+    "safe_name": "hotcakes",
+    "description": "These pancakes are light and fluffy and made entirely from scratch. They’re not too sweet and are scented with vanilla, making them extra delicious. These are easy to adapt — try adding a handful of berries, nuts, or chocolate to the batter.",
+    "serving_tag": "makes",
+    "serving_qty": 8,
+    "serving_unit": "hotcakes",
+    "ingredients": [{
+        "name": "Plain Flour",
+        "category": "Pantry",
+        "quantity": 1.5,
+        "unit": "Cups"
+    }, {
+        "name": "Sugar",
+        "category": "Pantry",
+        "quantity": 2,
+        "unit": "Tbsp"
+    }, {
+        "name": "Baking Powder",
+        "category": "Pantry",
+        "quantity": 1,
+        "unit": "Tbsp"
+    }, {
+        "name": "Table Salt",
+        "category": "Pantry",
+        "quantity": 0.5,
+        "unit": "Tsp"
+    }, {
+        "name": "Milk",
+        "category": "Fridge",
+        "quantity": 1.25,
+        "unit": "Cups"
+    }, {
+        "name": "Eggs",
+        "category": "Fresh Produce",
+        "quantity": 1,
+        "unit": "Whole"
+    }, {
+        "name": "Butter",
+        "category": "Fridge",
+        "quantity": 4,
+        "unit": "Tbsp"
+    }, {
+        "name": "Vanilla Extract",
+        "category": "Pantry",
+        "quantity": 1,
+        "unit": "Tsp"
+    }],
+    "equipment_standard": [
+        "Stove",
+        "Large Pan"
+    ],
+    "equipment_special": [
+    ],
+    "step_layout": ["Start", 0, 1, 2, 3, 4, 5, 6, 7, 8, "Finish"],
+    "steps": {
+        "Start": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 0,
+            "ingredients": [],
+            "instruction": "Start",
+            "extra_info": ""
+        },
+        "0": {
+            "time": "5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 10,
+            "ingredients": [
+                {
+                    "name": "Plain Flour",
+                    "quantity": 1.5,
+                    "unit": "Cups"
+                }, {
+                    "name": "Sugar",
+                    "quantity": 2,
+                    "unit": "Tbsp"
+                }, {
+                    "name": "Baking Powder",
+                    "quantity": 1,
+                    "unit": "Tbsp"
+                }, {
+                    "name": "Table Salt",
+                    "quantity": 0.5,
+                    "unit": "Tsp"
+                }
+            ],
+            "instruction": "Whisk in a medium bowl",
+            "extra_info": ""
+        },
+        "1": {
+            "time": "5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 20,
+            "ingredients": [
+                {
+                    "name": "Milk",
+                    "quantity": 1.25,
+                    "unit": "Cups"
+                }
+            ],
+            "instruction": "Warm in microwave until lukewarm.",
+            "extra_info": ""
+        },
+        "2": {
+            "time": "5 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 30,
+            "ingredients": [
+                {
+                    "name": "Warmed Milk",
+                    "quantity": "",
+                    "unit": ""
+                }, {
+                    "name": "Eggs",
+                    "quantity": 1,
+                    "unit": "Whole"
+                }, {
+                    "name": "Butter",
+                    "quantity": 4,
+                    "unit": "Tbsp"
+                }, {
+                    "name": "Vanilla Extract",
+                    "quantity": 1,
+                    "unit": "Tsp"
+                }
+            ],
+            "instruction": "Whisk together until combined.",
+            "extra_info": ""
+        },
+        "3": {
+            "time": "10 min",
+            "secondary": false,
+            "long_step": 1,
+            "completion": 40,
+            "ingredients": [],
+            "instruction": "Heat a large skillet (or use griddle) over medium heat.",
+            "extra_info": "The pan is ready if when you splatter a little water onto the pan surface, the water dances around the pan and eventually evaporates."
+        },
+        "4": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 50,
+            "ingredients": [
+                {
+                    "name": "Combined Dry Ingrients",
+                    "quantity": "",
+                    "unit": ""
+                }, {
+                    "name": "Combined Wet Ingrients",
+                    "quantity": "",
+                    "unit": ""
+                }
+            ],
+            "instruction": "Make a well in the center of the flour mixture, pour milk mixture into the well and use a fork to stir until you no longer see clumps of flour",
+            "extra_info": ""
+        },
+        "5": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 60,
+            "ingredients": [],
+            "instruction": "Lightly brush skillet with melted butter",
+            "extra_info": ""
+        },
+        "6": {
+            "time": "",
+            "secondary": true,
+            "long_step": false,
+            "completion": 70,
+            "ingredients": [{
+                    "name": "Batter",
+                    "quantity": 0.25,
+                    "unit": "Cups"
+                }
+            ],
+            "instruction": "Spoon batter onto the skillet. Spread into 4inch circle.",
+            "extra_info": ""
+        },
+        "7": {
+            "time": "4 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 80,
+            "ingredients": [],
+            "instruction": "Cook for 2min. When edges look dry, and bubbles start to appear and pop on the top surfaces of the pancake, turn over for a further 2 min.",
+            "extra_info": ""
+        },
+        "8": {
+            "time": "20 min",
+            "secondary": false,
+            "long_step": false,
+            "completion": 90,
+            "ingredients": [],
+            "instruction": "Repeat steps 6/7 for remaining batter.",
+            "extra_info": ""
+        },
+        "Finish": {
+            "time": "",
+            "secondary": false,
+            "long_step": false,
+            "completion": 100,
+            "ingredients": [],
+            "instruction": "Enjoy!",
+            "extra_info": ""
+        }
+    }
+}
